@@ -1,6 +1,7 @@
 # ELITE WORKFORCE SOLUTIONS
 
-### Reliable Skilled Workforce & Manpower Solutions for UAE Businesses
+### Skilled Workforce Solutions
+Semi-Skilled Workforce Solutions
 
 **ELITE WORKFORCE SOLUTIONS** provides reliable and skilled manpower solutions to businesses, contractors, and manpower suppliers across the UAE.
 
