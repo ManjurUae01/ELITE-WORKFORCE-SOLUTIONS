@@ -1,638 +1,1488 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elite Workforce Solutions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box}
+    <meta name="description"
+        content="Elite Workforce Solutions - Professional manpower and workforce supply solutions in the UAE. Electricians, fitters, welders, HVAC technicians and maintenance manpower.">
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
-    color:#172033;
-}
+    <meta name="keywords"
+        content="manpower supplier UAE, electrician supplier UAE, fitter supplier UAE, welder supplier UAE, skilled manpower UAE, workforce solutions UAE">
 
-/* ================= HEADER ================= */
+    <meta name="author" content="Elite Workforce Solutions">
 
-.site-header{
-    width:100%;
-    background:#ffffff;
-    border-bottom:1px solid #e8e8e8;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
+    <title>Elite Workforce Solutions | UAE Workforce & Manpower Supply</title>
 
-.header-container{
-    max-width:1200px;
-    margin:0 auto;
-    padding:16px 25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-.logo{
-    text-decoration:none;
-    display:flex;
-    flex-direction:column;
-    line-height:1;
-    min-width:190px;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1b263b;
+            background: #f6f8fb;
+            line-height: 1.6;
+        }
 
-.logo-main{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:2px;
-    color:#111827;
-}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-.logo-sub{
-    margin-top:5px;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:2.2px;
-    color:#2563eb;
-}
+        img {
+            max-width: 100%;
+        }
 
-.nav{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:25px;
-}
+        /* ================= HEADER ================= */
 
-.nav a{
-    position:relative;
-    text-decoration:none;
-    color:#374151;
-    font-size:14px;
-    font-weight:600;
-    padding:8px 0;
-    transition:.3s ease;
-}
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            z-index: 1000;
+        }
 
-.nav a:hover,
-.nav a.active{
-    color:#2563eb;
-}
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.nav a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:0;
-    height:2px;
-    background:#2563eb;
-    transition:.3s ease;
-}
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0b3d91;
+            letter-spacing: .5px;
+        }
 
-.nav a:hover::after,
-.nav a.active::after{
-    width:100%;
-}
+        .logo span {
+            color: #f59e0b;
+        }
 
-.header-button{
-    text-decoration:none;
-    background:#2563eb;
-    color:white;
-    padding:12px 20px;
-    border-radius:7px;
-    font-size:14px;
-    font-weight:700;
-    white-space:nowrap;
-}
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
 
-/* ================= HERO ================= */
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 600;
+            transition: .3s;
+        }
 
-.hero{
-    padding:85px 6%;
-    background:linear-gradient(135deg,#0b3b66,#176da8);
-    color:white;
-    min-height:520px;
-    display:flex;
-    align-items:center;
-}
+        .nav-links a:hover {
+            color: #0b3d91;
+        }
 
-.hero-content{
-    max-width:1200px;
-    width:100%;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns:1.25fr .75fr;
-    gap:60px;
-    align-items:center;
-}
+        .nav-btn {
+            background: #0b3d91;
+            color: white !important;
+            padding: 10px 17px;
+            border-radius: 7px;
+        }
 
-.hero h1{
-    font-size:48px;
-    line-height:1.12;
-    max-width:720px;
-    margin:0 0 20px;
-}
+        .menu-btn {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
 
-.hero p{
-    font-size:18px;
-    max-width:680px;
-    line-height:1.7;
-    margin:0 0 22px;
-    color:#e7f1fa;
-}
+        /* ================= HERO ================= */
 
-.btn{
-    display:inline-block;
-    padding:14px 22px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
-    margin:8px 8px 0 0;
-}
+        .hero {
+            min-height: 100vh;
+            padding: 150px 25px 90px;
+            background:
+                linear-gradient(135deg, #061b3a, #0b3d91 55%, #1255b3);
+            color: white;
+            display: flex;
+            align-items: center;
+        }
 
-.primary{
-    background:#ffb703;
-    color:#172033;
-}
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-.secondary{
-    border:1px solid white;
-    color:white;
-}
+        .hero-content h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
 
-.hero-highlights{
-    display:grid;
-    gap:14px;
-}
+        .hero-content h1 span {
+            color: #fbbf24;
+        }
 
-.hero-highlight{
-    background:#ffffff12;
-    border:1px solid #ffffff25;
-    border-radius:12px;
-    padding:20px;
-}
+        .hero-content p {
+            font-size: 19px;
+            max-width: 650px;
+            color: #e4ebf5;
+            margin-bottom: 30px;
+        }
 
-.hero-highlight strong{
-    display:block;
-    font-size:18px;
-    margin-bottom:6px;
-}
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-.hero-highlight span{
-    font-size:14px;
-    color:#dceaf5;
-}
+        .btn {
+            display: inline-block;
+            padding: 14px 23px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: .3s;
+        }
 
-/* ================= GENERAL ================= */
+        .btn-primary {
+            background: #f59e0b;
+            color: #111827;
+        }
 
-.container{
-    max-width:1150px;
-    margin:auto;
-    padding:40px 6%;
-}
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #fbbf24;
+        }
 
-h2{
-    font-size:30px;
-}
+        .btn-outline {
+            border: 1px solid white;
+            color: white;
+        }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:18px;
-}
+        .btn-outline:hover {
+            background: white;
+            color: #0b3d91;
+        }
 
-.card{
-    background:white;
-    padding:22px;
-    border-radius:12px;
-    box-shadow:0 3px 15px #00000012;
-}
+        .hero-card {
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.2);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
 
-.card h3{
-    margin-top:0;
-    color:#0b3b66;
-}
+        .hero-card h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
 
-.badge{
-    display:inline-block;
-    background:#e8f2fa;
-    color:#0b3b66;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:12px;
-    margin:3px;
-}
+        .hero-card ul {
+            list-style: none;
+        }
 
-/* ================= SERVICES ================= */
+        .hero-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+        }
 
-.services-intro{
-    max-width:700px;
-    margin-bottom:28px;
-    color:#5b6575;
-    line-height:1.6;
-}
+        .hero-card li:last-child {
+            border-bottom: none;
+        }
 
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
+        /* ================= GENERAL ================= */
 
-.service-card{
-    background:#ffffff;
-    padding:26px;
-    border-radius:14px;
-    border:1px solid #e6eaf0;
-    box-shadow:0 4px 18px #0000000d;
-    transition:.3s ease;
-}
+        section {
+            padding: 90px 25px;
+        }
 
-.service-card:hover{
-    transform:translateY(-4px);
-}
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.service-icon{
-    width:48px;
-    height:48px;
-    border-radius:10px;
-    background:#e8f2fa;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    margin-bottom:18px;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-.service-card h3{
-    margin:0 0 10px;
-    color:#0b3b66;
-    font-size:20px;
-}
+        .section-title h2 {
+            font-size: 38px;
+            color: #0b3d91;
+            margin-bottom: 10px;
+        }
 
-.service-card p{
-    margin:0;
-    color:#5b6575;
-    line-height:1.6;
-    font-size:14px;
-}
+        .section-title p {
+            color: #64748b;
+            max-width: 700px;
+            margin: auto;
+        }
 
-/* ================= FORM ================= */
+        /* ================= ABOUT ================= */
 
-form{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 15px #00000012;
-}
+        .about {
+            background: white;
+        }
 
-input,
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    margin:7px 0 15px;
-    border:1px solid #d5dbe3;
-    border-radius:7px;
-}
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-button{
-    background:#0b3b66;
-    color:white;
-    border:0;
-    padding:13px 22px;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .about-text h3 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
 
-/* ================= FOOTER ================= */
+        .about-text p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
 
-footer{
-    background:#102033;
-    color:#dce5ef;
-    padding:25px 6%;
-    text-align:center;
-}
+        .about-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
 
-/* ================= MOBILE ================= */
+        .about-box {
+            padding: 25px;
+            background: #f6f8fb;
+            border-radius: 12px;
+            border-left: 4px solid #0b3d91;
+        }
 
-@media(max-width:900px){
+        .about-box h4 {
+            color: #0b3d91;
+            margin-bottom: 7px;
+        }
 
-    .nav,
-    .header-button{
-        display:none;
-    }
+        /* ================= SERVICES ================= */
 
-    .header-container{
-        padding:14px 20px;
-    }
+        .services {
+            background: #f6f8fb;
+        }
 
-    .logo-main{
-        font-size:22px;
-    }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
 
-    .hero{
-        padding:65px 6%;
-    }
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 7px 25px rgba(0,0,0,.06);
+            transition: .3s;
+        }
 
-    .hero-content{
-        grid-template-columns:1fr;
-        gap:35px;
-    }
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.1);
+        }
 
-    .hero h1{
-        font-size:38px;
-    }
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
 
-    .services-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
+        .service-card h3 {
+            color: #0b3d91;
+            margin-bottom: 10px;
+        }
 
-@media(max-width:600px){
+        .service-card p {
+            color: #64748b;
+        }
 
-    .services-grid{
-        grid-template-columns:1fr;
-    }
-}
-</style>
+        /* ================= COMPANIES ================= */
+
+        .companies {
+            background: white;
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .company-card {
+            background: #f6f8fb;
+            padding: 35px;
+            border-radius: 15px;
+        }
+
+        .company-card h3 {
+            color: #0b3d91;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .company-card ul {
+            padding-left: 20px;
+            color: #64748b;
+        }
+
+        .company-card li {
+            margin-bottom: 8px;
+        }
+
+        /* ================= SUPPLIERS ================= */
+
+        .suppliers {
+            background: #061b3a;
+            color: white;
+        }
+
+        .suppliers .section-title h2 {
+            color: white;
+        }
+
+        .suppliers .section-title p {
+            color: #cbd5e1;
+        }
+
+        .supplier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .supplier-card {
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .supplier-card h3 {
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .supplier-card p {
+            color: #dbe4f0;
+        }
+
+        /* ================= PROCESS ================= */
+
+        .process {
+            background: #f6f8fb;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .process-card {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            background: #0b3d91;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .process-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .process-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 45px;
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            color: #0b3d91;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin-bottom: 18px;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #0b3d91;
+        }
+
+        .contact-item span {
+            color: #64748b;
+        }
+
+        form {
+            background: #f6f8fb;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d5dce6;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #0b3d91;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            background: #0b3d91;
+            color: white;
+            padding: 14px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: #082f70;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            background: linear-gradient(135deg, #0b3d91, #1255b3);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #e0e8f5;
+            margin-bottom: 25px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #050f20;
+            color: white;
+            padding: 45px 25px 20px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+            color: #fbbf24;
+        }
+
+        footer p,
+        footer li {
+            color: #aebbd0;
+            font-size: 14px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 35px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.1);
+            text-align: center;
+            color: #8492a8;
+            font-size: 13px;
+        }
+
+        /* ================= WHATSAPP ================= */
+
+        .whatsapp {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.25);
+            z-index: 999;
+            transition: .3s;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 900px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px 25px;
+                box-shadow: 0 10px 20px rgba(0,0,0,.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-container,
+            .about-grid,
+            .company-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .supplier-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            section {
+                padding: 70px 18px;
+            }
+
+            .navbar {
+                padding: 13px 18px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .hero {
+                padding: 120px 18px 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 37px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .service-grid,
+            .supplier-grid,
+            .process-grid,
+            .about-boxes,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                padding: 25px;
+            }
+
+            .whatsapp {
+                width: 55px;
+                height: 55px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <!-- ================= HEADER ================= -->
 
-<header class="site-header">
+<header>
+    <nav class="navbar">
 
-<div class="header-container">
+        <a href="#home" class="logo">
+            ELITE <span>WORKFORCE</span>
+        </a>
 
-<a href="#home" class="logo">
-<span class="logo-main">ELITE</span>
-<span class="logo-sub">WORKFORCE SOLUTIONS</span>
-</a>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<nav class="nav">
-<a href="#home" class="active">Home</a>
-<a href="#about">About Us</a>
-<a href="#services">Services</a>
-<a href="#post">For Companies</a>
-<a href="#supplier">For Suppliers</a>
-<a href="#contact">Contact</a>
-</nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#companies">Companies</a></li>
+            <li><a href="#suppliers">Suppliers</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <a href="https://wa.me/971553239813" class="nav-btn">
+                    WhatsApp
+                </a>
+            </li>
+        </ul>
 
-<a href="#post" class="header-button">Get Started</a>
-
-</div>
-
+    </nav>
 </header>
 
-<!-- ================= HERO ================= -->
+
+<!-- ================= HOME ================= -->
 
 <section class="hero" id="home">
 
-<div class="hero-content">
+    <div class="hero-container">
 
-<div>
+        <div class="hero-content">
 
-<h1>
-Reliable Workforce &amp; Supplier Solutions for UAE Businesses
-</h1>
+            <p style="color:#fbbf24;font-weight:bold;">
+                UAE WORKFORCE & MANPOWER SOLUTIONS
+            </p>
 
-<p>
-Connecting companies with reliable skilled workforce and trusted
-suppliers for electrical, mechanical, maintenance and industrial requirements.
-</p>
+            <h1>
+                Connecting
+                <span>Companies</span>
+                With Skilled Workforce
+            </h1>
 
-<a class="btn primary" href="#post">
-For Companies
-</a>
+            <p>
+                Elite Workforce Solutions helps companies connect with
+                reliable manpower suppliers and skilled workforce across
+                the UAE.
+            </p>
 
-<a class="btn secondary" href="#supplier">
-Register as Supplier
-</a>
+            <div class="hero-buttons">
 
-</div>
+                <a href="#companies" class="btn btn-primary">
+                    I Need Workforce
+                </a>
 
-<div class="hero-highlights">
+                <a href="#suppliers" class="btn btn-outline">
+                    I Am a Supplier
+                </a>
 
-<div class="hero-highlight">
-<strong>Skilled Workforce</strong>
-<span>
-Electricians, welders, fitters, HVAC technicians and more.
-</span>
-</div>
+            </div>
 
-<div class="hero-highlight">
-<strong>Trusted Suppliers</strong>
-<span>
-Connect with suppliers for workforce and industrial requirements.
-</span>
-</div>
+        </div>
 
-<div class="hero-highlight">
-<strong>Fast Response</strong>
-<span>
-Designed to help companies and suppliers connect efficiently.
-</span>
-</div>
 
-</div>
+        <div class="hero-card">
 
-</div>
+            <h3>Our Workforce Network</h3>
+
+            <ul>
+                <li>✓ Electricians</li>
+                <li>✓ Electrical Technicians</li>
+                <li>✓ Mechanical Fitters</li>
+                <li>✓ Welders & Fabricators</li>
+                <li>✓ HVAC Technicians</li>
+                <li>✓ General Maintenance Staff</li>
+                <li>✓ Skilled Manpower Suppliers</li>
+            </ul>
+
+        </div>
+
+    </div>
 
 </section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>About Elite Workforce Solutions</h2>
+            <p>
+                Building a professional connection between UAE companies,
+                manpower suppliers and skilled workers.
+            </p>
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-text">
+
+                <h3>Reliable Workforce. Professional Connections.</h3>
+
+                <p>
+                    Elite Workforce Solutions is a workforce networking
+                    platform designed to connect companies with reliable
+                    manpower suppliers and skilled workforce.
+                </p>
+
+                <p>
+                    Our goal is to make workforce sourcing easier,
+                    faster and more transparent for businesses operating
+                    across the UAE.
+                </p>
+
+                <p>
+                    We focus on connecting the right supplier with the
+                    right company requirement.
+                </p>
+
+            </div>
+
+
+            <div class="about-boxes">
+
+                <div class="about-box">
+                    <h4>Professional</h4>
+                    <p>Business-focused workforce connections.</p>
+                </div>
+
+                <div class="about-box">
+                    <h4>Reliable</h4>
+                    <p>Focus on dependable suppliers and workers.</p>
+                </div>
+
+                <div class="about-box">
+                    <h4>Fast Response</h4>
+                    <p>Quick communication between companies and suppliers.</p>
+                </div>
+
+                <div class="about-box">
+                    <h4>UAE Focused</h4>
+                    <p>Designed for workforce requirements in the UAE.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- ================= SERVICES ================= -->
 
-<section class="container" id="services">
+<section class="services" id="services">
 
-<h2>Our Workforce &amp; Supplier Services</h2>
+    <div class="container">
 
-<p class="services-intro">
-Connecting UAE businesses with skilled workforce and supplier support
-for electrical, mechanical, maintenance and industrial requirements.
-</p>
+        <div class="section-title">
 
-<div class="services-grid">
+            <h2>Our Services</h2>
 
-<div class="service-card">
-<div class="service-icon">⚡</div>
-<h3>Electrical Workforce</h3>
-<p>
-Electricians and electrical maintenance workforce for project and industrial requirements.
-</p>
-</div>
+            <p>
+                Workforce and manpower categories we help companies
+                source through supplier connections.
+            </p>
 
-<div class="service-card">
-<div class="service-icon">🔧</div>
-<h3>Mechanical &amp; Fitter</h3>
-<p>
-Fitters and mechanical support workforce for maintenance and industrial projects.
-</p>
-</div>
+        </div>
 
-<div class="service-card">
-<div class="service-icon">🔥</div>
-<h3>Welding Workforce</h3>
-<p>
-MIG, ARC and other welding workforce for fabrication and project requirements.
-</p>
-</div>
 
-<div class="service-card">
-<div class="service-icon">❄️</div>
-<h3>HVAC Technicians</h3>
-<p>
-HVAC technicians for installation, maintenance and building service requirements.
-</p>
-</div>
+        <div class="service-grid">
 
-<div class="service-card">
-<div class="service-icon">🏗️</div>
-<h3>Industrial Maintenance</h3>
-<p>
-Skilled workforce support for industrial maintenance and operational requirements.
-</p>
-</div>
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Electricians</h3>
+                <p>
+                    Skilled electricians for industrial, commercial,
+                    construction and maintenance requirements.
+                </p>
+            </div>
 
-<div class="service-card">
-<div class="service-icon">👷</div>
-<h3>General Skilled Workforce</h3>
-<p>
-Helpers and other skilled or semi-skilled workers based on company requirements.
-</p>
-</div>
 
-</div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Mechanical Fitters</h3>
+                <p>
+                    Mechanical fitters for industrial and maintenance
+                    projects.
+                </p>
+            </div>
 
-</section>
 
-<!-- ================= LATEST REQUIREMENTS ================= -->
+            <div class="service-card">
+                <div class="service-icon">🔥</div>
+                <h3>Welders</h3>
+                <p>
+                    Welders and fabrication workforce for project and
+                    industrial requirements.
+                </p>
+            </div>
 
-<section class="container" id="jobs">
 
-<h2>Latest Requirements</h2>
+            <div class="service-card">
+                <div class="service-icon">❄️</div>
+                <h3>HVAC Technicians</h3>
+                <p>
+                    HVAC technicians for installation, servicing and
+                    maintenance requirements.
+                </p>
+            </div>
 
-<div class="cards">
 
-<div class="card">
-<span class="badge">Sharjah</span>
-<span class="badge">Urgent</span>
-<h3>Electricians Required</h3>
-<p>20 electricians for industrial project.</p>
-<b>Start: Immediately</b>
-<p>Employer: Verified company</p>
-</div>
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Skilled Workforce</h3>
+                <p>
+                    Skilled manpower sourcing through our supplier
+                    network.
+                </p>
+            </div>
 
-<div class="card">
-<span class="badge">Ajman</span>
-<span class="badge">7 Days</span>
-<h3>Welders Required</h3>
-<p>10 MIG/ARC welders for fabrication work.</p>
-<b>Start: Next week</b>
-<p>Employer: Verified company</p>
-</div>
 
-<div class="card">
-<span class="badge">RAK</span>
-<span class="badge">Contract</span>
-<h3>HVAC Technicians</h3>
-<p>5 technicians for building maintenance.</p>
-<b>Duration: 3 months</b>
-<p>Employer: Verified company</p>
-</div>
+            <div class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3>Maintenance Staff</h3>
+                <p>
+                    Workforce connections for building and facility
+                    maintenance requirements.
+                </p>
+            </div>
 
-</div>
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ================= COMPANY REQUIREMENT ================= -->
 
-<section class="container" id="post">
+<!-- ================= COMPANIES ================= -->
 
-<h2>Post a Manpower Requirement</h2>
+<section class="companies" id="companies">
 
-<form onsubmit="alert('Demo submitted. Connect this form to a database/backend to receive real requests.');return false;">
+    <div class="container">
 
-<label>Company / Project Name</label>
-<input required placeholder="Company name">
+        <div class="section-title">
 
-<label>Required Trade</label>
+            <h2>For Companies</h2>
 
-<select required>
-<option value="">Select trade</option>
-<option>Electrician</option>
-<option>Welder</option>
-<option>Fitter</option>
-<option>HVAC Technician</option>
-<option>Plumber</option>
-<option>Helper</option>
-<option>Other</option>
-</select>
+            <p>
+                Looking for skilled manpower or a reliable workforce
+                supplier?
+            </p>
 
-<label>Number of Workers</label>
-<input type="number" min="1" required placeholder="e.g. 10">
+        </div>
 
-<label>Location</label>
-<input required placeholder="e.g. Hamriyah Free Zone, Sharjah">
 
-<label>Start Date</label>
-<input type="date" required>
+        <div class="company-grid">
 
-<label>Details</label>
+            <div class="company-card">
 
-<textarea rows="4"
-placeholder="Duty hours, required skills, accommodation, transport, rate, etc."></textarea>
+                <h3>Tell Us Your Requirement</h3>
 
-<button type="submit">
-Submit Requirement
-</button>
+                <p>
+                    Companies can contact us with their manpower
+                    requirements and workforce categories.
+                </p>
 
-</form>
+                <br>
+
+                <ul>
+                    <li>Number of workers required</li>
+                    <li>Required skill / trade</li>
+                    <li>Project location</li>
+                    <li>Expected duration</li>
+                    <li>Start date</li>
+                    <li>Other project requirements</li>
+                </ul>
+
+                <br>
+
+                <a href="#contact" class="btn btn-primary">
+                    Submit Requirement
+                </a>
+
+            </div>
+
+
+            <div class="company-card">
+
+                <h3>Why Work With Our Network?</h3>
+
+                <ul>
+                    <li>Access to workforce suppliers</li>
+                    <li>Multiple skilled manpower categories</li>
+                    <li>Faster supplier communication</li>
+                    <li>Project-based workforce connections</li>
+                    <li>UAE-focused network</li>
+                    <li>Professional business communication</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SUPPLIERS ================= -->
+
+<section class="suppliers" id="suppliers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>For Suppliers</h2>
+
+            <p>
+                Are you a manpower supplier looking for new company
+                opportunities in the UAE?
+            </p>
+
+        </div>
+
+
+        <div class="supplier-grid">
+
+            <div class="supplier-card">
+
+                <h3>Register Your Services</h3>
+
+                <p>
+                    Share your workforce categories and contact details
+                    so companies can understand your capabilities.
+                </p>
+
+            </div>
+
+
+            <div class="supplier-card">
+
+                <h3>Show Your Workforce</h3>
+
+                <p>
+                    Suppliers can offer electricians, fitters, welders,
+                    HVAC technicians and other skilled workforce.
+                </p>
+
+            </div>
+
+
+            <div class="supplier-card">
+
+                <h3>Find Opportunities</h3>
+
+                <p>
+                    Connect with companies and project requirements
+                    that match your workforce capacity.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div style="text-align:center;margin-top:40px;">
+
+            <a href="#contact" class="btn btn-primary">
+                Contact Us as Supplier
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ================= SUPPLIER ================= -->
 
-<section class="container" id="supplier">
+<!-- ================= PROCESS ================= -->
 
-<h2>Supplier Registration</h2>
+<section class="process">
 
-<div class="cards">
+    <div class="container">
 
-<div class="card">
-<h3>Supplier Profile</h3>
-<p>
-Company name, trade licence, contact person, phone and email.
-</p>
-</div>
+        <div class="section-title">
 
-<div class="card">
-<h3>Worker Capacity</h3>
-<p>
-Show available electricians, welders, fitters, HVAC technicians and helpers.
-</p>
-</div>
+            <h2>How It Works</h2>
 
-<div class="card">
-<h3>Verified Badge</h3>
-<p>
-Admin verifies licence and documents before suppliers receive verified status.
-</p>
-</div>
+            <p>
+                A simple process to connect companies and workforce
+                suppliers.
+            </p>
 
-</div>
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="process-number">1</div>
+
+                <h3>Requirement</h3>
+
+                <p>
+                    Company shares its workforce requirement.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">2</div>
+
+                <h3>Matching</h3>
+
+                <p>
+                    We identify suitable supplier/workforce options.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">3</div>
+
+                <h3>Connect</h3>
+
+                <p>
+                    Company and supplier communicate directly.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">4</div>
+
+                <h3>Work</h3>
+
+                <p>
+                    The parties proceed according to their agreed
+                    commercial terms.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <h2>Looking for Skilled Workforce?</h2>
+
+        <p>
+            Let us help connect your company with suitable workforce
+            suppliers.
+        </p>
+
+        <a href="#contact" class="btn btn-primary">
+            Send Enquiry
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                Tell us what workforce or supplier service you need.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+            <div class="contact-info">
+
+                <h3>Let's Work Together</h3>
+
+                <p style="color:#64748b;margin-bottom:25px;">
+                    Companies and suppliers can contact Elite Workforce
+                    Solutions for workforce networking and business
+                    enquiries.
+                </p>
+
+
+                <div class="contact-item">
+                    <strong>WhatsApp</strong>
+                    <span>+971 55 323 9813</span>
+                </div>
+
+
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <span>mohdmanjur021@gmail.com</span>
+                </div>
+
+
+                <div class="contact-item">
+                    <strong>Location</strong>
+                    <span>United Arab Emirates</span>
+                </div>
+
+            </div>
+
+
+            <form onsubmit="sendWhatsApp(event)">
+
+                <div class="form-group">
+
+                    <label>Your Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Company Name</label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        placeholder="Company name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>I Am</label>
+
+                    <select id="type">
+
+                        <option value="Company">Company</option>
+
+                        <option value="Manpower Supplier">
+                            Manpower Supplier
+                        </option>
+
+                        <option value="Worker">
+                            Skilled Worker
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Required Service</label>
+
+                    <select id="service">
+
+                        <option>Electrician</option>
+                        <option>Fitter</option>
+                        <option>Welder</option>
+                        <option>HVAC Technician</option>
+                        <option>Maintenance Staff</option>
+                        <option>Skilled Manpower</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Message</label>
+
+                    <textarea
+                        id="message"
+                        placeholder="Tell us about your requirement..."
+                        required></textarea>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+                    Send Enquiry on WhatsApp
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- ================= FOOTER ================= -->
 
 <footer>
-ELITE WORKFORCE SOLUTIONS • UAE Workforce &amp; Supplier Platform
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>Elite Workforce Solutions</h3>
+
+            <p>
+                Professional workforce and manpower networking
+                solutions connecting UAE companies with suppliers
+                and skilled workforce.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#companies">Companies</a></li>
+                <li><a href="#suppliers">Suppliers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        </div>
+
+
+        <div>
+
+            <h3>Workforce Categories</h3>
+
+            <ul>
+                <li>Electricians</li>
+                <li>Fitters</li>
+                <li>Welders</li>
+                <li>HVAC Technicians</li>
+                <li>Maintenance Staff</li>
+                <li>Skilled Manpower</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 Elite Workforce Solutions. All Rights Reserved.
+
+    </div>
+
 </footer>
+
+
+<!-- ================= WHATSAPP ================= -->
+
+<a
+    href="https://wa.me/971553239813"
+    class="whatsapp"
+    target="_blank"
+    title="Contact us on WhatsApp">
+
+    ☎
+
+</a>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /* Mobile Menu */
+
+    function toggleMenu() {
+
+        document
+            .getElementById("navLinks")
+            .classList
+            .toggle("active");
+
+    }
+
+
+    /* Close mobile menu after clicking */
+
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+
+        link.addEventListener("click", function() {
+
+            document
+                .getElementById("navLinks")
+                .classList
+                .remove("active");
+
+        });
+
+    });
+
+
+    /* WhatsApp Enquiry */
+
+    function sendWhatsApp(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value;
+
+        const company =
+            document.getElementById("company").value;
+
+        const type =
+            document.getElementById("type").value;
+
+        const service =
+            document.getElementById("service").value;
+
+        const message =
+            document.getElementById("message").value;
+
+
+        const whatsappMessage =
+            "Hello Elite Workforce Solutions,%0A%0A" +
+
+            "Name: " + encodeURIComponent(name) + "%0A" +
+
+            "Company: " + encodeURIComponent(company) + "%0A" +
+
+            "I am: " + encodeURIComponent(type) + "%0A" +
+
+            "Service: " + encodeURIComponent(service) + "%0A%0A" +
+
+            "Requirement:%0A" +
+            encodeURIComponent(message);
+
+
+        const whatsappURL =
+            "https://wa.me/971553239813?text=" +
+            whatsappMessage;
+
+
+        window.open(whatsappURL, "_blank");
+
+    }
+
+</script>
 
 </body>
 </html>
