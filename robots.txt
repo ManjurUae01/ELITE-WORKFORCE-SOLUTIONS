@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manjuruae01.github.io/ELITE-WORKFORCE-SOLUTIONS/sitemap.xml
