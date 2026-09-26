@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
- <meta name="google-site-verification" content="d0f1utrcMRE9xzLwKzpxVo1iGVxWacoIcfhrQ9_pVDc" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce including electricians, fitters, welders, HVAC technicians and maintenance staff.">
 <meta name="keywords" content="manpower supplier UAE, electrician supplier UAE, fitter supplier UAE, welder supplier UAE, skilled manpower UAE, workforce solutions UAE">
@@ -13,6 +12,7 @@
 <meta property="og:type" content="website">
 <title>Elite Workforce Solutions | UAE Workforce & Manpower Network</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 :root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--text:#17233a;--muted:#64748b;--light:#f6f8fb;--white:#fff}
@@ -54,15 +54,56 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 .menu-btn{display:block}.nav-links{display:none;position:absolute;top:68px;left:0;width:100%;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:10px 25px 20px;box-shadow:0 8px 18px rgba(0,0,0,.08)}.nav-links.active{display:flex}.nav-links li{padding:8px 0}.hero-container{grid-template-columns:1fr}.hero h1{font-size:45px}.about-grid,.company-grid,.requirement-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}.supplier-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.crm-toolbar{grid-template-columns:1fr 1fr}.crm-stats{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){
 .mobile-action-bar{display:flex}section{padding:65px 18px}.navbar{padding:13px 18px}.logo{font-size:18px}.hero{padding:95px 18px 65px}.hero h1{font-size:38px}.hero-lead{font-size:16px}.hero-card{padding:24px}.section-title h2{font-size:30px}.service-grid,.why-grid,.process-grid,.footer-grid,.testimonial-grid{grid-template-columns:1fr}.about-boxes{grid-template-columns:1fr}.trust-inner{grid-template-columns:1fr}.crm-toolbar{grid-template-columns:1fr}.crm-stats{grid-template-columns:1fr 1fr}.lead-form-grid{grid-template-columns:1fr}.full{grid-column:auto}.whatsapp{width:54px;height:54px;right:15px;bottom:70px}}
+
+/* NEW NETWORK FEATURES - added without removing existing code */
+.network-section{background:#fff}
+.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.network-card{background:var(--light);border:1px solid #e5eaf1;border-radius:15px;padding:28px;text-align:center}
+.network-card .network-icon{font-size:34px;color:var(--blue);margin-bottom:12px}
+.network-card h3{color:var(--blue);margin-bottom:8px}
+.network-card p{color:var(--muted);font-size:14px}
+.transparency-box{margin-top:28px;background:#fff8e7;border:1px solid #f4d58a;border-radius:14px;padding:22px}
+.transparency-box h3{color:#92400e;margin-bottom:7px}
+.transparency-box p{color:#6b5a2b;font-size:14px}
+.connect-panel{margin-top:25px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-radius:16px;padding:28px;display:flex;justify-content:space-between;gap:20px;align-items:center}
+.connect-panel h3{color:var(--gold);margin-bottom:5px}
+.connect-panel p{color:#dbe7f5;font-size:14px}
+.connect-actions{display:flex;gap:10px;flex-wrap:wrap}
+.connect-actions .btn{white-space:nowrap}
+@media(max-width:900px){.network-grid{grid-template-columns:1fr}.connect-panel{flex-direction:column;align-items:flex-start}}
+
+
+/* QUICK PRIVATE CRM BUTTON */
+.crm-quick-btn{position:fixed;left:0;top:45%;transform:translateY(-50%);z-index:1500;background:var(--navy);color:#fff;text-decoration:none;padding:14px 11px;border-radius:0 10px 10px 0;font-weight:800;font-size:13px;box-shadow:0 5px 18px rgba(0,0,0,.25);writing-mode:vertical-rl;display:flex;align-items:center;gap:7px}.crm-quick-btn i{color:var(--gold);font-size:16px}.crm-quick-btn:hover{background:var(--blue)}
+@media(max-width:600px){.crm-quick-btn{top:42%;padding:12px 9px;font-size:11px}}
+
+/* CLOUD NETWORK + CLOUD CRM */
+.cloud-panel{background:#f8fafc;border:1px solid #dbe3ec;border-radius:14px;padding:18px 20px;margin:18px 20px}
+.cloud-panel h3{color:var(--blue);margin-bottom:6px}
+.cloud-panel p{font-size:13px;color:var(--muted);margin-bottom:12px}
+.cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cloud-grid input{width:100%;padding:11px;border:1px solid #d5dce6;border-radius:7px}
+.cloud-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.cloud-status{font-size:12px;font-weight:700;margin-top:9px}
+.live-board{margin-top:22px;background:#fff;border:1px solid #e5eaf1;border-radius:14px;padding:20px}
+.live-board h3{color:var(--blue);margin-bottom:5px}
+.live-list{display:grid;gap:10px;margin-top:14px}
+.live-item{border:1px solid #e5eaf1;border-radius:10px;padding:14px;background:#fbfdff}
+.live-item strong{color:var(--blue)}
+.live-meta{font-size:12px;color:var(--muted);margin-top:4px}
+.publish-note{font-size:11px;color:var(--muted);margin-top:8px}
+@media(max-width:600px){.cloud-grid{grid-template-columns:1fr}.cloud-panel{margin:12px}.cloud-actions .crm-btn{width:100%}}
+
 </style>
 </head>
 <body>
+<a href="#crm" class="crm-quick-btn" aria-label="Open Private Lead CRM" title="Open Private Lead CRM"><i class="fa-solid fa-lock"></i> Private CRM</a>
 
 <header><nav class="navbar">
 <a href="#home" class="logo">ELITE <span>WORKFORCE</span></a>
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 <ul class="nav-links" id="navLinks">
-<li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#companies">Companies</a></li><li><a href="#suppliers">Suppliers</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#crm">Private CRM</a></li><li><a href="#contact" class="nav-btn">Contact</a></li>
+<li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#companies">Companies</a></li><li><a href="#suppliers">Suppliers</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li><li><a href="#contact" class="nav-btn">Contact</a></li>
 </ul></nav></header>
 
 <div class="ticker-wrap"><div class="ticker">
@@ -123,12 +164,82 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 <div class="form-group"><label>Company Name</label><input id="reqCompany" required></div><div class="form-group"><label>Contact Person</label><input id="reqPerson" required></div>
 <div class="form-group"><label>Trade</label><select id="reqTrade" required><option value="">Select trade</option><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance Staff</option><option>Other Skilled Workforce</option></select></div>
 <div class="form-group"><label>Workers Required</label><input id="reqQty" type="number" min="1" required></div><div class="form-group"><label>Location</label><input id="reqLocation" placeholder="Abu Dhabi / Dubai / Sharjah..." required></div>
-<div class="form-group"><label>Message / Requirement</label><textarea id="reqMessage" required></textarea></div><button class="submit-btn">Send Requirement via WhatsApp</button><div class="form-note">This form opens WhatsApp; it does not create a server-side account.</div></form></div>
-<div class="requirement-card"><h3>Supplier Enquiry</h3><p>Tell us what workforce you have available.</p><form onsubmit="submitSupplier(event)"><div class="form-group"><label>Supplier / Company Name</label><input id="supCompany" required></div><div class="form-group"><label>Contact Number</label><input id="supPhone" required></div><div class="form-group"><label>Available Trade</label><select id="supTrade" required><option value="">Select trade</option><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance Staff</option><option>Other Skilled Workforce</option></select></div><div class="form-group"><label>Available Quantity</label><input id="supQty" type="number" min="1" required></div><div class="form-group"><label>UAE Location / Coverage</label><input id="supLocation" required></div><div class="form-group"><label>Details</label><textarea id="supMessage" required></textarea></div><button class="submit-btn">Contact via WhatsApp</button></form></div></div></div></section>
+<div class="form-group"><label>Message / Requirement</label><textarea id="reqMessage" required></textarea></div><button class="submit-btn">Send Requirement via WhatsApp</button><div class="form-note">This form opens WhatsApp; it does not create a server-side account.</div>
+<div class="cloud-actions">
+<button type="button" class="crm-btn" onclick="publishRequirementOnline()">🌐 Publish to Live Network</button>
+</div>
+<div class="publish-note">Publishing creates a public networking post in the online database. Do not post passwords, ID numbers, bank details or other sensitive information.</div></form></div>
+<div class="requirement-card"><h3>Supplier Enquiry</h3><p>Tell us what workforce you have available.</p><form onsubmit="submitSupplier(event)"><div class="form-group"><label>Supplier / Company Name</label><input id="supCompany" required></div><div class="form-group"><label>Contact Number</label><input id="supPhone" required></div><div class="form-group"><label>Available Trade</label><select id="supTrade" required><option value="">Select trade</option><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance Staff</option><option>Other Skilled Workforce</option></select></div><div class="form-group"><label>Available Quantity</label><input id="supQty" type="number" min="1" required></div><div class="form-group"><label>UAE Location / Coverage</label><input id="supLocation" required></div><div class="form-group"><label>Details</label><textarea id="supMessage" required></textarea></div><button class="submit-btn">Contact via WhatsApp</button><div class="cloud-actions"><button type="button" class="crm-btn" onclick="publishSupplierOnline()">🌐 Publish Supplier Availability</button></div><div class="publish-note">Your supplier availability can be shown on the public network for potential business connections.</div></form></div></div></div></section>
+
+
+<section class="network-section" id="network">
+  <div class="container">
+    <div class="section-title">
+      <h2>Open Workforce Network</h2>
+      <p>A simple and transparent place where companies and manpower suppliers can discover each other and start a direct conversation.</p>
+    </div>
+
+    <div class="network-grid">
+      <div class="network-card">
+        <div class="network-icon"><i class="fa-solid fa-building"></i></div>
+        <h3>For Companies</h3>
+        <p>Share your workforce requirement and allow suitable suppliers to understand what you need.</p>
+      </div>
+      <div class="network-card">
+        <div class="network-icon"><i class="fa-solid fa-users"></i></div>
+        <h3>For Suppliers</h3>
+        <p>Present your available electricians, fitters, welders, HVAC and other skilled workforce.</p>
+      </div>
+      <div class="network-card">
+        <div class="network-icon"><i class="fa-solid fa-link"></i></div>
+        <h3>Direct Connection</h3>
+        <p>The platform focuses on connecting people. Commercial terms can be discussed directly between the relevant parties.</p>
+      </div>
+    </div>
+
+    <div class="transparency-box">
+      <h3><i class="fa-solid fa-eye"></i> Transparent by Design</h3>
+      <p>Our goal is to keep the network simple and transparent so people can feel comfortable making genuine business connections. Public-source information should always be independently verified before any commercial engagement.</p>
+    </div>
+
+    <div class="connect-panel">
+      <div>
+        <h3>Ready to Connect?</h3>
+        <p>Companies can post a requirement and suppliers can share their available workforce. Start the conversation directly.</p>
+      </div>
+      <div class="connect-actions">
+        <a href="#requirements" class="btn btn-primary">Post Requirement</a>
+        <a href="#contact" class="btn btn-outline">Contact Network</a>
+      </div>
+    </div>
+
+    <div class="live-board">
+      <h3><i class="fa-solid fa-signal"></i> Live Workforce Requirements</h3>
+      <p style="color:var(--muted);font-size:13px">Public posts published through this website appear here for companies and suppliers to discover.</p>
+      <div id="liveRequirements" class="live-list"><div class="empty">Connecting to the online network…</div></div>
+    </div>
+  </div>
+</section>
 
 <!-- PRIVATE CRM -->
 <section class="crm" id="crm"><div class="container"><div class="section-title"><h2>Private Lead CRM</h2><p>Local browser-based lead management for your own prospect list.</p></div>
-<div class="crm-shell"><div class="crm-head"><h2><i class="fa-solid fa-lock"></i> Elite Workforce Lead Manager</h2><p>Leads entered here stay in this browser's local storage. They are not automatically uploaded to your website server.</p></div>
+<div class="crm-shell"><div class="crm-head"><h2><i class="fa-solid fa-lock"></i> Elite Workforce Lead Manager</h2><p>Local CRM remains available. Cloud CRM can securely sync your private leads to an online database after you connect your account.</p></div>
+<div class="cloud-panel">
+  <h3><i class="fa-solid fa-cloud"></i> Cloud CRM Login</h3>
+  <p>Create/login to your private account. Your private leads are tied to your account; they are not public.</p>
+  <div class="cloud-grid">
+    <input id="cloudEmail" type="email" placeholder="Email">
+    <input id="cloudPassword" type="password" placeholder="Password (min. 6 characters)">
+  </div>
+  <div class="cloud-actions">
+    <button class="crm-btn" type="button" onclick="cloudSignUp()">Create Account</button>
+    <button class="crm-btn secondary" type="button" onclick="cloudSignIn()">Login</button>
+    <button class="crm-btn secondary" type="button" onclick="cloudSignOut()">Logout</button>
+    <button class="crm-btn gold" type="button" onclick="syncLocalToCloud()">☁️ Sync Local Leads</button>
+    <button class="crm-btn secondary" type="button" onclick="loadCloudLeads()">↻ Load Cloud Leads</button>
+  </div>
+  <div id="cloudStatus" class="cloud-status">Cloud database is not connected yet. Add your Supabase project URL and publishable key in the code setup area.</div>
+</div>
 <div class="crm-toolbar"><input id="searchLead" oninput="renderLeads()" placeholder="🔍 Search company, contact, phone, trade..."><select id="regionFilter" onchange="renderLeads()"><option value="">All Regions</option><option>JAFZA</option><option>Sharjah</option><option>Abu Dhabi</option><option>Dubai</option><option>Ajman</option><option>Other UAE</option></select><select id="statusFilter" onchange="renderLeads()"><option value="">All Status</option><option>New</option><option>Contacted</option><option>Follow-up</option><option>Converted</option><option>Closed</option></select><button class="crm-btn gold" onclick="openLeadModal()">+ Add New Lead</button><button class="crm-btn secondary" onclick="exportCSV()">CSV Export</button></div>
 <div class="crm-stats"><div class="stat"><strong id="statTotal">0</strong><span>Total Leads</span></div><div class="stat"><strong id="statNew">0</strong><span>New</span></div><div class="stat"><strong id="statFollow">0</strong><span>Follow-up</span></div><div class="stat"><strong id="statConverted">0</strong><span>Converted</span></div><div class="stat"><strong id="statToday">0</strong><span>Follow-up Due</span></div></div>
 <div class="table-wrap"><table class="lead-table"><thead><tr><th>Company</th><th>Region</th><th>Contact</th><th>Phone</th><th>Trade</th><th>Need</th><th>Source</th><th>Follow-up</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leadBody"></tbody></table><div id="emptyLeads" class="empty" style="display:none">No leads found. Click “Add New Lead” to create one.</div></div>
@@ -138,7 +249,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 <section class="contact" id="contact"><div class="container"><div class="section-title"><h2>Contact</h2><p>For workforce requirements, supplier enquiries and business networking.</p></div><div class="contact-grid"><div class="contact-info"><h3>Let's Connect</h3><p>Use the contact details below for business enquiries.</p><div class="contact-item"><strong>Phone</strong><span>+971 55 323 9813</span></div><div class="contact-item"><strong>WhatsApp</strong><span>+971 55 323 9813</span></div><div class="contact-item"><strong>Email</strong><span>mohdmanjur021@gmail.com</span></div><div class="contact-actions"><a class="small-btn" href="tel:+971553239813"><i class="fa-solid fa-phone"></i> Call</a><a class="small-btn" target="_blank" href="https://wa.me/971553239813"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a class="small-btn" href="mailto:mohdmanjur021@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></div></div><form onsubmit="contactSubmit(event)"><div class="form-group"><label>Name</label><input id="cName" required></div><div class="form-group"><label>Company</label><input id="cCompany"></div><div class="form-group"><label>Message</label><textarea id="cMessage" required></textarea></div><button class="submit-btn">Send via WhatsApp</button></form></div></div></section>
 
 <div class="disclaimer"><p>Information on this website is for business networking and enquiry purposes. Company names, public-source information and workforce requirements should be independently verified before commercial engagement. Elite Workforce Solutions does not guarantee employment, project award, payment or contract execution.</p></div>
-<footer><div class="footer-grid"><div><h3>Elite Workforce Solutions</h3><p>UAE-focused workforce and manpower networking platform connecting companies and suppliers.</p></div><div><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#crm">Private CRM</a></li></ul></div><div><h3>Contact</h3><p>+971 55 323 9813</p><p>mohdmanjur021@gmail.com</p></div></div><div class="copyright">© 2026 Elite Workforce Solutions. All rights reserved.</div></footer>
+<footer><div class="footer-grid"><div><h3>Elite Workforce Solutions</h3><p>UAE-focused workforce and manpower networking platform connecting companies and suppliers.</p></div><div><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li></ul></div><div><h3>Contact</h3><p>+971 55 323 9813</p><p>mohdmanjur021@gmail.com</p></div></div><div class="copyright">© 2026 Elite Workforce Solutions. All rights reserved.</div></footer>
 
 <a class="whatsapp" target="_blank" href="https://wa.me/971553239813" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 <div class="mobile-action-bar"><a class="action-btn call" href="tel:+971553239813">📞 Call</a><a class="action-btn wa" target="_blank" href="https://wa.me/971553239813">💬 WhatsApp</a></div>
@@ -156,6 +267,91 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 <script>
 const STORAGE_KEY='elite_workforce_private_leads_v1';
 let leads=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+
+const SUPABASE_URL='YOUR_SUPABASE_URL';
+const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
+const cloudEnabled=SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_') && !SUPABASE_PUBLISHABLE_KEY.includes('YOUR_');
+const supabaseClient=cloudEnabled ? window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY) : null;
+let cloudUser=null;
+
+function setCloudStatus(msg,ok=false){
+ const el=document.getElementById('cloudStatus');
+ if(el){el.textContent=msg;el.style.color=ok?'#166534':'#92400e'}
+}
+async function cloudSignUp(){
+ if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
+ const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
+ if(!email||password.length<6)return setCloudStatus('Enter a valid email and a password of at least 6 characters.');
+ const {error}=await supabaseClient.auth.signUp({email,password});
+ if(error)return setCloudStatus(error.message);
+ setCloudStatus('Account created. Check your email if email confirmation is enabled, then login.',true);
+}
+async function cloudSignIn(){
+ if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
+ const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
+ const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+ if(error)return setCloudStatus(error.message);
+ cloudUser=data.user;setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads();
+}
+async function cloudSignOut(){
+ if(!cloudEnabled)return;
+ await supabaseClient.auth.signOut();cloudUser=null;setCloudStatus('Logged out from Cloud CRM.');
+}
+async function cloudInit(){
+ if(!cloudEnabled){setCloudStatus('Cloud mode is ready but not activated. Add Supabase URL + publishable key, then upload this file again.');return}
+ const {data}=await supabaseClient.auth.getUser();
+ cloudUser=data.user||null;
+ if(cloudUser){setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads()}
+ else setCloudStatus('Cloud database connected. Please login to use your private CRM.',true);
+ await loadLiveRequirements();
+}
+async function cloudSaveLead(l){
+ if(!cloudUser)return;
+ const row={id:l.id,user_id:cloudUser.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||null,status:l.status,website:l.website,notes:l.notes};
+ const {error}=await supabaseClient.from('private_leads').upsert(row,{onConflict:'id'});
+ if(error)setCloudStatus('Cloud save error: '+error.message);
+}
+async function syncLocalToCloud(){
+ if(!cloudUser)return setCloudStatus('Login first, then sync your local leads.');
+ for(const l of leads)await cloudSaveLead(l);
+ setCloudStatus(leads.length+' local lead(s) synced to your private cloud CRM.',true);
+}
+async function loadCloudLeads(){
+ if(!cloudUser)return setCloudStatus('Login first to load your private cloud leads.');
+ const {data,error}=await supabaseClient.from('private_leads').select('*').order('created_at',{ascending:false});
+ if(error)return setCloudStatus('Cloud load error: '+error.message);
+ leads=(data||[]).map(l=>({id:l.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||'',status:l.status,website:l.website,notes:l.notes}));
+ save();renderLeads();setCloudStatus('Loaded '+leads.length+' private lead(s) from the cloud.',true);
+}
+async function cloudDeleteLead(id){
+ if(!cloudUser)return;
+ const {error}=await supabaseClient.from('private_leads').delete().eq('id',id);
+ if(error)setCloudStatus('Cloud delete error: '+error.message);
+}
+async function publishRequirementOnline(){
+ if(!cloudEnabled)return alert('Cloud database is not connected yet. Add your Supabase URL and publishable key first.');
+ const row={company_name:reqCompany.value.trim(),contact_person:reqPerson.value.trim(),trade:reqTrade.value,workers_required:Number(reqQty.value),location:reqLocation.value.trim(),message:reqMessage.value.trim(),status:'open'};
+ const {error}=await supabaseClient.from('public_requirements').insert(row);
+ if(error)return alert('Could not publish: '+error.message);
+ alert('Requirement published to the live network.');
+ await loadLiveRequirements();
+}
+async function publishSupplierOnline(){
+ if(!cloudEnabled)return alert('Cloud database is not connected yet. Add your Supabase URL and publishable key first.');
+ const row={supplier_name:supCompany.value.trim(),phone:supPhone.value.trim(),trade:supTrade.value,available_quantity:Number(supQty.value),coverage:supLocation.value.trim(),details:supMessage.value.trim(),status:'active'};
+ const {error}=await supabaseClient.from('supplier_availability').insert(row);
+ if(error)return alert('Could not publish: '+error.message);
+ alert('Supplier availability published to the live network.');
+}
+async function loadLiveRequirements(){
+ const box=document.getElementById('liveRequirements');
+ if(!box||!cloudEnabled)return;
+ const {data,error}=await supabaseClient.from('public_requirements').select('company_name,trade,workers_required,location,message,created_at').eq('status','open').order('created_at',{ascending:false}).limit(20);
+ if(error){box.innerHTML='<div class="empty">Live network is waiting for database setup.</div>';return}
+ if(!data||!data.length){box.innerHTML='<div class="empty">No live requirements yet. Be the first to publish one.</div>';return}
+ box.innerHTML=data.map(r=>`<div class="live-item"><strong>${escapeHTML(r.company_name)}</strong> — ${escapeHTML(r.trade)} <b>${escapeHTML(r.workers_required)}</b> worker(s)<div class="live-meta">${escapeHTML(r.location)} · ${new Date(r.created_at).toLocaleDateString()}</div><div style="margin-top:5px">${escapeHTML(r.message)}</div></div>`).join('');
+}
+
 
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('active')}
 document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));
@@ -202,10 +398,10 @@ function saveLead(e){
  e.preventDefault();const id=document.getElementById('leadId').value;
  const l={id:id||Date.now().toString(),company:leadCompany.value.trim(),region:leadRegion.value,contact:leadContact.value.trim(),phone:leadPhone.value.trim(),trade:leadTrade.value,need:leadNeed.value.trim(),source:leadSource.value.trim(),follow:leadFollow.value,status:leadStatus.value,website:leadWebsite.value.trim(),notes:leadNotes.value.trim()};
  if(id){const i=leads.findIndex(x=>x.id===id);if(i>-1)leads[i]=l}else leads.unshift(l);
- save();closeLeadModal();renderLeads();
+ save();closeLeadModal();renderLeads(); if(cloudUser) cloudSaveLead(l);
 }
 function editLead(id){openLeadModal(id)}
-function deleteLead(id){if(confirm('Delete this lead?')){leads=leads.filter(l=>l.id!==id);save();renderLeads()}}
+function deleteLead(id){if(confirm('Delete this lead?')){leads=leads.filter(l=>l.id!==id);save();renderLeads();if(cloudUser)cloudDeleteLead(id)}}
 function whatsLead(phone,company){const p=phone.replace(/[^\d]/g,'');window.open('https://wa.me/'+p+'?text='+encodeURIComponent('Hello, I am contacting you from Elite Workforce Solutions regarding workforce/manpower requirements for '+company+'.'),'_blank')}
 function exportCSV(){
  const headers=['Company','Region','Contact','Phone','Trade','Need','Source','Follow-up Date','Status','Website','Notes'];
@@ -218,6 +414,7 @@ function submitSupplier(e){e.preventDefault();const msg=`Hello Elite Workforce S
 function contactSubmit(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0AName: ${encodeURIComponent(cName.value)}%0ACompany: ${encodeURIComponent(cCompany.value)}%0AMessage: ${encodeURIComponent(cMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
 document.getElementById('leadModal').addEventListener('click',e=>{if(e.target.id==='leadModal')closeLeadModal()});
 renderLeads();
+cloudInit();
 </script>
 </body>
 </html>
