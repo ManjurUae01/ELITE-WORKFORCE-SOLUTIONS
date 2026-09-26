@@ -98,14 +98,17 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 .publish-note{font-size:11px;color:var(--muted);margin-top:8px}
 @media(max-width:600px){.cloud-grid{grid-template-columns:1fr}.cloud-panel{margin:12px}.cloud-actions .crm-btn{width:100%}}
 
+.brand-logo{display:flex;align-items:center;gap:9px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
+@media(max-width:600px){.brand-logo{font-size:13px;gap:6px}.brand-logo img{width:34px;height:34px}.brand-logo span{white-space:normal;line-height:1.05;max-width:180px}}
 </style>
 </head>
 <body>
 <a href="#crm" class="crm-quick-btn" aria-label="Open Private Lead CRM" title="Open Private Lead CRM"><i class="fa-solid fa-lock"></i> Private CRM</a>
 
 <header><nav class="navbar">
-<a href="#home" class="logo" aria-label="Elite Workforce Solutions">
+<a href="#home" class="brand-logo" aria-label="Elite Workforce Solutions">
 <img src="logo.png" alt="Elite Workforce Solutions" class="logo-img">
+<span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span>
 </a>
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 <ul class="nav-links" id="navLinks">
