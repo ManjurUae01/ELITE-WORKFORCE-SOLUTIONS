@@ -23,6 +23,8 @@ a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
 header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
 .navbar{max-width:1200px;margin:auto;padding:14px 25px;display:flex;align-items:center;justify-content:space-between}
 .logo{font-size:21px;font-weight:900;color:var(--blue);letter-spacing:.4px}.logo span{color:var(--gold2)}
+.logo-img{height:42px;width:auto;display:block;object-fit:contain}.logo{display:flex;align-items:center}
+@media(max-width:600px){.logo-img{height:36px}}
 .nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700}.nav-links a:hover{color:var(--blue)}
 .nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px}.menu-btn{display:none;font-size:28px;cursor:pointer;color:var(--blue)}
 .ticker-wrap{width:100%;background:var(--gold2);color:#000;overflow:hidden;padding:10px 0;font-weight:bold;font-size:14px;margin-top:68px}.ticker{display:flex;gap:50px;white-space:nowrap;animation:ticker 25s linear infinite}@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}.ticker-wrap:hover .ticker{animation-play-state:paused}
@@ -100,7 +102,9 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 <a href="#crm" class="crm-quick-btn" aria-label="Open Private Lead CRM" title="Open Private Lead CRM"><i class="fa-solid fa-lock"></i> Private CRM</a>
 
 <header><nav class="navbar">
-<a href="#home" class="logo">ELITE <span>WORKFORCE</span></a>
+<a href="#home" class="logo" aria-label="Elite Workforce Solutions">
+<img src="logo.png" alt="Elite Workforce Solutions" class="logo-img">
+</a>
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 <ul class="nav-links" id="navLinks">
 <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#companies">Companies</a></li><li><a href="#suppliers">Suppliers</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li><li><a href="#contact" class="nav-btn">Contact</a></li>
