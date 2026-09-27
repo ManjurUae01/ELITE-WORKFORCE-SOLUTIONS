@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="48x48" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
 <meta name="description" content="Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce including electricians, fitters, welders, HVAC technicians and maintenance staff.">
 <meta name="keywords" content="manpower supplier UAE, electrician supplier UAE, fitter supplier UAE, welder supplier UAE, skilled manpower UAE, workforce solutions UAE">
 <meta name="author" content="Elite Workforce Solutions">
@@ -25,8 +23,6 @@ a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
 header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
 .navbar{max-width:1200px;margin:auto;padding:14px 25px;display:flex;align-items:center;justify-content:space-between}
 .logo{font-size:21px;font-weight:900;color:var(--blue);letter-spacing:.4px}.logo span{color:var(--gold2)}
-.logo-img{height:42px;width:auto;display:block;object-fit:contain}.logo{display:flex;align-items:center}
-@media(max-width:600px){.logo-img{height:36px}}
 .nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700}.nav-links a:hover{color:var(--blue)}
 .nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px}.menu-btn{display:none;font-size:28px;cursor:pointer;color:var(--blue)}
 .ticker-wrap{width:100%;background:var(--gold2);color:#000;overflow:hidden;padding:10px 0;font-weight:bold;font-size:14px;margin-top:68px}.ticker{display:flex;gap:50px;white-space:nowrap;animation:ticker 25s linear infinite}@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}.ticker-wrap:hover .ticker{animation-play-state:paused}
@@ -98,18 +94,16 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 .publish-note{font-size:11px;color:var(--muted);margin-top:8px}
 @media(max-width:600px){.cloud-grid{grid-template-columns:1fr}.cloud-panel{margin:12px}.cloud-actions .crm-btn{width:100%}}
 
-.brand-logo{display:flex;align-items:center;gap:9px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
-@media(max-width:600px){.brand-logo{font-size:13px;gap:6px}.brand-logo img{width:34px;height:34px}.brand-logo span{white-space:normal;line-height:1.05;max-width:180px}}
-</style>
+.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}@media(max-width:600px){.brand-logo{font-size:13px;gap:7px}.brand-logo img{width:34px;height:34px}.brand-logo span{white-space:normal;line-height:1.05;max-width:180px}}</style>
+<link rel="icon" type="image/png" sizes="48x48" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Elite Workforce Solutions","alternateName":"Elite Workforce","url":"https://manjuruae01.github.io/ELITE-WORKFORCE-SOLUTIONS/"}</script>
 </head>
 <body>
 <a href="#crm" class="crm-quick-btn" aria-label="Open Private Lead CRM" title="Open Private Lead CRM"><i class="fa-solid fa-lock"></i> Private CRM</a>
 
 <header><nav class="navbar">
-<a href="#home" class="brand-logo" aria-label="Elite Workforce Solutions">
-<img src="logo.png" alt="Elite Workforce Solutions" class="logo-img">
-<span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span>
-</a>
+<a href="#home" class="brand-logo" aria-label="Elite Workforce Solutions"><img src="logo.png" alt="Elite Workforce Solutions"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 <ul class="nav-links" id="navLinks">
 <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#companies">Companies</a></li><li><a href="#suppliers">Suppliers</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li><li><a href="#contact" class="nav-btn">Contact</a></li>
