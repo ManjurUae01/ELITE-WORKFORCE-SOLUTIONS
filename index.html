@@ -266,167 +266,795 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 </div><div class="modal-actions"><button type="button" class="crm-btn secondary" onclick="closeLeadModal()">Cancel</button><button class="crm-btn">Save Lead</button></div></form></div></div>
 
 <script>
-const STORAGE_KEY='elite_workforce_private_leads_v1';
-let leads=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+/* =========================================================
+   ELITE WORKFORCE SOLUTIONS
+   SUPABASE CLOUD + PRIVATE CRM
+   COMPLETE CORRECTED SCRIPT
+   ========================================================= */
 
-/* SUPABASE CREDENTIALS & TABLE MAPPING */
-const SUPABASE_URL='https://maakqzczkhkoimlmnvws.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
-const cloudEnabled=SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_') && !SUPABASE_PUBLISHABLE_KEY.includes('YOUR_');
-const supabaseClient=cloudEnabled ? window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY) : null;
-let cloudUser=null;
+/* =========================================================
+   SUPABASE CONFIG
+   ========================================================= */
 
-function setCloudStatus(msg,ok=false){
- const el=document.getElementById('cloudStatus');
- if(el){el.textContent=msg;el.style.color=ok?'#166534':'#92400e'}
-}
-async function cloudSignUp(){
- if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
- const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
- if(!email||password.length<6)return setCloudStatus('Enter a valid email and a password of at least 6 characters.');
- const {error}=await supabaseClient.auth.signUp({email,password});
- if(error)return setCloudStatus(error.message);
- setCloudStatus('Account created. Check your email if email confirmation is enabled, then login.',true);
-}
-async function cloudSignIn(){
- if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
- const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
- const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
- if(error)return setCloudStatus(error.message);
- cloudUser=data.user;setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads();
-}
-async function cloudSignOut(){
- if(!cloudEnabled)return;
- await supabaseClient.auth.signOut();cloudUser=null;setCloudStatus('Logged out from Cloud CRM.');
-}
-async function cloudInit(){
- if(!cloudEnabled){setCloudStatus('Cloud mode is ready but not activated.');return}
- const {data}=await supabaseClient.auth.getUser();
- cloudUser=data.user||null;
- if(cloudUser){setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads()}
- else setCloudStatus('Cloud database connected. Please login to use your private CRM.',true);
- await loadLiveRequirements();
-}
+const STORAGE_KEY = 'elite_workforce_private_leads_v1';
 
-/* Save to crm_leads table */
-async function cloudSaveLead(l){
- if(!cloudUser)return;
- const row={id:l.id,user_id:cloudUser.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||null,status:l.status,website:l.website,notes:l.notes};
- const {error}=await supabaseClient.from('crm_leads').upsert(row,{onConflict:'id'});
- if(error)setCloudStatus('Cloud save error: '+error.message);
-}
-async function syncLocalToCloud(){
- if(!cloudUser)return setCloudStatus('Login first, then sync your local leads.');
- for(const l of leads)await cloudSaveLead(l);
- setCloudStatus(leads.length+' local lead(s) synced to your private cloud CRM.',true);
+const SUPABASE_URL = 'https://maakqzczkhkoimlmnvws.supabase.co';
+
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
+
+const cloudEnabled =
+  SUPABASE_URL.startsWith('https://') &&
+  !SUPABASE_URL.includes('YOUR_') &&
+  !!SUPABASE_PUBLISHABLE_KEY &&
+  !SUPABASE_PUBLISHABLE_KEY.includes('YOUR_');
+
+const supabaseClient =
+  cloudEnabled && window.supabase
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+    : null;
+
+let cloudUser = null;
+
+
+/* =========================================================
+   LOCAL CRM DATA
+   ========================================================= */
+
+let leads = [];
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  leads = Array.isArray(saved) ? saved : [];
+} catch (error) {
+  console.error('Local CRM data error:', error);
+  leads = [];
 }
 
-/* Load from crm_leads table */
-async function loadCloudLeads(){
- if(!cloudUser)return setCloudStatus('Login first to load your private cloud leads.');
- const {data,error}=await supabaseClient.from('crm_leads').select('*').order('created_at',{ascending:false});
- if(error)return setCloudStatus('Cloud load error: '+error.message);
- leads=(data||[]).map(l=>({id:l.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||'',status:l.status,website:l.website,notes:l.notes}));
- save();renderLeads();setCloudStatus('Loaded '+leads.length+' private lead(s) from the cloud.',true);
-}
-async function cloudDeleteLead(id){
- if(!cloudUser)return;
- const {error}=await supabaseClient.from('crm_leads').delete().eq('id',id);
- if(error)setCloudStatus('Cloud delete error: '+error.message);
+
+function saveLocalLeads() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  } catch (error) {
+    console.error('Could not save local CRM:', error);
+  }
 }
 
-/* Save to requirements table */
-async function publishRequirementOnline(){
- if(!cloudEnabled)return alert('Cloud database is not connected yet.');
- const row={company_name:reqCompany.value.trim(),contact_person:reqPerson.value.trim(),trade:reqTrade.value,workers_required:Number(reqQty.value),location:reqLocation.value.trim(),message:reqMessage.value.trim(),status:'open'};
- const {error}=await supabaseClient.from('requirements').insert(row);
- if(error)return alert('Could not publish: '+error.message);
- alert('Requirement published to the live network.');
- await loadLiveRequirements();
+
+/* =========================================================
+   SECURITY / HTML ESCAPE
+   ========================================================= */
+
+function escapeHTML(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
-/* Save to suppliers table */
-async function publishSupplierOnline(){
- if(!cloudEnabled)return alert('Cloud database is not connected yet.');
- const row={supplier_name:supCompany.value.trim(),phone:supPhone.value.trim(),trade:supTrade.value,available_quantity:Number(supQty.value),coverage:supLocation.value.trim(),details:supMessage.value.trim(),status:'active'};
- const {error}=await supabaseClient.from('suppliers').insert(row);
- if(error)return alert('Could not publish: '+error.message);
- alert('Supplier availability published to the live network.');
+
+/* =========================================================
+   CREATE UNIQUE LOCAL ID
+   ========================================================= */
+
+function createLeadId() {
+  if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+    return window.crypto.randomUUID();
+  }
+  return (
+    Date.now().toString(36) +
+    '-' +
+    Math.random().toString(36).substring(2, 10)
+  );
 }
 
-/* Load from requirements table */
-async function loadLiveRequirements(){
- const box=document.getElementById('liveRequirements');
- if(!box||!cloudEnabled)return;
- const {data,error}=await supabaseClient.from('requirements').select('company_name,trade,workers_required,location,message,created_at').eq('status','open').order('created_at',{ascending:false}).limit(20);
- if(error){box.innerHTML='<div class="empty">Live network is waiting for database setup.</div>';return}
- if(!data||!data.length){box.innerHTML='<div class="empty">No live requirements yet. Be the first to publish one.</div>';return}
- box.innerHTML=data.map(r=>`<div class="live-item"><strong>${escapeHTML(r.company_name)}</strong> — ${escapeHTML(r.trade)} <b>${escapeHTML(r.workers_required)}</b> worker(s)<div class="live-meta">${escapeHTML(r.location)} · ${new Date(r.created_at).toLocaleDateString()}</div><div style="margin-top:5px">${escapeHTML(r.message)}</div></div>`).join('');
+
+/* =========================================================
+   CRM RENDER
+   ========================================================= */
+
+function renderLeads() {
+  const body = document.getElementById('leadBody');
+  const empty = document.getElementById('emptyLeads');
+
+  if (!body) return;
+
+  const search = (document.getElementById('searchLead')?.value || '').toLowerCase().trim();
+  const region = document.getElementById('regionFilter')?.value || '';
+  const status = document.getElementById('statusFilter')?.value || '';
+
+  const filtered = leads.filter(function (lead) {
+    const searchableText = [
+      lead.company, lead.contact, lead.phone, lead.trade,
+      lead.need, lead.region, lead.source, lead.website, lead.notes
+    ].join(' ').toLowerCase();
+
+    const matchesSearch = !search || searchableText.includes(search);
+    const matchesRegion = !region || lead.region === region;
+    const matchesStatus = !status || lead.status === status;
+
+    return matchesSearch && matchesRegion && matchesStatus;
+  });
+
+  body.innerHTML = '';
+
+  filtered.forEach(function (lead) {
+    let badgeClass = 'new';
+    if (lead.status === 'Contacted') badgeClass = 'contacted';
+    if (lead.status === 'Follow-up') badgeClass = 'follow';
+    if (lead.status === 'Converted') badgeClass = 'converted';
+    if (lead.status === 'Closed') badgeClass = 'closed';
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${escapeHTML(lead.company)}</strong>${lead.website ? `<br><a href="${escapeHTML(lead.website)}" target="_blank" style="color:var(--blue);font-size:11px">Website</a>` : ''}</td>
+      <td>${escapeHTML(lead.region)}</td>
+      <td>${escapeHTML(lead.contact)}</td>
+      <td>${lead.phone ? `<a href="tel:${escapeHTML(lead.phone)}" style="color:var(--blue)">${escapeHTML(lead.phone)}</a>` : ''}</td>
+      <td>${escapeHTML(lead.trade)}</td>
+      <td>${escapeHTML(lead.need)}</td>
+      <td>${escapeHTML(lead.source)}</td>
+      <td>${escapeHTML(lead.follow || '—')}</td>
+      <td><span class="badge ${badgeClass}">${escapeHTML(lead.status || 'New')}</span></td>
+      <td>${escapeHTML(lead.notes || '')}</td>
+      <td>
+        <div class="lead-actions">
+          <button type="button" class="icon-btn" title="Edit" onclick="editLead('${escapeHTML(lead.id)}')">✏️</button>
+          ${lead.phone ? `<button type="button" class="icon-btn" title="WhatsApp" onclick="whatsLead('${lead.phone}','${escapeHTML(lead.company)}')">💬</button>` : ''}
+          <button type="button" class="icon-btn delete" title="Delete" onclick="deleteLead('${escapeHTML(lead.id)}')">🗑️</button>
+        </div>
+      </td>
+    `;
+    body.appendChild(row);
+  });
+
+  if (empty) {
+    empty.style.display = filtered.length ? 'none' : 'block';
+  }
+
+  updateCRMStats();
 }
 
+
+/* =========================================================
+   CRM STATISTICS
+   ========================================================= */
+
+function updateCRMStats() {
+  const total = document.getElementById('statTotal');
+  const newCount = document.getElementById('statNew');
+  const follow = document.getElementById('statFollow');
+  const converted = document.getElementById('statConverted');
+
+  if (total) total.textContent = leads.length;
+  if (newCount) newCount.textContent = leads.filter(lead => lead.status === 'New').length;
+  if (follow) follow.textContent = leads.filter(lead => lead.status === 'Follow-up').length;
+  if (converted) converted.textContent = leads.filter(lead => lead.status === 'Converted').length;
+}
+
+
+/* =========================================================
+   OPEN CRM MODAL
+   ========================================================= */
+
+function openLeadModal(id = '') {
+  const modal = document.getElementById('leadModal');
+  if (!modal) return;
+
+  const lead = leads.find(item => String(item.id) === String(id));
+  const modalTitle = document.getElementById('modalTitle');
+
+  if (modalTitle) {
+    modalTitle.textContent = lead ? 'Edit Lead' : 'Add New Lead';
+  }
+
+  const fields = {
+    leadId: lead?.id || '',
+    leadCompany: lead?.company || '',
+    leadRegion: lead?.region || 'JAFZA',
+    leadContact: lead?.contact || '',
+    leadPhone: lead?.phone || '',
+    leadTrade: lead?.trade || 'Electrician',
+    leadNeed: lead?.need || '',
+    leadSource: lead?.source || '',
+    leadFollow: lead?.follow || '',
+    leadStatus: lead?.status || 'New',
+    leadWebsite: lead?.website || '',
+    leadNotes: lead?.notes || ''
+  };
+
+  Object.keys(fields).forEach(function (key) {
+    const element = document.getElementById(key);
+    if (element) {
+      element.value = fields[key];
+    }
+  });
+
+  modal.classList.add('active');
+  modal.style.display = 'flex';
+}
+
+
+/* =========================================================
+   CLOSE CRM MODAL
+   ========================================================= */
+
+function closeLeadModal() {
+  const modal = document.getElementById('leadModal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
+}
+
+
+/* =========================================================
+   EDIT LEAD
+   ========================================================= */
+
+function editLead(id) {
+  openLeadModal(id);
+}
+
+
+/* =========================================================
+   SAVE CRM LEAD
+   ========================================================= */
+
+async function saveLead(event) {
+  if (event) event.preventDefault();
+
+  const leadId = document.getElementById('leadId')?.value?.trim();
+
+  const lead = {
+    id: leadId || createLeadId(),
+    company: document.getElementById('leadCompany')?.value?.trim() || '',
+    region: document.getElementById('leadRegion')?.value?.trim() || '',
+    contact: document.getElementById('leadContact')?.value?.trim() || '',
+    phone: document.getElementById('leadPhone')?.value?.trim() || '',
+    trade: document.getElementById('leadTrade')?.value?.trim() || '',
+    need: document.getElementById('leadNeed')?.value?.trim() || '',
+    source: document.getElementById('leadSource')?.value?.trim() || '',
+    follow: document.getElementById('leadFollow')?.value || '',
+    status: document.getElementById('leadStatus')?.value || 'New',
+    website: document.getElementById('leadWebsite')?.value?.trim() || '',
+    notes: document.getElementById('leadNotes')?.value?.trim() || ''
+  };
+
+  if (!lead.company) {
+    alert('Please enter company name.');
+    return;
+  }
+
+  const existingIndex = leads.findIndex(item => String(item.id) === String(lead.id));
+
+  if (existingIndex >= 0) {
+    leads[existingIndex] = lead;
+  } else {
+    leads.unshift(lead);
+  }
+
+  saveLocalLeads();
+  renderLeads();
+  closeLeadModal();
+
+  if (cloudUser) {
+    await saveLeadToCloud(lead);
+  }
+}
+
+
+/* =========================================================
+   DELETE CRM LEAD
+   ========================================================= */
+
+async function deleteLead(id) {
+  if (!confirm('Are you sure you want to delete this lead?')) return;
+
+  leads = leads.filter(lead => String(lead.id) !== String(id));
+  saveLocalLeads();
+  renderLeads();
+
+  if (cloudUser && supabaseClient) {
+    const { error } = await supabaseClient
+      .from('crm_leads')
+      .delete()
+      .eq('id', String(id));
+
+    if (error) {
+      console.error('Cloud delete error:', error);
+      alert('Cloud delete failed: ' + error.message);
+    }
+  }
+}
+
+
+/* =========================================================
+   CONVERT LOCAL LEAD → SUPABASE ROW
+   ========================================================= */
+
+function leadToCloudRow(lead) {
+  if (!cloudUser) return null;
+
+  return {
+    id: String(lead.id),
+    user_id: cloudUser.id,
+    company: lead.company || '',
+    contact: lead.contact || '',
+    phone: lead.phone || '',
+    region: lead.region || '',
+    trade: lead.trade || '',
+    need: lead.need || '',
+    source: lead.source || '',
+    follow: lead.follow || null,
+    status: lead.status || 'New',
+    website: lead.website || '',
+    notes: lead.notes || ''
+  };
+}
+
+
+/* =========================================================
+   SAVE ONE LEAD TO CLOUD
+   ========================================================= */
+
+async function saveLeadToCloud(lead) {
+  if (!cloudUser || !supabaseClient) return false;
+
+  const row = leadToCloudRow(lead);
+  if (!row) return false;
+
+  const { error } = await supabaseClient
+    .from('crm_leads')
+    .upsert(row, { onConflict: 'id' });
+
+  if (error) {
+    console.error('Cloud save error:', error);
+    alert('Cloud save failed: ' + error.message);
+    return false;
+  }
+
+  return true;
+}
+
+
+/* =========================================================
+   LOAD CRM FROM SUPABASE
+   ========================================================= */
+
+async function loadCloudLeads() {
+  if (!cloudUser || !supabaseClient) {
+    alert('Please login first.');
+    return;
+  }
+
+  const { data, error } = await supabaseClient
+    .from('crm_leads')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Cloud load error:', error);
+    alert('Could not load cloud leads: ' + error.message);
+    return;
+  }
+
+  leads = (data || []).map(function (row) {
+    return {
+      id: row.id,
+      company: row.company || '',
+      contact: row.contact || '',
+      phone: row.phone || '',
+      region: row.region || '',
+      trade: row.trade || '',
+      need: row.need || '',
+      source: row.source || '',
+      follow: row.follow || '',
+      status: row.status || 'New',
+      website: row.website || '',
+      notes: row.notes || ''
+    };
+  });
+
+  saveLocalLeads();
+  renderLeads();
+}
+
+
+/* =========================================================
+   SYNC LOCAL CRM → SUPABASE
+   ========================================================= */
+
+async function syncLocalToCloud() {
+  if (!cloudUser || !supabaseClient) {
+    alert('Please login first.');
+    return;
+  }
+
+  if (!leads.length) {
+    alert('There are no local leads to sync.');
+    return;
+  }
+
+  let successCount = 0;
+
+  for (const lead of leads) {
+    const row = leadToCloudRow(lead);
+    if (!row) continue;
+
+    const { error } = await supabaseClient
+      .from('crm_leads')
+      .upsert(row, { onConflict: 'id' });
+
+    if (!error) {
+      successCount++;
+    } else {
+      console.error('Sync error:', error);
+    }
+  }
+
+  alert(successCount + ' lead(s) synced to Supabase.');
+  await loadCloudLeads();
+}
+
+
+/* =========================================================
+   SUPABASE SIGN UP
+   ========================================================= */
+
+async function cloudSignUp() {
+  if (!supabaseClient) return alert('Supabase is not configured.');
+
+  const email = document.getElementById('cloudEmail')?.value?.trim();
+  const password = document.getElementById('cloudPassword')?.value;
+
+  if (!email || !password) return alert('Please enter email and password.');
+  if (password.length < 6) return alert('Password must be at least 6 characters.');
+
+  const { data, error } = await supabaseClient.auth.signUp({ email, password });
+
+  if (error) return alert('Signup failed: ' + error.message);
+
+  if (data.session) {
+    cloudUser = data.user;
+    updateCloudStatus();
+    alert('Account created and logged in.');
+  } else {
+    alert('Account created. Please check your email for verification.');
+  }
+}
+
+
+/* =========================================================
+   SUPABASE LOGIN
+   ========================================================= */
+
+async function cloudSignIn() {
+  if (!supabaseClient) return alert('Supabase is not configured.');
+
+  const email = document.getElementById('cloudEmail')?.value?.trim();
+  const password = document.getElementById('cloudPassword')?.value;
+
+  if (!email || !password) return alert('Please enter email and password.');
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+  if (error) return alert('Login failed: ' + error.message);
+
+  cloudUser = data.user;
+  updateCloudStatus();
+  await loadCloudLeads();
+  alert('Login successful.');
+}
+
+
+/* =========================================================
+   SUPABASE LOGOUT
+   ========================================================= */
+
+async function cloudSignOut() {
+  if (!supabaseClient) return;
+
+  const { error } = await supabaseClient.auth.signOut();
+  if (error) return alert('Logout failed: ' + error.message);
+
+  cloudUser = null;
+  updateCloudStatus();
+  renderLeads();
+  alert('Logged out successfully.');
+}
+
+
+/* =========================================================
+   CLOUD STATUS
+   ========================================================= */
+
+function updateCloudStatus() {
+  const status = document.getElementById('cloudStatus');
+  if (!status) return;
+
+  if (cloudUser) {
+    status.textContent = '☁️ Cloud connected: ' + cloudUser.email;
+    status.style.color = '#166534';
+  } else {
+    status.textContent = '☁️ Cloud database connected. Please login to use your private CRM.';
+    status.style.color = '#92400e';
+  }
+}
+
+
+/* =========================================================
+   SUPABASE INITIALIZATION
+   ========================================================= */
+
+async function cloudInit() {
+  if (!cloudEnabled || !supabaseClient) {
+    console.warn('Supabase is not configured.');
+    updateCloudStatus();
+    return;
+  }
+
+  try {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    cloudUser = session?.user || null;
+    updateCloudStatus();
+
+    if (cloudUser) {
+      await loadCloudLeads();
+    }
+
+    supabaseClient.auth.onAuthStateChange(function (_event, session) {
+      cloudUser = session?.user || null;
+      updateCloudStatus();
+    });
+  } catch (error) {
+    console.error('Supabase initialization error:', error);
+  }
+}
+
+
+/* =========================================================
+   PUBLIC REQUIREMENT → SUPABASE
+   ========================================================= */
+
+async function publishRequirementOnline() {
+  if (!supabaseClient) return alert('Supabase is not connected yet.');
+
+  const company = document.getElementById('reqCompany');
+  const person = document.getElementById('reqPerson');
+  const trade = document.getElementById('reqTrade');
+  const qty = document.getElementById('reqQty');
+  const location = document.getElementById('reqLocation');
+  const message = document.getElementById('reqMessage');
+
+  if (!company?.value.trim() || !trade?.value || !qty?.value || !location?.value.trim()) {
+    return alert('Please fill all required fields.');
+  }
+
+  const quantity = Number(qty.value);
+  if (!Number.isFinite(quantity) || quantity <= 0) {
+    return alert('Please enter a valid worker quantity.');
+  }
+
+  const { error } = await supabaseClient
+    .from('requirements')
+    .insert({
+      company_name: company.value.trim(),
+      contact_person: person?.value.trim() || '',
+      trade: trade.value,
+      workers_required: quantity,
+      location: location.value.trim(),
+      message: message?.value.trim() || '',
+      status: 'open'
+    });
+
+  if (error) {
+    console.error('Requirement error:', error);
+    return alert('Requirement publish failed: ' + error.message);
+  }
+
+  alert('Requirement published to the live network.');
+  await loadLiveRequirements();
+}
+
+
+/* =========================================================
+   SUPPLIER → SUPABASE (MAPPED TO 'suppliers')
+   ========================================================= */
+
+async function publishSupplierOnline() {
+  if (!supabaseClient) return alert('Supabase is not connected yet.');
+
+  const company = document.getElementById('supCompany');
+  const phone = document.getElementById('supPhone');
+  const trade = document.getElementById('supTrade');
+  const qty = document.getElementById('supQty');
+  const location = document.getElementById('supLocation');
+  const message = document.getElementById('supMessage');
+
+  if (!company?.value.trim() || !phone?.value.trim() || !trade?.value || !qty?.value) {
+    return alert('Please fill all required fields.');
+  }
+
+  const quantity = Number(qty.value);
+  if (!Number.isFinite(quantity) || quantity <= 0) {
+    return alert('Please enter a valid quantity.');
+  }
+
+  const { error } = await supabaseClient
+    .from('suppliers')
+    .insert({
+      supplier_name: company.value.trim(),
+      phone: phone.value.trim(),
+      trade: trade.value,
+      available_quantity: quantity,
+      coverage: location?.value.trim() || '',
+      details: message?.value.trim() || '',
+      status: 'active'
+    });
+
+  if (error) {
+    console.error('Supplier error:', error);
+    return alert('Supplier submission failed: ' + error.message);
+  }
+
+  alert('Supplier availability published to the live network.');
+}
+
+
+/* =========================================================
+   LIVE REQUIREMENTS BOARD
+   ========================================================= */
+
+async function loadLiveRequirements() {
+  const board = document.getElementById('liveRequirements');
+  if (!board) return;
+
+  if (!supabaseClient) {
+    board.innerHTML = '<div class="empty">Cloud requirements are currently unavailable.</div>';
+    return;
+  }
+
+  const { data, error } = await supabaseClient
+    .from('requirements')
+    .select('company_name,trade,workers_required,location,message,created_at')
+    .eq('status', 'open')
+    .order('created_at', { ascending: false })
+    .limit(20);
+
+  if (error) {
+    console.error('Live requirements error:', error);
+    board.innerHTML = '<div class="empty">Live network is waiting for database setup.</div>';
+    return;
+  }
+
+  if (!data || !data.length) {
+    board.innerHTML = '<div class="empty">No live requirements yet. Be the first to publish one.</div>';
+    return;
+  }
+
+  board.innerHTML = data.map(function (item) {
+    return `
+      <div class="live-item">
+        <strong>${escapeHTML(item.company_name)}</strong> — ${escapeHTML(item.trade)} <b>${escapeHTML(item.workers_required)}</b> worker(s)
+        <div class="live-meta">${escapeHTML(item.location)} · ${new Date(item.created_at).toLocaleDateString()}</div>
+        ${item.message ? `<div style="margin-top:5px">${escapeHTML(item.message)}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+
+/* =========================================================
+   CSV EXPORT
+   ========================================================= */
+
+function exportCRMCSV() {
+  if (!leads.length) return alert('No CRM leads to export.');
+
+  const headers = ['Company', 'Region', 'Contact', 'Phone', 'Trade', 'Need', 'Source', 'Follow-up', 'Status', 'Website', 'Notes'];
+  const rows = leads.map(function (lead) {
+    return [lead.company, lead.region, lead.contact, lead.phone, lead.trade, lead.need, lead.source, lead.follow, lead.status, lead.website, lead.notes];
+  });
+
+  const csv = [headers, ...rows].map(function (row) {
+    return row.map(function (value) {
+      return '"' + String(value ?? '').replace(/"/g, '""') + '"';
+    }).join(',');
+  }).join('\n');
+
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'elite-workforce-crm.csv';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+
+/* =========================================================
+   FORM ACTIONS & WHATSAPP
+   ========================================================= */
 
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('active')}
 document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));
 
-function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(leads))}
-function today(){return new Date().toISOString().slice(0,10)}
+function whatsLead(phone,company){
+  const p=phone.replace(/[^\d]/g,'');
+  window.open('https://wa.me/'+p+'?text='+encodeURIComponent('Hello, I am contacting you from Elite Workforce Solutions regarding workforce/manpower requirements for '+company+'.'),'_blank');
+}
 
-function renderLeads(){
- const q=document.getElementById('searchLead').value.toLowerCase().trim();
- const region=document.getElementById('regionFilter').value,status=document.getElementById('statusFilter').value;
- const filtered=leads.filter(l=>{
-   const text=[l.company,l.region,l.contact,l.phone,l.trade,l.need,l.source,l.notes].join(' ').toLowerCase();
-   return (!q||text.includes(q))&&(!region||l.region===region)&&(!status||l.status===status);
- });
- const body=document.getElementById('leadBody');
- body.innerHTML=filtered.map(l=>`<tr>
- <td><strong>${escapeHTML(l.company)}</strong>${l.website?`<br><a href="${escapeHTML(l.website)}" target="_blank" style="color:var(--blue);font-size:11px">Website</a>`:''}</td>
- <td>${escapeHTML(l.region)}</td><td>${escapeHTML(l.contact)}</td>
- <td>${l.phone?`<a href="tel:${escapeHTML(l.phone)}" style="color:var(--blue)">${escapeHTML(l.phone)}</a>`:''}</td>
- <td>${escapeHTML(l.trade)}</td><td>${escapeHTML(l.need)}</td><td>${escapeHTML(l.source)}</td>
- <td>${escapeHTML(l.follow||'—')}</td><td><span class="badge ${String(l.status).toLowerCase().replace('-','')}">${escapeHTML(l.status)}</span></td>
- <td>${escapeHTML(l.notes||'')}</td><td><div class="lead-actions"><button class="icon-btn" title="Edit" onclick="editLead('${l.id}')">✏️</button>${l.phone?`<button class="icon-btn" title="WhatsApp" onclick="whatsLead('${l.phone}','${escapeHTML(l.company)}')">💬</button>`:''}<button class="icon-btn delete" title="Delete" onclick="deleteLead('${l.id}')">🗑️</button></div></td></tr>`).join('');
- document.getElementById('emptyLeads').style.display=filtered.length?'none':'block';
- updateStats();
+function submitPublicRequirement(e){
+  e.preventDefault();
+  const msg=`Hello Elite Workforce Solutions,%0ACompany: ${encodeURIComponent(reqCompany.value)}%0AContact: ${encodeURIComponent(reqPerson.value)}%0ATrade: ${encodeURIComponent(reqTrade.value)}%0AWorkers: ${encodeURIComponent(reqQty.value)}%0ALocation: ${encodeURIComponent(reqLocation.value)}%0ARequirement: ${encodeURIComponent(reqMessage.value)}`;
+  window.open('https://wa.me/971553239813?text='+msg,'_blank');
 }
-function updateStats(){
- document.getElementById('statTotal').textContent=leads.length;
- document.getElementById('statNew').textContent=leads.filter(l=>l.status==='New').length;
- document.getElementById('statFollow').textContent=leads.filter(l=>l.status==='Follow-up').length;
- document.getElementById('statConverted').textContent=leads.filter(l=>l.status==='Converted').length;
- document.getElementById('statToday').textContent=leads.filter(l=>l.follow&&l.follow<=today()&&l.status!=='Converted'&&l.status!=='Closed').length;
+
+function submitSupplier(e){
+  e.preventDefault();
+  const msg=`Hello Elite Workforce Solutions,%0ASupplier: ${encodeURIComponent(supCompany.value)}%0APhone: ${encodeURIComponent(supPhone.value)}%0ATrade: ${encodeURIComponent(supTrade.value)}%0AAvailable: ${encodeURIComponent(supQty.value)}%0ACoverage: ${encodeURIComponent(supLocation.value)}%0ADetails: ${encodeURIComponent(supMessage.value)}`;
+  window.open('https://wa.me/971553239813?text='+msg,'_blank');
 }
-function openLeadModal(id=null){
- document.getElementById('leadModal').classList.add('active');
- document.getElementById('modalTitle').textContent=id?'Edit Lead':'Add New Lead';
- document.getElementById('leadId').value=id||'';
- if(id){const l=leads.find(x=>x.id===id);if(l) fillLead(l)}
- else {['leadCompany','leadContact','leadPhone','leadNeed','leadSource','leadWebsite','leadNotes','leadFollow'].forEach(x=>document.getElementById(x).value='');document.getElementById('leadRegion').value='JAFZA';document.getElementById('leadStatus').value='New';document.getElementById('leadTrade').value='Electrician'}
+
+function contactSubmit(e){
+  e.preventDefault();
+  const msg=`Hello Elite Workforce Solutions,%0AName: ${encodeURIComponent(cName.value)}%0ACompany: ${encodeURIComponent(cCompany.value)}%0AMessage: ${encodeURIComponent(cMessage.value)}`;
+  window.open('https://wa.me/971553239813?text='+msg,'_blank');
 }
-function fillLead(l){for(const k of ['company','region','contact','phone','trade','need','source','follow','status','website','notes']){const el=document.getElementById('lead'+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=l[k]||''}}
-function closeLeadModal(){document.getElementById('leadModal').classList.remove('active')}
-function saveLead(e){
- e.preventDefault();const id=document.getElementById('leadId').value;
- const l={id:id||Date.now().toString(),company:leadCompany.value.trim(),region:leadRegion.value,contact:leadContact.value.trim(),phone:leadPhone.value.trim(),trade:leadTrade.value,need:leadNeed.value.trim(),source:leadSource.value.trim(),follow:leadFollow.value,status:leadStatus.value,website:leadWebsite.value.trim(),notes:leadNotes.value.trim()};
- if(id){const i=leads.findIndex(x=>x.id===id);if(i>-1)leads[i]=l}else leads.unshift(l);
- save();closeLeadModal();renderLeads(); if(cloudUser) cloudSaveLead(l);
-}
-function editLead(id){openLeadModal(id)}
-function deleteLead(id){if(confirm('Delete this lead?')){leads=leads.filter(l=>l.id!==id);save();renderLeads();if(cloudUser)cloudDeleteLead(id)}}
-function whatsLead(phone,company){const p=phone.replace(/[^\d]/g,'');window.open('https://wa.me/'+p+'?text='+encodeURIComponent('Hello, I am contacting you from Elite Workforce Solutions regarding workforce/manpower requirements for '+company+'.'),'_blank')}
-function exportCSV(){
- const headers=['Company','Region','Contact','Phone','Trade','Need','Source','Follow-up Date','Status','Website','Notes'];
- const rows=leads.map(l=>[l.company,l.region,l.contact,l.phone,l.trade,l.need,l.source,l.follow,l.status,l.website,l.notes]);
- const csv=[headers,...rows].map(r=>r.map(x=>`"${String(x??'').replace(/"/g,'""')}"`).join('\n'));
- const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='elite-workforce-leads.csv';a.click();URL.revokeObjectURL(a.href);
-}
-function submitPublicRequirement(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0ACompany: ${encodeURIComponent(reqCompany.value)}%0AContact: ${encodeURIComponent(reqPerson.value)}%0ATrade: ${encodeURIComponent(reqTrade.value)}%0AWorkers: ${encodeURIComponent(reqQty.value)}%0ALocation: ${encodeURIComponent(reqLocation.value)}%0ARequirement: ${encodeURIComponent(reqMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-function submitSupplier(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0ASupplier: ${encodeURIComponent(supCompany.value)}%0APhone: ${encodeURIComponent(supPhone.value)}%0ATrade: ${encodeURIComponent(supTrade.value)}%0AAvailable: ${encodeURIComponent(supQty.value)}%0ACoverage: ${encodeURIComponent(supLocation.value)}%0ADetails: ${encodeURIComponent(supMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-function contactSubmit(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0AName: ${encodeURIComponent(cName.value)}%0ACompany: ${encodeURIComponent(cCompany.value)}%0AMessage: ${encodeURIComponent(cMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-document.getElementById('leadModal').addEventListener('click',e=>{if(e.target.id==='leadModal')closeLeadModal()});
-renderLeads();
-cloudInit();
+
+
+/* =========================================================
+   INITIALIZATION & EVENT LISTENERS
+   ========================================================= */
+
+document.addEventListener('input', function (event) {
+  if (event.target && event.target.id === 'searchLead') renderLeads();
+});
+
+document.addEventListener('change', function (event) {
+  if (event.target && (event.target.id === 'regionFilter' || event.target.id === 'statusFilter')) renderLeads();
+});
+
+document.addEventListener('click', function (event) {
+  const modal = document.getElementById('leadModal');
+  if (modal && event.target === modal) closeLeadModal();
+});
+
+document.addEventListener('DOMContentLoaded', async function () {
+  renderLeads();
+  await cloudInit();
+  await loadLiveRequirements();
+});
+
+
+/* =========================================================
+   GLOBAL BINDINGS FOR HTML BUTTONS
+   ========================================================= */
+
+window.openLeadModal = openLeadModal;
+window.closeLeadModal = closeLeadModal;
+window.editLead = editLead;
+window.saveLead = saveLead;
+window.deleteLead = deleteLead;
+window.cloudSignUp = cloudSignUp;
+window.cloudSignIn = cloudSignIn;
+window.cloudSignOut = cloudSignOut;
+window.syncLocalToCloud = syncLocalToCloud;
+window.loadCloudLeads = loadCloudLeads;
+window.publishRequirementOnline = publishRequirementOnline;
+window.publishSupplierOnline = publishSupplierOnline;
+window.loadLiveRequirements = loadLiveRequirements;
+window.exportCRMCSV = exportCRMCSV;
+window.exportCSV = exportCRMCSV;
+window.submitPublicRequirement = submitPublicRequirement;
+window.submitSupplier = submitSupplier;
+window.contactSubmit = contactSubmit;
+window.toggleMenu = toggleMenu;
+window.whatsLead = whatsLead;
 </script>
 </body>
 </html>
