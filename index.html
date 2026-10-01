@@ -12,7 +12,10 @@
 <meta property="og:type" content="website">
 <title>Elite Workforce Solutions | UAE Workforce & Manpower Network</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Supabase JS Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 :root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--text:#17233a;--muted:#64748b;--light:#f6f8fb;--white:#fff}
@@ -29,84 +32,38 @@ header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.97);b
 .hero{min-height:88vh;padding:100px 25px 80px;background:linear-gradient(135deg,var(--navy),var(--blue) 55%,var(--blue2));color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
 .hero-container{max-width:1200px;width:100%;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
 .eyebrow{display:inline-block;color:var(--gold);font-weight:800;letter-spacing:1.4px;font-size:13px;margin-bottom:18px}.hero h1{font-size:56px;line-height:1.08;margin-bottom:22px}.hero h1 span{color:var(--gold)}.hero-lead{font-size:18px;color:#e2eaf5;max-width:650px;margin-bottom:30px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}.hero-note{margin-top:20px;font-size:13px;color:#cbd7e7}
-.hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:32px;border-radius:20px;backdrop-filter:blur(12px)}.hero-card .card-label{color:var(--gold);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1px}.hero-card h3{font-size:27px;margin:8px 0 18px}.hero-list{list-style:none}.hero-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14);display:flex;gap:10px}.hero-list li:last-child{border:0}.check{color:var(--gold);font-weight:900}
-.trust-strip{background:#fff;padding:22px 25px;border-bottom:1px solid #e5eaf1}.trust-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center}.trust-item strong{display:block;color:var(--blue);font-size:16px}.trust-item span{font-size:13px;color:var(--muted)}
-.about{background:#fff}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.about-text h3{font-size:30px;margin-bottom:16px}.about-text p{color:var(--muted);margin-bottom:15px}.about-boxes{display:grid;grid-template-columns:1fr 1fr;gap:18px}.about-box{padding:24px;background:var(--light);border-radius:12px;border-left:4px solid var(--blue)}.about-box h4{color:var(--blue);margin-bottom:6px}.about-box p{color:var(--muted);font-size:14px}
-.services{background:var(--light)}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.service-card{background:#fff;padding:29px;border-radius:15px;box-shadow:0 7px 25px rgba(0,0,0,.055);border:1px solid #edf0f5}.service-icon{font-size:32px;color:var(--blue);margin-bottom:12px}.service-card h3{color:var(--blue);margin-bottom:8px}.service-card p{color:var(--muted);font-size:14px}
-.why{background:#fff}.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.why-card{padding:28px;background:var(--light);border-radius:14px;text-align:center}.why-card .big-icon{font-size:32px;color:var(--gold2);margin-bottom:12px}.why-card h3{color:var(--blue);font-size:18px;margin-bottom:7px}.why-card p{color:var(--muted);font-size:13px}
-.companies{background:var(--light)}.company-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.company-card{background:#fff;padding:35px;border-radius:15px;border:1px solid #e9edf3}.company-card h3{color:var(--blue);font-size:25px;margin-bottom:12px}.company-card p,.company-card li{color:var(--muted);font-size:14px}.company-card ul{padding-left:20px;margin:14px 0 22px}.company-card li{margin-bottom:7px}
-.suppliers{background:var(--navy);color:#fff}.suppliers .section-title h2{color:#fff}.suppliers .section-title p{color:#cbd5e1}.supplier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.supplier-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);padding:30px;border-radius:15px}.supplier-card h3{color:var(--gold);margin-bottom:9px}.supplier-card p{color:#d7e1ee;font-size:14px}
-.process{background:var(--light)}.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.process-card{background:#fff;padding:26px;text-align:center;border-radius:13px;box-shadow:0 5px 20px rgba(0,0,0,.05)}.process-number{width:50px;height:50px;margin:0 auto 14px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:19px;font-weight:900}.process-card h3{margin-bottom:7px}.process-card p{color:var(--muted);font-size:13px}
-.cta{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;text-align:center}.cta h2{font-size:38px;margin-bottom:10px}.cta p{color:#e1e9f5;margin-bottom:24px}
-.contact{background:#fff}.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px}.contact-info h3{font-size:28px;color:var(--blue);margin-bottom:14px}.contact-info>p{color:var(--muted);margin-bottom:25px}.contact-item{margin-bottom:17px}.contact-item strong{display:block;color:var(--blue)}.contact-item span{color:var(--muted)}.contact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.small-btn{padding:11px 15px;border-radius:7px;font-weight:800;border:1px solid #dce3ec}.small-btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}
 .requirement-section{background:#f1f5f9}.requirement-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0}.requirement-card h3{color:var(--blue);font-size:24px;margin-bottom:8px}.requirement-card>p{color:var(--muted);font-size:14px;margin-bottom:22px}
 form{background:var(--light);padding:30px;border-radius:15px}.requirement-card form{padding:0;background:#fff}.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
 input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff}input:focus,textarea:focus,select:focus{border-color:var(--blue)}textarea{min-height:125px;resize:vertical}.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800}.form-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
-.testimonial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.testimonial{background:var(--light);padding:25px;border-radius:12px;border-top:3px solid var(--blue)}.testimonial p{font-size:14px;color:var(--muted);margin-bottom:15px}
-.disclaimer{background:#fff8e7;padding:22px 25px}.disclaimer p{max-width:1100px;margin:auto;text-align:center;color:#6b5a2b;font-size:12px}
-footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}footer h3{margin-bottom:14px;color:var(--gold)}footer p,footer li{color:#aebbd0;font-size:13px}footer ul{list-style:none}footer li{margin-bottom:8px}.copyright{max-width:1200px;margin:32px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);text-align:center;color:#8492a8;font-size:12px}
-.whatsapp{position:fixed;right:20px;bottom:70px;width:59px;height:59px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:27px;box-shadow:0 5px 20px rgba(0,0,0,.25);z-index:999}.mobile-action-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -2px 10px rgba(0,0,0,.1);z-index:1000;padding:8px 15px;gap:10px}.action-btn{flex:1;text-align:center;padding:10px;border-radius:6px;font-weight:bold;color:#fff}.action-btn.call{background:var(--blue)}.action-btn.wa{background:#25D366}
+footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width:1200px;margin:32px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);text-align:center;color:#8492a8;font-size:12px}
+.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
 
-/* PRIVATE CRM */
-.crm{background:#eef3f8}.crm-shell{background:#fff;border-radius:18px;box-shadow:0 10px 35px rgba(0,0,0,.07);overflow:hidden}.crm-head{background:var(--navy);color:#fff;padding:28px}.crm-head h2{color:var(--gold);margin-bottom:5px}.crm-head p{color:#cbd5e1;font-size:13px}.crm-toolbar{padding:20px;display:grid;grid-template-columns:1.5fr 1fr 1fr auto auto;gap:10px;border-bottom:1px solid #e5eaf1;background:#fff}.crm-toolbar input,.crm-toolbar select{min-width:0}.crm-btn{border:0;border-radius:7px;padding:12px 16px;font-weight:800;cursor:pointer;background:var(--blue);color:#fff}.crm-btn.secondary{background:#e2e8f0;color:#17233a}.crm-btn.gold{background:var(--gold2);color:#111827}.crm-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:18px 20px;background:#f8fafc}.stat{background:#fff;border:1px solid #e5eaf1;border-radius:10px;padding:15px}.stat strong{display:block;font-size:23px;color:var(--blue)}.stat span{font-size:12px;color:var(--muted)}.table-wrap{overflow:auto;padding:0 20px 20px}.lead-table{width:100%;border-collapse:collapse;min-width:1050px}.lead-table th{background:#f1f5f9;color:#334155;font-size:12px;text-align:left;padding:12px;border-bottom:2px solid #dbe3ec}.lead-table td{padding:12px;border-bottom:1px solid #edf0f4;font-size:13px;vertical-align:top}.lead-table tr:hover{background:#fafcff}.badge{display:inline-block;padding:5px 8px;border-radius:20px;font-size:11px;font-weight:800;background:#e2e8f0}.badge.new{background:#dbeafe;color:#1d4ed8}.badge.contacted{background:#fef3c7;color:#92400e}.badge.follow{background:#ede9fe;color:#6d28d9}.badge.converted{background:#dcfce7;color:#166534}.badge.closed{background:#fee2e2;color:#991b1b}.lead-actions{display:flex;gap:6px}.icon-btn{border:0;background:#eef2f7;padding:7px 9px;border-radius:6px;cursor:pointer;color:var(--blue)}.icon-btn.delete{color:#b91c1c}.private-note{padding:0 20px 20px;color:#64748b;font-size:12px}.modal{display:none;position:fixed;inset:0;background:rgba(2,12,30,.7);z-index:2000;align-items:center;justify-content:center;padding:20px}.modal.active{display:flex}.modal-box{background:#fff;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:16px;padding:28px}.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-top h3{color:var(--blue);font-size:24px}.close{border:0;background:#eef2f7;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:20px}.lead-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.empty{text-align:center;padding:40px;color:var(--muted)}
-@media(max-width:900px){
-.menu-btn{display:block}.nav-links{display:none;position:absolute;top:68px;left:0;width:100%;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:10px 25px 20px;box-shadow:0 8px 18px rgba(0,0,0,.08)}.nav-links.active{display:flex}.nav-links li{padding:8px 0}.hero-container{grid-template-columns:1fr}.hero h1{font-size:45px}.about-grid,.company-grid,.requirement-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}.supplier-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.crm-toolbar{grid-template-columns:1fr 1fr}.crm-stats{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:600px){
-.mobile-action-bar{display:flex}section{padding:65px 18px}.navbar{padding:13px 18px}.logo{font-size:18px}.hero{padding:95px 18px 65px}.hero h1{font-size:38px}.hero-lead{font-size:16px}.hero-card{padding:24px}.section-title h2{font-size:30px}.service-grid,.why-grid,.process-grid,.footer-grid,.testimonial-grid{grid-template-columns:1fr}.about-boxes{grid-template-columns:1fr}.trust-inner{grid-template-columns:1fr}.crm-toolbar{grid-template-columns:1fr}.crm-stats{grid-template-columns:1fr 1fr}.lead-form-grid{grid-template-columns:1fr}.full{grid-column:auto}.whatsapp{width:54px;height:54px;right:15px;bottom:70px}}
-
-/* NEW NETWORK FEATURES - added without removing existing code */
-.network-section{background:#fff}
-.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.network-card{background:var(--light);border:1px solid #e5eaf1;border-radius:15px;padding:28px;text-align:center}
-.network-card .network-icon{font-size:34px;color:var(--blue);margin-bottom:12px}
-.network-card h3{color:var(--blue);margin-bottom:8px}
-.network-card p{color:var(--muted);font-size:14px}
-.transparency-box{margin-top:28px;background:#fff8e7;border:1px solid #f4d58a;border-radius:14px;padding:22px}
-.transparency-box h3{color:#92400e;margin-bottom:7px}
-.transparency-box p{color:#6b5a2b;font-size:14px}
-.connect-panel{margin-top:25px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-radius:16px;padding:28px;display:flex;justify-content:space-between;gap:20px;align-items:center}
-.connect-panel h3{color:var(--gold);margin-bottom:5px}
-.connect-panel p{color:#dbe7f5;font-size:14px}
-.connect-actions{display:flex;gap:10px;flex-wrap:wrap}
-.connect-actions .btn{white-space:nowrap}
-@media(max-width:900px){.network-grid{grid-template-columns:1fr}.connect-panel{flex-direction:column;align-items:flex-start}}
-
-
-/* QUICK PRIVATE CRM BUTTON */
-.crm-quick-btn{position:fixed;left:0;top:45%;transform:translateY(-50%);z-index:1500;background:var(--navy);color:#fff;text-decoration:none;padding:14px 11px;border-radius:0 10px 10px 0;font-weight:800;font-size:13px;box-shadow:0 5px 18px rgba(0,0,0,.25);writing-mode:vertical-rl;display:flex;align-items:center;gap:7px}.crm-quick-btn i{color:var(--gold);font-size:16px}.crm-quick-btn:hover{background:var(--blue)}
-@media(max-width:600px){.crm-quick-btn{top:42%;padding:12px 9px;font-size:11px}}
-
-/* CLOUD NETWORK + CLOUD CRM */
-.cloud-panel{background:#f8fafc;border:1px solid #dbe3ec;border-radius:14px;padding:18px 20px;margin:18px 20px}
-.cloud-panel h3{color:var(--blue);margin-bottom:6px}
-.cloud-panel p{font-size:13px;color:var(--muted);margin-bottom:12px}
-.cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.cloud-grid input{width:100%;padding:11px;border:1px solid #d5dce6;border-radius:7px}
-.cloud-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.cloud-status{font-size:12px;font-weight:700;margin-top:9px}
-.live-board{margin-top:22px;background:#fff;border:1px solid #e5eaf1;border-radius:14px;padding:20px}
-.live-board h3{color:var(--blue);margin-bottom:5px}
-.live-list{display:grid;gap:10px;margin-top:14px}
-.live-item{border:1px solid #e5eaf1;border-radius:10px;padding:14px;background:#fbfdff}
-.live-item strong{color:var(--blue)}
-.live-meta{font-size:12px;color:var(--muted);margin-top:4px}
-.publish-note{font-size:11px;color:var(--muted);margin-top:8px}
-@media(max-width:600px){.cloud-grid{grid-template-columns:1fr}.cloud-panel{margin:12px}.cloud-actions .crm-btn{width:100%}}
-
-.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}@media(max-width:600px){.brand-logo{font-size:13px;gap:7px}.brand-logo img{width:34px;height:34px}.brand-logo span{white-space:normal;line-height:1.05;max-width:180px}}</style>
+/* Admin Panel Additional Styling */
+.admin-section{background:#fff;border-top:4px solid var(--navy);padding:60px 25px}
+.admin-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.admin-tab-btn{background:#e2e8f0;border:0;padding:10px 20px;border-radius:6px;font-weight:bold;cursor:pointer;color:#334155}
+.admin-tab-btn.active{background:var(--blue);color:#fff}
+.admin-table-wrap{overflow-x:auto;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
+.admin-table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}
+.admin-table th{background:#f8fafc;padding:12px;border-bottom:2px solid #e2e8f0;color:#475569}
+.admin-table td{padding:12px;border-bottom:1px solid #f1f5f9;color:#1e293b}
+.admin-badge{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:bold}
+.admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
+.admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
+</style>
 <link rel="icon" type="image/png" sizes="48x48" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Elite Workforce Solutions","alternateName":"Elite Workforce","url":"https://manjuruae01.github.io/ELITE-WORKFORCE-SOLUTIONS/"}</script>
 </head>
 <body>
-<a href="#crm" class="crm-quick-btn" aria-label="Open Private Lead CRM" title="Open Private Lead CRM"><i class="fa-solid fa-lock"></i> Private CRM</a>
 
 <header><nav class="navbar">
-<a href="#home" class="brand-logo" aria-label="Elite Workforce Solutions"><img src="logo.png" alt="Elite Workforce Solutions"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-<ul class="nav-links" id="navLinks">
-<li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#companies">Companies</a></li><li><a href="#suppliers">Suppliers</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li><li><a href="#contact" class="nav-btn">Contact</a></li>
+<a href="#home" class="brand-logo"><img src="logo.png" alt="Elite Workforce"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#suppliers">Suppliers</a></li>
+<li><a href="#contact" class="nav-btn">Contact</a></li>
+<li><a href="#admin" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin</a></li>
 </ul></nav></header>
 
 <div class="ticker-wrap"><div class="ticker">
@@ -115,309 +72,312 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.footer-grid{max-wid
 <div>🔥 AVAILABLE: 30 Certified Welders ready for immediate deployment</div>
 </div></div>
 
+<!-- HERO SECTION -->
 <section class="hero" id="home"><div class="hero-container"><div>
 <div class="eyebrow">UAE WORKFORCE NETWORK</div>
 <h1>Connecting Companies With <span>Skilled Workforce</span></h1>
 <p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
 <div class="hero-buttons"><a href="#requirements" class="btn btn-primary">Post Requirement</a><a href="#suppliers" class="btn btn-outline">Join as Supplier</a></div>
-<p class="hero-note">Electricians • Fitters • Welders • HVAC • Maintenance • Skilled Workforce</p>
-</div><div class="hero-card"><div class="card-label">Our Workforce Network</div><h3>Skilled People. Better Connections.</h3>
-<ul class="hero-list"><li><span class="check">✓</span>Electricians & Electrical Technicians</li><li><span class="check">✓</span>Mechanical Fitters</li><li><span class="check">✓</span>Welders & Fabricators</li><li><span class="check">✓</span>HVAC Technicians</li><li><span class="check">✓</span>Maintenance Workforce</li><li><span class="check">✓</span>Other Skilled Manpower</li></ul></div></div></section>
-
-<div class="trust-strip"><div class="trust-inner">
-<div class="trust-item"><strong>Company Connections</strong><span>Connect with workforce requirements</span></div>
-<div class="trust-item"><strong>Multiple Trades</strong><span>Different skilled workforce categories</span></div>
-<div class="trust-item"><strong>Direct Communication</strong><span>Simple and professional enquiries</span></div>
-</div></div>
-
-<section class="about" id="about"><div class="container"><div class="section-title"><h2>About Us</h2><p>A professional workforce networking platform focused on connecting companies and manpower suppliers in the UAE.</p></div>
-<div class="about-grid"><div class="about-text"><h3>Building Better Workforce Connections</h3><p>Elite Workforce Solutions is designed to make it easier for companies to communicate their workforce requirements and for manpower suppliers to present their available skilled workforce.</p><p>Our network focuses on electricians, fitters, welders, HVAC technicians and maintenance staff.</p><p>We aim to create professional business connections that help companies and suppliers communicate faster and understand workforce requirements clearly.</p></div>
-<div class="about-boxes"><div class="about-box"><h4>Professional Network</h4><p>Focused on company and manpower supplier connections.</p></div><div class="about-box"><h4>Skilled Workforce</h4><p>Multiple technical and maintenance workforce categories.</p></div><div class="about-box"><h4>Direct Enquiries</h4><p>Simple communication through WhatsApp and email.</p></div><div class="about-box"><h4>UAE Focused</h4><p>Built around workforce requirements in the UAE.</p></div></div></div></div></section>
-
-<section class="services" id="services"><div class="container"><div class="section-title"><h2>Workforce Categories</h2><p>Explore the main workforce categories supported by our supplier network.</p></div>
-<div class="service-grid">
-<div class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><h3>Electricians</h3><p>Skilled electricians for industrial, commercial, construction and maintenance requirements.</p></div>
-<div class="service-card"><div class="service-icon"><i class="fa-solid fa-wrench"></i></div><h3>Mechanical Fitters</h3><p>Mechanical fitters for industrial installation, shutdown and maintenance requirements.</p></div>
-<div class="service-card"><div class="service-icon"><i class="fa-solid fa-fire"></i></div><h3>Welders & Fabricators</h3><p>Welding and fabrication workforce for project and industrial requirements.</p></div>
-<div class="service-card"><div class="service-icon"><i class="fa-regular fa-snowflake"></i></div><h3>HVAC Technicians</h3><p>HVAC technicians for installation, servicing and maintenance requirements.</p></div>
-<div class="service-card"><div class="service-icon"><i class="fa-solid fa-helmet-safety"></i></div><h3>Skilled Workforce</h3><p>Workforce sourcing through supplier connections for project-based requirements.</p></div>
-<div class="service-card"><div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div><h3>Maintenance Staff</h3><p>Workforce connections for building, facility and general maintenance needs.</p></div>
 </div></div></section>
 
-<section class="why"><div class="container"><div class="section-title"><h2>Why Use Our Network?</h2><p>A simple approach to workforce sourcing and supplier communication.</p></div>
-<div class="why-grid"><div class="why-card"><div class="big-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Right Requirement</h3><p>Share the trade, quantity, location and project details.</p></div>
-<div class="why-card"><div class="big-icon"><i class="fa-solid fa-handshake"></i></div><h3>Better Connections</h3><p>Connect companies and suitable workforce suppliers.</p></div>
-<div class="why-card"><div class="big-icon"><i class="fa-solid fa-bolt"></i></div><h3>Quick Communication</h3><p>Use direct enquiry channels to discuss requirements.</p></div>
-<div class="why-card"><div class="big-icon"><i class="fa-solid fa-database"></i></div><h3>Lead Organization</h3><p>Keep your private prospect information organized in the CRM.</p></div></div></div></section>
-
-<section class="companies" id="companies"><div class="container"><div class="section-title"><h2>For Companies</h2><p>Companies can share workforce requirements and connect with relevant suppliers.</p></div>
-<div class="company-grid"><div class="company-card"><h3>Post Workforce Requirements</h3><p>Provide the information suppliers need to respond professionally.</p><ul><li>Trade and job category</li><li>Number of workers required</li><li>Project location</li><li>Expected start date</li><li>Duration and basic requirements</li></ul><a href="#requirements" class="btn btn-primary">Post Requirement</a></div>
-<div class="company-card"><h3>Typical Requirements</h3><p>Examples of workforce categories that can be communicated through the network.</p><ul><li>Electrical & MEP workforce</li><li>Mechanical fitters</li><li>Welders & fabricators</li><li>HVAC technicians</li><li>Facility and maintenance staff</li></ul><a href="#contact" class="btn btn-outline" style="background:var(--blue);">Contact Network</a></div></div></div></section>
-
-<section class="suppliers" id="suppliers"><div class="container"><div class="section-title"><h2>For Manpower Suppliers</h2><p>Present your available workforce and respond to suitable company requirements.</p></div>
-<div class="supplier-grid"><div class="supplier-card"><h3><i class="fa-solid fa-users"></i> Available Workforce</h3><p>Share trade, quantity, experience, certifications and availability.</p></div>
-<div class="supplier-card"><h3><i class="fa-solid fa-location-dot"></i> UAE Coverage</h3><p>Communicate where your workforce can be deployed across the UAE.</p></div>
-<div class="supplier-card"><h3><i class="fa-solid fa-comments"></i> Direct Enquiries</h3><p>Use professional communication channels for business discussions.</p></div></div></div></section>
-
-<section class="process"><div class="container"><div class="section-title"><h2>How It Works</h2><p>A straightforward process for company and supplier communication.</p></div>
-<div class="process-grid"><div class="process-card"><div class="process-number">1</div><h3>Requirement</h3><p>Company shares workforce needs.</p></div><div class="process-card"><div class="process-number">2</div><h3>Supplier</h3><p>Relevant supplier presents available workforce.</p></div><div class="process-card"><div class="process-number">3</div><h3>Communication</h3><p>Both parties discuss project details directly.</p></div><div class="process-card"><div class="process-number">4</div><h3>Follow-up</h3><p>Business discussions can be tracked and followed up.</p></div></div></div></section>
-
-<section id="requirements" class="requirement-section"><div class="container"><div class="section-title"><h2>Post a Workforce Requirement</h2><p>Send a basic enquiry. Final commercial, employment and legal arrangements remain between the relevant parties.</p></div>
-<div class="requirement-grid"><div class="requirement-card"><h3>Company Requirement</h3><p>Tell us what workforce you need.</p><form id="publicReqForm" onsubmit="submitPublicRequirement(event)">
-<div class="form-group"><label>Company Name</label><input id="reqCompany" required></div><div class="form-group"><label>Contact Person</label><input id="reqPerson" required></div>
-<div class="form-group"><label>Trade</label><select id="reqTrade" required><option value="">Select trade</option><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance Staff</option><option>Other Skilled Workforce</option></select></div>
-<div class="form-group"><label>Workers Required</label><input id="reqQty" type="number" min="1" required></div><div class="form-group"><label>Location</label><input id="reqLocation" placeholder="Abu Dhabi / Dubai / Sharjah..." required></div>
-<div class="form-group"><label>Message / Requirement</label><textarea id="reqMessage" required></textarea></div><button class="submit-btn">Send Requirement via WhatsApp</button><div class="form-note">This form opens WhatsApp; it does not create a server-side account.</div>
-<div class="cloud-actions">
-<button type="button" class="crm-btn" onclick="publishRequirementOnline()">🌐 Publish to Live Network</button>
-</div>
-<div class="publish-note">Publishing creates a public networking post in the online database. Do not post passwords, ID numbers, bank details or other sensitive information.</div></form></div>
-<div class="requirement-card"><h3>Supplier Enquiry</h3><p>Tell us what workforce you have available.</p><form onsubmit="submitSupplier(event)"><div class="form-group"><label>Supplier / Company Name</label><input id="supCompany" required></div><div class="form-group"><label>Contact Number</label><input id="supPhone" required></div><div class="form-group"><label>Available Trade</label><select id="supTrade" required><option value="">Select trade</option><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance Staff</option><option>Other Skilled Workforce</option></select></div><div class="form-group"><label>Available Quantity</label><input id="supQty" type="number" min="1" required></div><div class="form-group"><label>UAE Location / Coverage</label><input id="supLocation" required></div><div class="form-group"><label>Details</label><textarea id="supMessage" required></textarea></div><button class="submit-btn">Contact via WhatsApp</button><div class="cloud-actions"><button type="button" class="crm-btn" onclick="publishSupplierOnline()">🌐 Publish Supplier Availability</button></div><div class="publish-note">Your supplier availability can be shown on the public network for potential business connections.</div></form></div></div></div></section>
-
-
-<section class="network-section" id="network">
+<!-- REQUIREMENTS SECTION (Company Form) -->
+<section class="requirement-section" id="requirements">
   <div class="container">
     <div class="section-title">
-      <h2>Open Workforce Network</h2>
-      <p>A simple and transparent place where companies and manpower suppliers can discover each other and start a direct conversation.</p>
+      <h2>Post Company Requirement</h2>
+      <p>Submit your manpower requirements directly to our network.</p>
     </div>
-
-    <div class="network-grid">
-      <div class="network-card">
-        <div class="network-icon"><i class="fa-solid fa-building"></i></div>
-        <h3>For Companies</h3>
-        <p>Share your workforce requirement and allow suitable suppliers to understand what you need.</p>
-      </div>
-      <div class="network-card">
-        <div class="network-icon"><i class="fa-solid fa-users"></i></div>
-        <h3>For Suppliers</h3>
-        <p>Present your available electricians, fitters, welders, HVAC and other skilled workforce.</p>
-      </div>
-      <div class="network-card">
-        <div class="network-icon"><i class="fa-solid fa-link"></i></div>
-        <h3>Direct Connection</h3>
-        <p>The platform focuses on connecting people. Commercial terms can be discussed directly between the relevant parties.</p>
-      </div>
-    </div>
-
-    <div class="transparency-box">
-      <h3><i class="fa-solid fa-eye"></i> Transparent by Design</h3>
-      <p>Our goal is to keep the network simple and transparent so people can feel comfortable making genuine business connections. Public-source information should always be independently verified before any commercial engagement.</p>
-    </div>
-
-    <div class="connect-panel">
-      <div>
-        <h3>Ready to Connect?</h3>
-        <p>Companies can post a requirement and suppliers can share their available workforce. Start the conversation directly.</p>
-      </div>
-      <div class="connect-actions">
-        <a href="#requirements" class="btn btn-primary">Post Requirement</a>
-        <a href="#contact" class="btn btn-outline">Contact Network</a>
-      </div>
-    </div>
-
-    <div class="live-board">
-      <h3><i class="fa-solid fa-signal"></i> Live Workforce Requirements</h3>
-      <p style="color:var(--muted);font-size:13px">Public posts published through this website appear here for companies and suppliers to discover.</p>
-      <div id="liveRequirements" class="live-list"><div class="empty">Connecting to the online network…</div></div>
+    <div class="requirement-card">
+      <form id="companyForm" onsubmit="submitCompanyForm(event)">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" id="comp_name" required placeholder="e.g. Al Habtoor Contracting">
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" id="comp_person" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="comp_email" required placeholder="name@company.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number (WhatsApp)</label>
+          <input type="tel" id="comp_phone" required placeholder="+971 50 123 4567">
+        </div>
+        <div class="form-group">
+          <label>Location / Emirate</label>
+          <input type="text" id="comp_location" placeholder="e.g. Dubai, Abu Dhabi">
+        </div>
+        <div class="form-group">
+          <label>Requirement Details</label>
+          <textarea id="comp_details" required placeholder="Specify needed roles, number of workers, duration, etc."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="comp_btn">Submit Requirement</button>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- PRIVATE CRM -->
-<section class="crm" id="crm"><div class="container"><div class="section-title"><h2>Private Lead CRM</h2><p>Local browser-based lead management for your own prospect list.</p></div>
-<div class="crm-shell"><div class="crm-head"><h2><i class="fa-solid fa-lock"></i> Elite Workforce Lead Manager</h2><p>Local CRM remains available. Cloud CRM can securely sync your private leads to an online database after you connect your account.</p></div>
-<div class="cloud-panel">
-  <h3><i class="fa-solid fa-cloud"></i> Cloud CRM Login</h3>
-  <p>Create/login to your private account. Your private leads are tied to your account; they are not public.</p>
-  <div class="cloud-grid">
-    <input id="cloudEmail" type="email" placeholder="Email">
-    <input id="cloudPassword" type="password" placeholder="Password (min. 6 characters)">
+<!-- SUPPLIERS SECTION (Supplier Form) -->
+<section class="requirement-section" id="suppliers" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Join as Manpower Supplier</h2>
+      <p>Register your supply company to get direct client leads.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="supplierForm" onsubmit="submitSupplierForm(event)">
+        <div class="form-group">
+          <label>Supplier / Company Name</label>
+          <input type="text" id="supp_name" required placeholder="e.g. Gulf Manpower Services">
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" id="supp_person" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="supp_email" required placeholder="supplier@domain.com">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" id="supp_phone" required placeholder="+971 50 987 6543">
+        </div>
+        <div class="form-group">
+          <label>Available Manpower Categories</label>
+          <input type="text" id="supp_types" placeholder="e.g. Electricians, Welders, Fitters, HVAC">
+        </div>
+        <div class="form-group">
+          <label>Total Workers Available</label>
+          <input type="number" id="supp_workers" placeholder="e.g. 25">
+        </div>
+        <button type="submit" class="submit-btn" id="supp_btn">Register as Supplier</button>
+      </form>
+    </div>
   </div>
-  <div class="cloud-actions">
-    <button class="crm-btn" type="button" onclick="cloudSignUp()">Create Account</button>
-    <button class="crm-btn secondary" type="button" onclick="cloudSignIn()">Login</button>
-    <button class="crm-btn secondary" type="button" onclick="cloudSignOut()">Logout</button>
-    <button class="crm-btn gold" type="button" onclick="syncLocalToCloud()">☁️ Sync Local Leads</button>
-    <button class="crm-btn secondary" type="button" onclick="loadCloudLeads()">↻ Load Cloud Leads</button>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="requirement-section" id="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Get In Touch</h2>
+      <p>Send us a message for general inquiries or support.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="contactForm" onsubmit="submitContactForm(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="cont_name" required placeholder="Your Full Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cont_email" required placeholder="yourname@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cont_msg" required placeholder="Write your message here..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="cont_btn">Send Message</button>
+      </form>
+    </div>
   </div>
-  <div id="cloudStatus" class="cloud-status">Cloud database is not connected yet. Add your Supabase project URL and publishable key in the code setup area.</div>
-</div>
-<div class="crm-toolbar"><input id="searchLead" oninput="renderLeads()" placeholder="🔍 Search company, contact, phone, trade..."><select id="regionFilter" onchange="renderLeads()"><option value="">All Regions</option><option>JAFZA</option><option>Sharjah</option><option>Abu Dhabi</option><option>Dubai</option><option>Ajman</option><option>Other UAE</option></select><select id="statusFilter" onchange="renderLeads()"><option value="">All Status</option><option>New</option><option>Contacted</option><option>Follow-up</option><option>Converted</option><option>Closed</option></select><button class="crm-btn gold" onclick="openLeadModal()">+ Add New Lead</button><button class="crm-btn secondary" onclick="exportCSV()">CSV Export</button></div>
-<div class="crm-stats"><div class="stat"><strong id="statTotal">0</strong><span>Total Leads</span></div><div class="stat"><strong id="statNew">0</strong><span>New</span></div><div class="stat"><strong id="statFollow">0</strong><span>Follow-up</span></div><div class="stat"><strong id="statConverted">0</strong><span>Converted</span></div><div class="stat"><strong id="statToday">0</strong><span>Follow-up Due</span></div></div>
-<div class="table-wrap"><table class="lead-table"><thead><tr><th>Company</th><th>Region</th><th>Contact</th><th>Phone</th><th>Trade</th><th>Need</th><th>Source</th><th>Follow-up</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leadBody"></tbody></table><div id="emptyLeads" class="empty" style="display:none">No leads found. Click “Add New Lead” to create one.</div></div>
-<div class="private-note"><i class="fa-solid fa-shield-halved"></i> Privacy note: This is a front-end/local CRM. Anyone with access to this browser can view stored leads. Do not enter passwords, bank details, ID numbers or other sensitive information.</div>
-</div></div></section>
+</section>
 
-<section class="contact" id="contact"><div class="container"><div class="section-title"><h2>Contact</h2><p>For workforce requirements, supplier enquiries and business networking.</p></div><div class="contact-grid"><div class="contact-info"><h3>Let's Connect</h3><p>Use the contact details below for business enquiries.</p><div class="contact-item"><strong>Phone</strong><span>+971 55 323 9813</span></div><div class="contact-item"><strong>WhatsApp</strong><span>+971 55 323 9813</span></div><div class="contact-item"><strong>Email</strong><span>mohdmanjur021@gmail.com</span></div><div class="contact-actions"><a class="small-btn" href="tel:+971553239813"><i class="fa-solid fa-phone"></i> Call</a><a class="small-btn" target="_blank" href="https://wa.me/971553239813"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a class="small-btn" href="mailto:mohdmanjur021@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></div></div><form onsubmit="contactSubmit(event)"><div class="form-group"><label>Name</label><input id="cName" required></div><div class="form-group"><label>Company</label><input id="cCompany"></div><div class="form-group"><label>Message</label><textarea id="cMessage" required></textarea></div><button class="submit-btn">Send via WhatsApp</button></form></div></div></section>
+<!-- NEW: ADMIN DASHBOARD DATA SECTION (DIRECTLY IN INDEX.HTML) -->
+<section class="admin-section" id="admin">
+  <div class="container">
+    <div class="section-title">
+      <h2>Live Database Entries (Admin Panel)</h2>
+      <p>View all live submissions from the forms above in real-time.</p>
+    </div>
 
-<div class="disclaimer"><p>Information on this website is for business networking and enquiry purposes. Company names, public-source information and workforce requirements should be independently verified before commercial engagement. Elite Workforce Solutions does not guarantee employment, project award, payment or contract execution.</p></div>
-<footer><div class="footer-grid"><div><h3>Elite Workforce Solutions</h3><p>UAE-focused workforce and manpower networking platform connecting companies and suppliers.</p></div><div><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#network">Network</a></li><li><a href="#crm">Private CRM</a></li></ul></div><div><h3>Contact</h3><p>+971 55 323 9813</p><p>mohdmanjur021@gmail.com</p></div></div><div class="copyright">© 2026 Elite Workforce Solutions. All rights reserved.</div></footer>
+    <button class="admin-refresh" onclick="loadActiveTabData()"><i class="fa-solid fa-rotate-right"></i> Refresh Table</button>
 
-<a class="whatsapp" target="_blank" href="https://wa.me/971553239813" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-<div class="mobile-action-bar"><a class="action-btn call" href="tel:+971553239813">📞 Call</a><a class="action-btn wa" target="_blank" href="https://wa.me/971553239813">💬 WhatsApp</a></div>
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchTab('companies', this)"><i class="fa-solid fa-building"></i> Companies Data</button>
+      <button class="admin-tab-btn" onclick="switchTab('suppliers', this)"><i class="fa-solid fa-truck-field"></i> Suppliers Data</button>
+      <button class="admin-tab-btn" onclick="switchTab('contact_messages', this)"><i class="fa-solid fa-envelope"></i> Contact Messages</button>
+    </div>
 
-<div class="modal" id="leadModal"><div class="modal-box"><div class="modal-top"><h3 id="modalTitle">Add New Lead</h3><button class="close" onclick="closeLeadModal()">×</button></div>
-<form onsubmit="saveLead(event)"><input type="hidden" id="leadId"><div class="lead-form-grid">
-<div class="form-group"><label>Company Name *</label><input id="leadCompany" required></div><div class="form-group"><label>Region *</label><select id="leadRegion" required><option>JAFZA</option><option>Sharjah</option><option>Abu Dhabi</option><option>Dubai</option><option>Ajman</option><option>Other UAE</option></select></div>
-<div class="form-group"><label>Contact Person</label><input id="leadContact"></div><div class="form-group"><label>Phone / WhatsApp</label><input id="leadPhone"></div>
-<div class="form-group"><label>Trade / Requirement</label><select id="leadTrade"><option>Electrician</option><option>Mechanical Fitter</option><option>Welder</option><option>HVAC Technician</option><option>Maintenance</option><option>General Manpower</option><option>Other</option></select></div><div class="form-group"><label>Workers / Requirement</label><input id="leadNeed" placeholder="e.g. 10 electricians"></div>
-<div class="form-group"><label>Lead Source</label><input id="leadSource" placeholder="Company website / LinkedIn / Directory / Referral"></div><div class="form-group"><label>Follow-up Date</label><input id="leadFollow" type="date"></div>
-<div class="form-group"><label>Status</label><select id="leadStatus"><option>New</option><option>Contacted</option><option>Follow-up</option><option>Converted</option><option>Closed</option></select></div><div class="form-group"><label>Website</label><input id="leadWebsite" placeholder="https://..."></div>
-<div class="form-group full"><label>Notes</label><textarea id="leadNotes" placeholder="Contact details, requirement, next action, etc."></textarea></div>
-</div><div class="modal-actions"><button type="button" class="crm-btn secondary" onclick="closeLeadModal()">Cancel</button><button class="crm-btn">Save Lead</button></div></form></div></div>
+    <div class="admin-table-wrap" id="admin-table-container">
+      <p style="padding:20px;text-align:center;">Loading database records...</p>
+    </div>
+  </div>
+</section>
 
+<footer>
+  <div class="copyright">
+    &copy; 2026 Elite Workforce Solutions. All rights reserved.
+  </div>
+</footer>
+
+<!-- SUPABASE LIVE CONNECTION & ALL HANDLERS -->
 <script>
-const STORAGE_KEY='elite_workforce_private_leads_v1';
-let leads=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  // 1. Supabase Connection Setup
+  const SUPABASE_URL = 'https://maakqzczkhkoimlmnvws.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const SUPABASE_URL='YOUR_SUPABASE_URL';
-const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
-const cloudEnabled=SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_') && !SUPABASE_PUBLISHABLE_KEY.includes('YOUR_');
-const supabaseClient=cloudEnabled ? window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY) : null;
-let cloudUser=null;
+  let currentTab = 'companies';
 
-function setCloudStatus(msg,ok=false){
- const el=document.getElementById('cloudStatus');
- if(el){el.textContent=msg;el.style.color=ok?'#166534':'#92400e'}
-}
-async function cloudSignUp(){
- if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
- const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
- if(!email||password.length<6)return setCloudStatus('Enter a valid email and a password of at least 6 characters.');
- const {error}=await supabaseClient.auth.signUp({email,password});
- if(error)return setCloudStatus(error.message);
- setCloudStatus('Account created. Check your email if email confirmation is enabled, then login.',true);
-}
-async function cloudSignIn(){
- if(!cloudEnabled)return setCloudStatus('First add your Supabase URL and publishable key in the code.');
- const email=document.getElementById('cloudEmail').value.trim(),password=document.getElementById('cloudPassword').value;
- const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
- if(error)return setCloudStatus(error.message);
- cloudUser=data.user;setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads();
-}
-async function cloudSignOut(){
- if(!cloudEnabled)return;
- await supabaseClient.auth.signOut();cloudUser=null;setCloudStatus('Logged out from Cloud CRM.');
-}
-async function cloudInit(){
- if(!cloudEnabled){setCloudStatus('Cloud mode is ready but not activated. Add Supabase URL + publishable key, then upload this file again.');return}
- const {data}=await supabaseClient.auth.getUser();
- cloudUser=data.user||null;
- if(cloudUser){setCloudStatus('Cloud CRM connected: '+cloudUser.email,true);await loadCloudLeads()}
- else setCloudStatus('Cloud database connected. Please login to use your private CRM.',true);
- await loadLiveRequirements();
-}
-async function cloudSaveLead(l){
- if(!cloudUser)return;
- const row={id:l.id,user_id:cloudUser.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||null,status:l.status,website:l.website,notes:l.notes};
- const {error}=await supabaseClient.from('private_leads').upsert(row,{onConflict:'id'});
- if(error)setCloudStatus('Cloud save error: '+error.message);
-}
-async function syncLocalToCloud(){
- if(!cloudUser)return setCloudStatus('Login first, then sync your local leads.');
- for(const l of leads)await cloudSaveLead(l);
- setCloudStatus(leads.length+' local lead(s) synced to your private cloud CRM.',true);
-}
-async function loadCloudLeads(){
- if(!cloudUser)return setCloudStatus('Login first to load your private cloud leads.');
- const {data,error}=await supabaseClient.from('private_leads').select('*').order('created_at',{ascending:false});
- if(error)return setCloudStatus('Cloud load error: '+error.message);
- leads=(data||[]).map(l=>({id:l.id,company:l.company,region:l.region,contact:l.contact,phone:l.phone,trade:l.trade,need:l.need,source:l.source,follow:l.follow||'',status:l.status,website:l.website,notes:l.notes}));
- save();renderLeads();setCloudStatus('Loaded '+leads.length+' private lead(s) from the cloud.',true);
-}
-async function cloudDeleteLead(id){
- if(!cloudUser)return;
- const {error}=await supabaseClient.from('private_leads').delete().eq('id',id);
- if(error)setCloudStatus('Cloud delete error: '+error.message);
-}
-async function publishRequirementOnline(){
- if(!cloudEnabled)return alert('Cloud database is not connected yet. Add your Supabase URL and publishable key first.');
- const row={company_name:reqCompany.value.trim(),contact_person:reqPerson.value.trim(),trade:reqTrade.value,workers_required:Number(reqQty.value),location:reqLocation.value.trim(),message:reqMessage.value.trim(),status:'open'};
- const {error}=await supabaseClient.from('public_requirements').insert(row);
- if(error)return alert('Could not publish: '+error.message);
- alert('Requirement published to the live network.');
- await loadLiveRequirements();
-}
-async function publishSupplierOnline(){
- if(!cloudEnabled)return alert('Cloud database is not connected yet. Add your Supabase URL and publishable key first.');
- const row={supplier_name:supCompany.value.trim(),phone:supPhone.value.trim(),trade:supTrade.value,available_quantity:Number(supQty.value),coverage:supLocation.value.trim(),details:supMessage.value.trim(),status:'active'};
- const {error}=await supabaseClient.from('supplier_availability').insert(row);
- if(error)return alert('Could not publish: '+error.message);
- alert('Supplier availability published to the live network.');
-}
-async function loadLiveRequirements(){
- const box=document.getElementById('liveRequirements');
- if(!box||!cloudEnabled)return;
- const {data,error}=await supabaseClient.from('public_requirements').select('company_name,trade,workers_required,location,message,created_at').eq('status','open').order('created_at',{ascending:false}).limit(20);
- if(error){box.innerHTML='<div class="empty">Live network is waiting for database setup.</div>';return}
- if(!data||!data.length){box.innerHTML='<div class="empty">No live requirements yet. Be the first to publish one.</div>';return}
- box.innerHTML=data.map(r=>`<div class="live-item"><strong>${escapeHTML(r.company_name)}</strong> — ${escapeHTML(r.trade)} <b>${escapeHTML(r.workers_required)}</b> worker(s)<div class="live-meta">${escapeHTML(r.location)} · ${new Date(r.created_at).toLocaleDateString()}</div><div style="margin-top:5px">${escapeHTML(r.message)}</div></div>`).join('');
-}
+  // 2. Company Requirement Form Submit
+  async function submitCompanyForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('comp_btn');
+    btn.disabled = true;
+    btn.innerText = 'Submitting...';
 
+    const payload = {
+      company_name: document.getElementById('comp_name').value.trim(),
+      contact_person: document.getElementById('comp_person').value.trim(),
+      email: document.getElementById('comp_email').value.trim(),
+      phone: document.getElementById('comp_phone').value.trim(),
+      location: document.getElementById('comp_location').value.trim(),
+      requirement_details: document.getElementById('comp_details').value.trim()
+    };
 
-function toggleMenu(){document.getElementById('navLinks').classList.toggle('active')}
-document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));
+    const { data, error } = await _supabase.from('companies').insert([payload]);
 
-function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(leads))}
-function today(){return new Date().toISOString().slice(0,10)}
+    if (error) {
+      alert('Error: ' + error.message);
+    } else {
+      alert('Success! Your requirement has been posted.');
+      document.getElementById('companyForm').reset();
+      loadActiveTabData(); // Refresh table automatically
+    }
+    btn.disabled = false;
+    btn.innerText = 'Submit Requirement';
+  }
 
-function renderLeads(){
- const q=document.getElementById('searchLead').value.toLowerCase().trim();
- const region=document.getElementById('regionFilter').value,status=document.getElementById('statusFilter').value;
- const filtered=leads.filter(l=>{
-   const text=[l.company,l.region,l.contact,l.phone,l.trade,l.need,l.source,l.notes].join(' ').toLowerCase();
-   return (!q||text.includes(q))&&(!region||l.region===region)&&(!status||l.status===status);
- });
- const body=document.getElementById('leadBody');
- body.innerHTML=filtered.map(l=>`<tr>
- <td><strong>${escapeHTML(l.company)}</strong>${l.website?`<br><a href="${escapeHTML(l.website)}" target="_blank" style="color:var(--blue);font-size:11px">Website</a>`:''}</td>
- <td>${escapeHTML(l.region)}</td><td>${escapeHTML(l.contact)}</td>
- <td>${l.phone?`<a href="tel:${escapeHTML(l.phone)}" style="color:var(--blue)">${escapeHTML(l.phone)}</a>`:''}</td>
- <td>${escapeHTML(l.trade)}</td><td>${escapeHTML(l.need)}</td><td>${escapeHTML(l.source)}</td>
- <td>${escapeHTML(l.follow||'—')}</td><td><span class="badge ${String(l.status).toLowerCase().replace('-','')}">${escapeHTML(l.status)}</span></td>
- <td>${escapeHTML(l.notes||'')}</td><td><div class="lead-actions"><button class="icon-btn" title="Edit" onclick="editLead('${l.id}')">✏️</button>${l.phone?`<button class="icon-btn" title="WhatsApp" onclick="whatsLead('${l.phone}','${escapeHTML(l.company)}')">💬</button>`:''}<button class="icon-btn delete" title="Delete" onclick="deleteLead('${l.id}')">🗑️</button></div></td></tr>`).join('');
- document.getElementById('emptyLeads').style.display=filtered.length?'none':'block';
- updateStats();
-}
-function updateStats(){
- document.getElementById('statTotal').textContent=leads.length;
- document.getElementById('statNew').textContent=leads.filter(l=>l.status==='New').length;
- document.getElementById('statFollow').textContent=leads.filter(l=>l.status==='Follow-up').length;
- document.getElementById('statConverted').textContent=leads.filter(l=>l.status==='Converted').length;
- document.getElementById('statToday').textContent=leads.filter(l=>l.follow&&l.follow<=today()&&l.status!=='Converted'&&l.status!=='Closed').length;
-}
-function openLeadModal(id=null){
- document.getElementById('leadModal').classList.add('active');
- document.getElementById('modalTitle').textContent=id?'Edit Lead':'Add New Lead';
- document.getElementById('leadId').value=id||'';
- if(id){const l=leads.find(x=>x.id===id);if(l) fillLead(l)}
- else {['leadCompany','leadContact','leadPhone','leadNeed','leadSource','leadWebsite','leadNotes','leadFollow'].forEach(x=>document.getElementById(x).value='');document.getElementById('leadRegion').value='JAFZA';document.getElementById('leadStatus').value='New';document.getElementById('leadTrade').value='Electrician'}
-}
-function fillLead(l){for(const k of ['company','region','contact','phone','trade','need','source','follow','status','website','notes']){const el=document.getElementById('lead'+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=l[k]||''}}
-function closeLeadModal(){document.getElementById('leadModal').classList.remove('active')}
-function saveLead(e){
- e.preventDefault();const id=document.getElementById('leadId').value;
- const l={id:id||Date.now().toString(),company:leadCompany.value.trim(),region:leadRegion.value,contact:leadContact.value.trim(),phone:leadPhone.value.trim(),trade:leadTrade.value,need:leadNeed.value.trim(),source:leadSource.value.trim(),follow:leadFollow.value,status:leadStatus.value,website:leadWebsite.value.trim(),notes:leadNotes.value.trim()};
- if(id){const i=leads.findIndex(x=>x.id===id);if(i>-1)leads[i]=l}else leads.unshift(l);
- save();closeLeadModal();renderLeads(); if(cloudUser) cloudSaveLead(l);
-}
-function editLead(id){openLeadModal(id)}
-function deleteLead(id){if(confirm('Delete this lead?')){leads=leads.filter(l=>l.id!==id);save();renderLeads();if(cloudUser)cloudDeleteLead(id)}}
-function whatsLead(phone,company){const p=phone.replace(/[^\d]/g,'');window.open('https://wa.me/'+p+'?text='+encodeURIComponent('Hello, I am contacting you from Elite Workforce Solutions regarding workforce/manpower requirements for '+company+'.'),'_blank')}
-function exportCSV(){
- const headers=['Company','Region','Contact','Phone','Trade','Need','Source','Follow-up Date','Status','Website','Notes'];
- const rows=leads.map(l=>[l.company,l.region,l.contact,l.phone,l.trade,l.need,l.source,l.follow,l.status,l.website,l.notes]);
- const csv=[headers,...rows].map(r=>r.map(x=>`"${String(x??'').replace(/"/g,'""')}"`).join(',')).join('\\n');
- const blob=new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='elite-workforce-leads.csv';a.click();URL.revokeObjectURL(a.href);
-}
-function submitPublicRequirement(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0ACompany: ${encodeURIComponent(reqCompany.value)}%0AContact: ${encodeURIComponent(reqPerson.value)}%0ATrade: ${encodeURIComponent(reqTrade.value)}%0AWorkers: ${encodeURIComponent(reqQty.value)}%0ALocation: ${encodeURIComponent(reqLocation.value)}%0ARequirement: ${encodeURIComponent(reqMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-function submitSupplier(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0ASupplier: ${encodeURIComponent(supCompany.value)}%0APhone: ${encodeURIComponent(supPhone.value)}%0ATrade: ${encodeURIComponent(supTrade.value)}%0AAvailable: ${encodeURIComponent(supQty.value)}%0ACoverage: ${encodeURIComponent(supLocation.value)}%0ADetails: ${encodeURIComponent(supMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-function contactSubmit(e){e.preventDefault();const msg=`Hello Elite Workforce Solutions,%0AName: ${encodeURIComponent(cName.value)}%0ACompany: ${encodeURIComponent(cCompany.value)}%0AMessage: ${encodeURIComponent(cMessage.value)}`;window.open('https://wa.me/971553239813?text='+msg,'_blank')}
-document.getElementById('leadModal').addEventListener('click',e=>{if(e.target.id==='leadModal')closeLeadModal()});
-renderLeads();
-cloudInit();
+  // 3. Supplier Registration Form Submit
+  async function submitSupplierForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('supp_btn');
+    btn.disabled = true;
+    btn.innerText = 'Registering...';
+
+    const rawWorkers = document.getElementById('supp_workers').value;
+
+    const payload = {
+      company_name: document.getElementById('supp_name').value.trim(),
+      contact_person: document.getElementById('supp_person').value.trim(),
+      email: document.getElementById('supp_email').value.trim(),
+      phone: document.getElementById('supp_phone').value.trim(),
+      manpower_types: document.getElementById('supp_types').value.trim(),
+      workers_available: rawWorkers ? parseInt(rawWorkers, 10) : 0
+    };
+
+    const { data, error } = await _supabase.from('suppliers').insert([payload]);
+
+    if (error) {
+      alert('Error: ' + error.message);
+    } else {
+      alert('Success! Supplier registration completed.');
+      document.getElementById('supplierForm').reset();
+      loadActiveTabData(); // Refresh table automatically
+    }
+    btn.disabled = false;
+    btn.innerText = 'Register as Supplier';
+  }
+
+  // 4. Contact Form Submit
+  async function submitContactForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cont_btn');
+    btn.disabled = true;
+    btn.innerText = 'Sending...';
+
+    const payload = {
+      name: document.getElementById('cont_name').value.trim(),
+      email: document.getElementById('cont_email').value.trim(),
+      message: document.getElementById('cont_msg').value.trim()
+    };
+
+    const { data, error } = await _supabase.from('contact_messages').insert([payload]);
+
+    if (error) {
+      alert('Error: ' + error.message);
+    } else {
+      alert('Thank you! Message sent successfully.');
+      document.getElementById('contactForm').reset();
+      loadActiveTabData(); // Refresh table automatically
+    }
+    btn.disabled = false;
+    btn.innerText = 'Send Message';
+  }
+
+  // 5. ADMIN TABLE DATA FETCH FUNCTIONS
+  function switchTab(tableName, btn) {
+    currentTab = tableName;
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadActiveTabData();
+  }
+
+  function loadActiveTabData() {
+    if (currentTab === 'companies') fetchCompanies();
+    else if (currentTab === 'suppliers') fetchSuppliers();
+    else if (currentTab === 'contact_messages') fetchMessages();
+  }
+
+  async function fetchCompanies() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading companies...</p>';
+    const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No company requirements posted yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Company</th><th>Person</th><th>Email / Phone</th><th>Location</th><th>Details</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.location||'N/A'}</td><td>${i.requirement_details}</td><td><button class="admin-del-btn" onclick="deleteRecord('companies', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchSuppliers() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading suppliers...</p>';
+    const { data, error } = await _supabase.from('suppliers').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No suppliers registered yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Supplier</th><th>Person</th><th>Email / Phone</th><th>Categories</th><th>Workers</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.manpower_types||'N/A'}</td><td><b>${i.workers_available}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('suppliers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchMessages() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading messages...</p>';
+    const { data, error } = await _supabase.from('contact_messages').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No messages received yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.name}</b></td><td>${i.email}</td><td>${i.message}</td><td><button class="admin-del-btn" onclick="deleteRecord('contact_messages', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function deleteRecord(table, id) {
+    if (confirm('Delete this entry permanently?')) {
+      const { error } = await _supabase.from(table).delete().eq('id', id);
+      if (error) alert('Error: ' + error.message);
+      else loadActiveTabData();
+    }
+  }
+
+  // Load Admin Data on Startup
+  window.onload = loadActiveTabData;
 </script>
+
 </body>
 </html>
