@@ -18,7 +18,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--text:#17233a;--muted:#64748b;--light:#f6f8fb;--white:#fff}
+:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--emerald:#10b981;--emerald2:#059669;--text:#17233a;--muted:#64748b;--light:#f6f8fb;--white:#fff}
 body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--light);line-height:1.6;padding-bottom:50px}
 a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
 .container{max-width:1200px;margin:auto}section{padding:80px 25px}
@@ -33,6 +33,8 @@ header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.97);b
 .hero-container{max-width:1200px;width:100%;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
 .eyebrow{display:inline-block;color:var(--gold);font-weight:800;letter-spacing:1.4px;font-size:13px;margin-bottom:18px}.hero h1{font-size:56px;line-height:1.08;margin-bottom:22px}.hero h1 span{color:var(--gold)}.hero-lead{font-size:18px;color:#e2eaf5;max-width:650px;margin-bottom:30px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}
+.btn-azad-hero{background:var(--emerald);color:#fff}.btn-azad-hero:hover{background:var(--emerald2);transform:translateY(-2px)}
+
 .requirement-section{background:#f1f5f9}.requirement-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0}.requirement-card h3{color:var(--blue);font-size:24px;margin-bottom:8px}.requirement-card>p{color:var(--muted);font-size:14px;margin-bottom:22px}
 form{background:var(--light);padding:30px;border-radius:15px}.requirement-card form{padding:0;background:#fff}.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
 input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff}input:focus,textarea:focus,select:focus{border-color:var(--blue)}textarea{min-height:125px;resize:vertical}.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800}.form-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
@@ -51,6 +53,12 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
 .admin-badge{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:bold}
 .admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
 .admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
+
+/* Modal Styling for Azad Visa Popup */
+.azad-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;justify-content:center;align-items:center;padding:20px}
+.azad-modal-content{background:#fff;border-radius:12px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:30px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.azad-close-btn{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#64748b}
+.azad-close-btn:hover{color:#000}
 </style>
 <link rel="icon" type="image/png" sizes="48x48" href="logo.png">
 </head>
@@ -62,6 +70,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
 <li><a href="#home">Home</a></li>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#suppliers">Suppliers</a></li>
+<li><a href="#azad-visa">Azad Workers</a></li>
 <li><a href="#contact" class="nav-btn">Contact</a></li>
 <li><a href="#admin" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin</a></li>
 </ul></nav></header>
@@ -77,7 +86,11 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
 <div class="eyebrow">UAE WORKFORCE NETWORK</div>
 <h1>Connecting Companies With <span>Skilled Workforce</span></h1>
 <p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
-<div class="hero-buttons"><a href="#requirements" class="btn btn-primary">Post Requirement</a><a href="#suppliers" class="btn btn-outline">Join as Supplier</a></div>
+<div class="hero-buttons">
+  <a href="#requirements" class="btn btn-primary">Post Requirement</a>
+  <a href="#suppliers" class="btn btn-outline">Join as Supplier</a>
+  <button onclick="openAzadModal()" class="btn btn-azad-hero"><i class="fa-solid fa-id-card"></i> 🇦🇪 Azad Visa Worker</button>
+</div>
 </div></div></section>
 
 <!-- REQUIREMENTS SECTION (Company Form) -->
@@ -158,8 +171,66 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </section>
 
+<!-- AZAD VISA WORKER SECTION (On-Page Form) -->
+<section class="requirement-section" id="azad-visa">
+  <div class="container">
+    <div class="section-title">
+      <h2>🇦🇪 Azad / Freelance Visa Worker Registration</h2>
+      <p>Register yourself to get immediate short-term & long-term site work across UAE.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="azadWorkerForm" onsubmit="submitAzadWorkerForm(event)">
+        <div class="form-group">
+          <label>Full Name (Poora Naam)</label>
+          <input type="text" id="azad_name" required placeholder="e.g. Mohd Imran">
+        </div>
+        <div class="form-group">
+          <label>UAE Phone / WhatsApp Number</label>
+          <input type="tel" id="azad_phone" required placeholder="+971 50 xxx xxxx">
+        </div>
+        <div class="form-group">
+          <label>Emirates ID Number</label>
+          <input type="text" id="azad_eid" required placeholder="784-XXXX-XXXXXXX-X">
+        </div>
+        <div class="form-group">
+          <label>Trade / Skill Specialization</label>
+          <select id="azad_trade" required>
+            <option value="">Select Your Work Skill</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Mason">Mason</option>
+            <option value="Welder">Welder</option>
+            <option value="Fitter / Mechanical">Fitter / Mechanical</option>
+            <option value="HVAC Technician">HVAC Technician</option>
+            <option value="Scaffolder">Scaffolder</option>
+            <option value="Driver">Driver</option>
+            <option value="Helper / General Labour">Helper / General Labour</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Emirate / Location</label>
+          <select id="azad_location" required>
+            <option value="Dubai">Dubai</option>
+            <option value="Abu Dhabi">Abu Dhabi</option>
+            <option value="Sharjah">Sharjah</option>
+            <option value="Ajman">Ajman</option>
+            <option value="Ras Al Khaimah">Ras Al Khaimah</option>
+            <option value="Umm Al Quwain">Umm Al Quwain</option>
+            <option value="Fujairah">Fujairah</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Expected Daily / Hourly Rate (AED)</label>
+          <input type="number" id="azad_rate" placeholder="e.g. 100 AED/Day or 12 AED/Hour">
+        </div>
+        <button type="submit" class="submit-btn" id="azad_btn" style="background:var(--emerald2);">Register as Freelance Worker</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT SECTION -->
-<section class="requirement-section" id="contact">
+<section class="requirement-section" id="contact" style="background:#fff;">
   <div class="container">
     <div class="section-title">
       <h2>Get In Touch</h2>
@@ -185,7 +256,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </section>
 
-<!-- NEW: ADMIN DASHBOARD DATA SECTION (DIRECTLY IN INDEX.HTML) -->
+<!-- ADMIN DASHBOARD DATA SECTION -->
 <section class="admin-section" id="admin">
   <div class="container">
     <div class="section-title">
@@ -198,6 +269,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
     <div class="admin-tabs">
       <button class="admin-tab-btn active" onclick="switchTab('companies', this)"><i class="fa-solid fa-building"></i> Companies Data</button>
       <button class="admin-tab-btn" onclick="switchTab('suppliers', this)"><i class="fa-solid fa-truck-field"></i> Suppliers Data</button>
+      <button class="admin-tab-btn" onclick="switchTab('azad_workers', this)"><i class="fa-solid fa-user-gear"></i> Azad Workers</button>
       <button class="admin-tab-btn" onclick="switchTab('contact_messages', this)"><i class="fa-solid fa-envelope"></i> Contact Messages</button>
     </div>
 
@@ -213,6 +285,52 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </footer>
 
+<!-- AZAD VISA POPUP MODAL -->
+<div class="azad-modal" id="azadModal">
+  <div class="azad-modal-content">
+    <span class="azad-close-btn" onclick="closeAzadModal()">&times;</span>
+    <h3 style="color:var(--blue);margin-bottom:10px;">🇦🇪 Quick Registration: Azad Visa Worker</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Fill details to get instant daily/hourly site work leads.</p>
+    
+    <form onsubmit="submitModalAzadWorker(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="m_azad_name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp / Phone</label>
+        <input type="tel" id="m_azad_phone" required placeholder="+971 50 xxx xxxx">
+      </div>
+      <div class="form-group">
+        <label>Emirates ID</label>
+        <input type="text" id="m_azad_eid" required placeholder="784-XXXX-XXXXXXX-X">
+      </div>
+      <div class="form-group">
+        <label>Trade / Skill</label>
+        <select id="m_azad_trade" required>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Mason">Mason</option>
+          <option value="Welder">Welder</option>
+          <option value="Fitter / Mechanical">Fitter / Mechanical</option>
+          <option value="HVAC Technician">HVAC Technician</option>
+          <option value="Helper / General Labour">Helper / General Labour</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Emirate</label>
+        <select id="m_azad_location" required>
+          <option value="Dubai">Dubai</option>
+          <option value="Abu Dhabi">Abu Dhabi</option>
+          <option value="Sharjah">Sharjah</option>
+          <option value="Ajman">Ajman</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn" id="m_azad_btn" style="background:var(--emerald2);">Submit Azad Worker Details</button>
+    </form>
+  </div>
+</div>
+
 <!-- SUPABASE LIVE CONNECTION & ALL HANDLERS -->
 <script>
   // 1. Supabase Connection Setup
@@ -221,6 +339,10 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let currentTab = 'companies';
+
+  // Modal Functions
+  function openAzadModal() { document.getElementById('azadModal').style.display = 'flex'; }
+  function closeAzadModal() { document.getElementById('azadModal').style.display = 'none'; }
 
   // 2. Company Requirement Form Submit
   async function submitCompanyForm(e) {
@@ -245,7 +367,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
     } else {
       alert('Success! Your requirement has been posted.');
       document.getElementById('companyForm').reset();
-      loadActiveTabData(); // Refresh table automatically
+      loadActiveTabData();
     }
     btn.disabled = false;
     btn.innerText = 'Submit Requirement';
@@ -276,13 +398,73 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
     } else {
       alert('Success! Supplier registration completed.');
       document.getElementById('supplierForm').reset();
-      loadActiveTabData(); // Refresh table automatically
+      loadActiveTabData();
     }
     btn.disabled = false;
     btn.innerText = 'Register as Supplier';
   }
 
-  // 4. Contact Form Submit
+  // 4. Azad Visa Worker Form Submit (On-Page Form)
+  async function submitAzadWorkerForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('azad_btn');
+    btn.disabled = true;
+    btn.innerText = 'Submitting Details...';
+
+    const rawRate = document.getElementById('azad_rate').value;
+
+    const payload = {
+      full_name: document.getElementById('azad_name').value.trim(),
+      phone_number: document.getElementById('azad_phone').value.trim(),
+      emirates_id: document.getElementById('azad_eid').value.trim(),
+      trade: document.getElementById('azad_trade').value,
+      location: document.getElementById('azad_location').value,
+      expected_daily_rate: rawRate ? parseFloat(rawRate) : 0
+    };
+
+    const { data, error } = await _supabase.from('azad_workers').insert([payload]);
+
+    if (error) {
+      alert('Error: ' + error.message);
+    } else {
+      alert('Success! Azad Visa Worker profile registered.');
+      document.getElementById('azadWorkerForm').reset();
+      loadActiveTabData();
+    }
+    btn.disabled = false;
+    btn.innerText = 'Register as Freelance Worker';
+  }
+
+  // 5. Azad Visa Worker Form Submit (Modal Popup Form)
+  async function submitModalAzadWorker(e) {
+    e.preventDefault();
+    const btn = document.getElementById('m_azad_btn');
+    btn.disabled = true;
+    btn.innerText = 'Registering...';
+
+    const payload = {
+      full_name: document.getElementById('m_azad_name').value.trim(),
+      phone_number: document.getElementById('m_azad_phone').value.trim(),
+      emirates_id: document.getElementById('m_azad_eid').value.trim(),
+      trade: document.getElementById('m_azad_trade').value,
+      location: document.getElementById('m_azad_location').value,
+      expected_daily_rate: 0
+    };
+
+    const { data, error } = await _supabase.from('azad_workers').insert([payload]);
+
+    if (error) {
+      alert('Error: ' + error.message);
+    } else {
+      alert('Success! Azad Worker registered successfully.');
+      closeAzadModal();
+      loadActiveTabData();
+    }
+    btn.disabled = false;
+    btn.innerText = 'Submit Azad Worker Details';
+  }
+
+  // 6. Contact Form Submit
   async function submitContactForm(e) {
     e.preventDefault();
     const btn = document.getElementById('cont_btn');
@@ -302,13 +484,13 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
     } else {
       alert('Thank you! Message sent successfully.');
       document.getElementById('contactForm').reset();
-      loadActiveTabData(); // Refresh table automatically
+      loadActiveTabData();
     }
     btn.disabled = false;
     btn.innerText = 'Send Message';
   }
 
-  // 5. ADMIN TABLE DATA FETCH FUNCTIONS
+  // 7. ADMIN TABLE DATA FETCH FUNCTIONS
   function switchTab(tableName, btn) {
     currentTab = tableName;
     document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
@@ -319,6 +501,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   function loadActiveTabData() {
     if (currentTab === 'companies') fetchCompanies();
     else if (currentTab === 'suppliers') fetchSuppliers();
+    else if (currentTab === 'azad_workers') fetchAzadWorkers();
     else if (currentTab === 'contact_messages') fetchMessages();
   }
 
@@ -348,6 +531,21 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
     let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Supplier</th><th>Person</th><th>Email / Phone</th><th>Categories</th><th>Workers</th><th>Action</th></tr></thead><tbody>`;
     data.forEach(i => {
       html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.manpower_types||'N/A'}</td><td><b>${i.workers_available}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('suppliers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchAzadWorkers() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading Azad Visa Workers...</p>';
+    const { data, error } = await _supabase.from('azad_workers').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No Azad workers registered yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Emirates ID</th><th>Trade</th><th>Location</th><th>Expected Rate</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.full_name}</b></td><td>${i.phone_number}</td><td>${i.emirates_id}</td><td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td><td>${i.location}</td><td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'N/A'}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('azad_workers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
     });
     container.innerHTML = html + '</tbody></table>';
   }
