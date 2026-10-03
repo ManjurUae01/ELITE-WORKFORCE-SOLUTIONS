@@ -1,392 +1,772 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Workforce Solutions | UAE Workforce Network</title>
-    
-    <!-- Meta & SEO Tags -->
-    <meta name="description" content="Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.">
-    <meta name="keywords" content="HR Solutions, Manpower Supply, Recruitment Agency, Azad Visa Worker, UAE Jobs">
-    <meta name="author" content="Elite Workforce Solutions">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce including electricians, fitters, welders, HVAC technicians and maintenance staff.">
+<meta name="keywords" content="manpower supplier UAE, electrician supplier UAE, fitter supplier UAE, welder supplier UAE, skilled manpower UAE, workforce solutions UAE">
+<meta name="author" content="Elite Workforce Solutions">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Elite Workforce Solutions | UAE Workforce Network">
+<meta property="og:description" content="Connecting UAE companies with manpower suppliers and skilled workforce.">
+<meta property="og:type" content="website">
+<title>Elite Workforce Solutions | UAE Workforce & Manpower Network</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<!-- Supabase JS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                            navy: '#0b132b',
-                            slate: '#1c2541'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(229, 231, 235, 0.8);
-        }
-    </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--emerald:#10b981;--emerald2:#059669;--text:#17233a;--muted:#64748b;--light:#f8fafc;--white:#fff}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--light);line-height:1.6;padding-bottom:50px}
+a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
+.container{max-width:1200px;margin:auto}section{padding:80px 25px}
+.section-title{text-align:center;margin-bottom:45px}.section-title h2{font-size:38px;color:var(--blue);margin-bottom:10px}.section-title p{color:var(--muted);max-width:720px;margin:auto}
+
+/* Header & Mobile Navbar */
+header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.98);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
+.navbar{max-width:1200px;margin:auto;padding:14px 25px;display:flex;align-items:center;justify-content:space-between}
+.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
+.nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700;transition:color 0.2s}.nav-links a:hover{color:var(--blue2)}
+.nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px;transition:0.3s}.nav-btn:hover{background:var(--blue2)}
+.menu-btn{display:none;font-size:24px;cursor:pointer;color:var(--blue)}
+
+/* Ticker */
+.ticker-wrap{width:100%;background:var(--gold2);color:#000;overflow:hidden;padding:10px 0;font-weight:bold;font-size:14px;margin-top:68px}.ticker{display:flex;gap:50px;white-space:nowrap;animation:ticker 25s linear infinite}@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}.ticker-wrap:hover .ticker{animation-play-state:paused}
+
+/* Hero Section */
+.hero{min-height:88vh;padding:100px 25px 80px;background:linear-gradient(135deg,var(--navy),var(--blue) 55%,var(--blue2));color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-container{max-width:1200px;width:100%;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
+.eyebrow{display:inline-block;color:var(--gold);font-weight:800;letter-spacing:1.4px;font-size:13px;margin-bottom:18px}.hero h1{font-size:56px;line-height:1.08;margin-bottom:22px}.hero h1 span{color:var(--gold)}.hero-lead{font-size:18px;color:#e2eaf5;max-width:650px;margin-bottom:30px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}
+.btn-azad-hero{background:var(--emerald);color:#fff}.btn-azad-hero:hover{background:var(--emerald2);transform:translateY(-2px)}
+
+/* Forms & Tables Section */
+.requirement-section{background:#f1f5f9}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0;max-width:700px;margin:auto}
+.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
+input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff;transition:border-color 0.2s}input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,61,145,0.1)}textarea{min-height:125px;resize:vertical}
+.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800;transition:background 0.2s}.submit-btn:hover{background:var(--blue2)}
+
+/* Public & Admin Tabs/Tables */
+.admin-section{background:#fff;border-top:4px solid var(--navy);padding:60px 25px;display:none}
+.admin-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.admin-tab-btn{background:#e2e8f0;border:0;padding:10px 20px;border-radius:6px;font-weight:bold;cursor:pointer;color:#334155;transition:0.2s}
+.admin-tab-btn.active{background:var(--blue);color:#fff}
+.admin-table-wrap{overflow-x:auto;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
+.admin-table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}
+.admin-table th{background:#f8fafc;padding:12px;border-bottom:2px solid #e2e8f0;color:#475569}
+.admin-table td{padding:12px;border-bottom:1px solid #f1f5f9;color:#1e293b}
+.admin-badge{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:bold}
+.admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px;margin-left:10px}
+.admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
+
+/* Modal Styling */
+.azad-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;justify-content:center;align-items:center;padding:20px}
+.azad-modal-content{background:#fff;border-radius:12px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:30px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.azad-close-btn{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#64748b}
+
+/* Toast Notifications */
+#toast-container{position:fixed;bottom:20px;right:20px;z-index:9999}
+.toast{background:#1e293b;color:#fff;padding:14px 20px;border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.2);margin-top:10px;font-size:14px;display:flex;align-items:center;gap:10px;animation:slideIn 0.3s ease-out}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+
+/* Responsive Navigation Styles */
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr;text-align:center}
+  .hero-lead{margin:0 auto 30px}
+  .hero-buttons{justify-content:center}
+  .menu-btn{display:block}
+  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1)}
+  .nav-links.active{display:flex}
+}
+</style>
+<link rel="icon" type="image/png" sizes="48x48" href="logo.png">
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+<body>
 
-    <!-- Top Alert Ticker Bar -->
-    <div class="bg-amber-500 text-slate-950 font-medium text-xs sm:text-sm py-2 px-4 text-center tracking-wide">
-        <i class="fa-solid fa-bullhorn mr-2"></i> URGENT: 15 Electrical Technicians needed in Abu Dhabi
+<header>
+  <nav class="navbar">
+    <a href="#home" class="brand-logo"><img src="logo.png" alt="Elite Workforce"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
+    <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#leaderboard" onclick="closeMenu()">Public Board</a></li>
+      <li><a href="#requirements" onclick="closeMenu()">Post Requirement</a></li>
+      <li><a href="#suppliers" onclick="closeMenu()">Suppliers</a></li>
+      <li><a href="#azad-visa" onclick="closeMenu()">Azad Workers</a></li>
+      <li><a href="#contact" class="nav-btn" onclick="closeMenu()">Contact</a></li>
+      <li><a href="javascript:void(0)" onclick="unlockAdminPanel()" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div>⚡ URGENT: 15 Electrical Technicians needed in Abu Dhabi</div>
+    <div>🔧 REQUIRED: 20 Mechanical Fitters for Dubai Project</div>
+    <div>🔥 AVAILABLE: 30 Certified Welders ready for immediate deployment</div>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div>
+      <div class="eyebrow">UAE WORKFORCE NETWORK</div>
+      <h1>Connecting Companies With <span>Skilled Workforce</span></h1>
+      <p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
+      <div class="hero-buttons">
+        <a href="#requirements" class="btn btn-primary">Post Requirement</a>
+        <a href="#suppliers" class="btn btn-outline">Join as Supplier</a>
+        <button onclick="openAzadModal()" class="btn btn-azad-hero"><i class="fa-solid fa-id-card"></i> 🇦🇪 Azad Visa Worker</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC LEADERBOARD SECTION -->
+<section class="requirement-section" id="leaderboard" style="background:#fff; padding:60px 25px;">
+  <div class="container">
+    <div class="section-title">
+      <h2>🔥 Live Job Requirements & Available Workforce</h2>
+      <p>Browse active company requirements and verified manpower listings across UAE with direct WhatsApp contact.</p>
     </div>
 
-    <!-- Sticky Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Brand Logo -->
-                <a href="#" class="flex items-center space-x-3 group">
-                    <div class="w-11 h-11 bg-brand-700 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-md group-hover:bg-brand-600 transition-colors">
-                        EWS
-                    </div>
-                    <div>
-                        <span class="text-xl font-extrabold text-brand-navy tracking-tight block">ELITE WORKFORCE</span>
-                        <span class="text-xs font-semibold text-brand-600 tracking-widest uppercase block -mt-1">Solutions Agency</span>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation Menu -->
-                <nav class="hidden lg:flex items-center space-x-5 text-sm font-semibold text-slate-600">
-                    <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
-                    <a href="#about" class="hover:text-brand-600 transition-colors">About Us</a>
-                    <a href="#board" class="hover:text-brand-600 transition-colors">Public Board</a>
-                    <a href="#requirement" class="hover:text-brand-600 transition-colors">Post Requirement</a>
-                    <a href="#suppliers" class="hover:text-brand-600 transition-colors">Suppliers</a>
-                    <a href="#azad" class="hover:text-emerald-600 transition-colors">Azad Workers</a>
-                    <a href="#careers" class="hover:text-brand-600 transition-colors">Careers</a>
-                    <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
-                </nav>
-
-                <!-- Admin Login CTA -->
-                <div class="hidden lg:flex items-center">
-                    <a href="#admin" class="bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-bold px-4 py-2.5 rounded-xl border border-amber-300 transition-all">
-                        <i class="fa-solid fa-lock mr-1.5"></i> Admin Login
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Toggle Button -->
-                <button id="mobile-menu-btn" class="lg:hidden text-slate-700 focus:outline-none p-2 rounded-lg hover:bg-slate-100">
-                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 max-h-[80vh] overflow-y-auto">
-            <a href="#home" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Home</a>
-            <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">About Us</a>
-            <a href="#board" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Public Board</a>
-            <a href="#requirement" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Post Requirement</a>
-            <a href="#suppliers" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Suppliers</a>
-            <a href="#azad" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-emerald-600 hover:bg-slate-50">Azad Workers</a>
-            <a href="#careers" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Careers & Resume</a>
-            <a href="#contact" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Contact Us</a>
-            <a href="#admin" class="mobile-link block w-full text-center bg-amber-100 text-amber-800 font-bold py-2.5 rounded-xl mt-3">Admin Login</a>
-        </div>
-    </header>
-
-    <!-- Hero Section (Matching Your Original Screenshot Layout) -->
-    <section id="home" class="relative bg-gradient-to-br from-slate-900 via-brand-navy to-slate-900 text-white pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center space-x-2 bg-brand-500/10 border border-brand-500/20 text-brand-50 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>UAE Workforce Network</span>
-                    </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                        Connecting Companies With <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200">Skilled Workforce</span>
-                    </h1>
-                    
-                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.
-                    </p>
-
-                    <!-- Original Buttons -->
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#requirement" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all">
-                            Post Requirement
-                        </a>
-                        <a href="#suppliers" class="border border-slate-700 hover:border-slate-500 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-semibold px-7 py-3.5 rounded-xl transition-all">
-                            Join as Supplier
-                        </a>
-                        <a href="#azad" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all">
-                            🇦🇪 Azad Visa Worker
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Hero Graphic -->
-                <div class="lg:col-span-5">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-500 rounded-3xl blur opacity-30"></div>
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Workforce Team" class="w-full h-[400px] object-cover">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">About Our Agency</h2>
-                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                    Building Stronger Workforces Across Industries
-                </p>
-                <div class="w-16 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <p class="text-slate-600 leading-relaxed text-base">
-                        Founded with a mission to streamline human capital management, <strong class="text-slate-900">Elite Workforce Solutions</strong> has evolved into a premier staffing and HR services agency in the UAE. We specialize in providing end-to-end recruitment, contract staffing, technical manpower, and legal compliance support.
-                    </p>
-                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
-                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                            <h3 class="font-bold text-slate-900 mb-1">Our Mission</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">To deliver vetted, reliable talent quickly while safeguarding business compliance.</p>
-                        </div>
-                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                            <h3 class="font-bold text-slate-900 mb-1">Our Vision</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">To be the global standard for workforce reliability and ethical recruitment.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Team" class="rounded-2xl shadow-lg object-cover h-64 w-full">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="HR" class="rounded-2xl shadow-lg object-cover h-64 w-full mt-8">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Public Board & Azad Workers Section -->
-    <section id="board" class="py-16 bg-slate-100 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-extrabold text-slate-900 mb-4" id="azad">Public Board & Azad Visa Workers</h2>
-            <p class="text-slate-600 text-sm max-w-2xl mx-auto mb-8">Active visa opportunities, verified supplier postings, and direct hiring requirements updated daily for UAE candidates.</p>
-            <div class="grid sm:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-lg mb-2">Electrical Technicians</h3>
-                    <p class="text-xs text-slate-500 mb-4">Location: Abu Dhabi | Visa: Provided</p>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Active</span>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-lg mb-2">Document Controllers</h3>
-                    <p class="text-xs text-slate-500 mb-4">Location: Dubai | Experience: 3+ Years</p>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Active</span>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-lg mb-2">Mechanical Supervisor</h3>
-                    <p class="text-xs text-slate-500 mb-4">Location: Sharjah | Urgent Requirement</p>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Active</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Job Application & PDF Resume Upload Section -->
-    <section id="careers" class="py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-xs font-bold uppercase tracking-widest text-brand-400">Join Our Talent Pool</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Looking For Your Next Career Opportunity?</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">Submit your details and upload your PDF Resume. Our recruitment specialists match your qualification with active UAE vacancies.</p>
-                </div>
-                <div class="lg:col-span-7">
-                    <div class="bg-slate-800 p-8 sm:p-10 rounded-3xl border border-slate-700 shadow-2xl">
-                        <h3 class="text-2xl font-bold text-white mb-6">Submit Candidate Application</h3>
-                        <form id="career-form" onsubmit="handleCareerFormSubmit(event)" class="space-y-5">
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Full Name *</label>
-                                    <input type="text" required placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Email Address *</label>
-                                    <input type="email" required placeholder="john@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500">
-                                </div>
-                            </div>
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Phone Number *</label>
-                                    <input type="tel" required placeholder="+971 50 000 0000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Applied Position *</label>
-                                    <select required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-brand-500">
-                                        <option value="">Select Target Job Field</option>
-                                        <option value="engineering">Engineering & Construction</option>
-                                        <option value="hr">HR & Administration</option>
-                                        <option value="it">Information Technology</option>
-                                        <option value="doc">Document Control & Support</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-2">Upload Resume (PDF format) *</label>
-                                <div class="border-2 border-dashed border-slate-700 rounded-xl p-6 text-center hover:border-brand-500 bg-slate-900/50 cursor-pointer relative">
-                                    <input type="file" id="resume-file" accept=".pdf" required class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" onchange="handleFileSelect(event)">
-                                    <i class="fa-solid fa-file-pdf text-3xl text-brand-400 mb-2"></i>
-                                    <p class="text-sm font-medium text-slate-200" id="file-name-label">Click or Drag & Drop PDF Resume Here</p>
-                                </div>
-                            </div>
-                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all">
-                                Submit Application <i class="fa-solid fa-paper-plane ml-2"></i>
-                            </button>
-                        </form>
-                        <div id="career-success-msg" class="hidden mt-4 p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-emerald-200 text-center text-sm font-semibold">
-                            <i class="fa-solid fa-circle-check mr-2"></i> Your application and PDF resume have been received successfully!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Google Maps Section -->
-    <section id="contact" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Get In Touch</h2>
-                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Contact Our Executive Team</p>
-                <div class="w-16 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-5 space-y-6">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900">Headquarters Address</h4>
-                            <p class="text-sm text-slate-600 mt-1">Level 12, Elite Tower, Business Bay, Dubai, UAE</p>
-                        </div>
-                    </div>
-                    <!-- Google Map -->
-                    <div class="bg-white p-2 rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden h-64">
-                        <iframe title="Map" class="w-full h-full rounded-xl border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1786541819777!2d55.2721877150094!3d25.18880398390069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682def2893d9%3A0xe349f7831f13b632!2sBusiness%20Bay%2C%20Dubai!5e0!3m2!1sen!2sae!4v1650000000000" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-7">
-                    <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-lg" id="requirement">
-                        <h3 class="text-2xl font-bold text-slate-900 mb-6">Post Requirement / Send Query</h3>
-                        <form id="contact-form" onsubmit="handleContactFormSubmit(event)" class="space-y-5">
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Your Name *</label>
-                                    <input type="text" required placeholder="Full Name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Company Name</label>
-                                    <input type="text" placeholder="Company Ltd." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
-                                </div>
-                            </div>
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Email Address *</label>
-                                    <input type="email" required placeholder="name@company.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Phone Number *</label>
-                                    <input type="tel" required placeholder="+971 50 000 0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-2">Project Details / Message *</label>
-                                <textarea rows="4" required placeholder="Describe your manpower requirements..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-4 rounded-xl shadow-md transition-all">
-                                Send Requirement <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </button>
-                        </form>
-                        <div id="contact-success-msg" class="hidden mt-4 p-4 bg-emerald-100 border border-emerald-300 rounded-xl text-emerald-800 text-center text-sm font-semibold">
-                            <i class="fa-solid fa-circle-check mr-2"></i> Requirement posted successfully!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="suppliers" class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 text-center text-xs">
-        <p>&copy; 2026 Elite Workforce Solutions (UAE Workforce Network). All rights reserved.</p>
-    </footer>
-
-    <!-- Floating Buttons -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
-        <a href="tel:+971509876543" class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-2xl hover:bg-brand-700 transition-all"><i class="fa-solid fa-phone text-lg"></i></a>
-        <a href="https://wa.me/971509876543" target="_blank" class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl hover:bg-emerald-600 transition-all animate-bounce"><i class="fa-brands fa-whatsapp text-3xl"></i></a>
+    <div class="admin-tabs" style="justify-content: center; margin-bottom: 25px;">
+      <button class="admin-tab-btn active" onclick="switchPublicTab('companies', this)"><i class="fa-solid fa-briefcase"></i> Active Requirements</button>
+      <button class="admin-tab-btn" onclick="switchPublicTab('azad_workers', this)"><i class="fa-solid fa-users"></i> Available Workers</button>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
-        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    <div class="admin-table-wrap" id="public-table-container">
+      <p style="padding:20px;text-align:center;">Loading live opportunities...</p>
+    </div>
+  </div>
+</section>
 
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            const label = document.getElementById('file-name-label');
-            if (file) {
-                if (file.type !== "application/pdf") {
-                    label.innerText = "Error: Please upload a valid .PDF file!";
-                    event.target.value = "";
-                    return;
-                }
-                label.innerText = `Selected: ${file.name}`;
-                label.classList.add('text-emerald-400');
-            }
+<!-- REQUIREMENTS SECTION -->
+<section class="requirement-section" id="requirements">
+  <div class="container">
+    <div class="section-title">
+      <h2>Post Company Requirement</h2>
+      <p>Submit your manpower requirements directly to our network.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="companyForm" onsubmit="submitCompanyForm(event)">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" id="comp_name" required placeholder="e.g. Al Habtoor Contracting">
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" id="comp_person" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="comp_email" required placeholder="name@company.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number (WhatsApp)</label>
+          <input type="tel" id="comp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 123 4567">
+        </div>
+        <div class="form-group">
+          <label>Location / Emirate</label>
+          <input type="text" id="comp_location" placeholder="e.g. Dubai, Abu Dhabi">
+        </div>
+        <div class="form-group">
+          <label>Requirement Details</label>
+          <textarea id="comp_details" required placeholder="Specify needed roles, number of workers, duration, etc."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="comp_btn">Submit Requirement</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLIERS SECTION -->
+<section class="requirement-section" id="suppliers" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Join as Manpower Supplier</h2>
+      <p>Register your supply company to get direct client leads.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="supplierForm" onsubmit="submitSupplierForm(event)">
+        <div class="form-group">
+          <label>Supplier / Company Name</label>
+          <input type="text" id="supp_name" required placeholder="e.g. Gulf Manpower Services">
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" id="supp_person" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="supp_email" required placeholder="supplier@domain.com">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" id="supp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone Number" placeholder="+971 50 987 6543">
+        </div>
+        <div class="form-group">
+          <label>Available Manpower Categories</label>
+          <input type="text" id="supp_types" placeholder="e.g. Electricians, Welders, Fitters, HVAC">
+        </div>
+        <div class="form-group">
+          <label>Total Workers Available</label>
+          <input type="number" id="supp_workers" min="1" placeholder="e.g. 25">
+        </div>
+        <button type="submit" class="submit-btn" id="supp_btn">Register as Supplier</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- AZAD VISA WORKER SECTION -->
+<section class="requirement-section" id="azad-visa">
+  <div class="container">
+    <div class="section-title">
+      <h2>🇦🇪 Azad / Freelance Visa Worker Registration</h2>
+      <p>Register yourself to get immediate short-term & long-term site work across UAE.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="azadWorkerForm" onsubmit="submitAzadWorkerForm(event)">
+        <div class="form-group">
+          <label>Full Name (Poora Naam)</label>
+          <input type="text" id="azad_name" required placeholder="e.g. Mohd Imran">
+        </div>
+        <div class="form-group">
+          <label>UAE Phone / WhatsApp Number</label>
+          <input type="tel" id="azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 xxx xxxx">
+        </div>
+        <div class="form-group">
+          <label>Emirates ID Number</label>
+          <input type="text" id="azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
+        </div>
+        <div class="form-group">
+          <label>Trade / Skill Specialization</label>
+          <select id="azad_trade" required>
+            <option value="">Select Your Work Skill</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Mason">Mason</option>
+            <option value="Welder">Welder</option>
+            <option value="Fitter / Mechanical">Fitter / Mechanical</option>
+            <option value="HVAC Technician">HVAC Technician</option>
+            <option value="Scaffolder">Scaffolder</option>
+            <option value="Driver">Driver</option>
+            <option value="Helper / General Labour">Helper / General Labour</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Emirate / Location</label>
+          <select id="azad_location" required>
+            <option value="Dubai">Dubai</option>
+            <option value="Abu Dhabi">Abu Dhabi</option>
+            <option value="Sharjah">Sharjah</option>
+            <option value="Ajman">Ajman</option>
+            <option value="Ras Al Khaimah">Ras Al Khaimah</option>
+            <option value="Umm Al Quwain">Umm Al Quwain</option>
+            <option value="Fujairah">Fujairah</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Expected Daily / Hourly Rate (AED)</label>
+          <input type="number" id="azad_rate" placeholder="e.g. 100 AED/Day or 12 AED/Hour">
+        </div>
+        <button type="submit" class="submit-btn" id="azad_btn" style="background:var(--emerald2);">Register as Freelance Worker</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="requirement-section" id="contact" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Get In Touch</h2>
+      <p>Send us a message for general inquiries or support.</p>
+    </div>
+    <div class="requirement-card">
+      <form id="contactForm" onsubmit="submitContactForm(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="cont_name" required placeholder="Your Full Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cont_email" required placeholder="yourname@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cont_msg" required placeholder="Write your message here..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="cont_btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SECURED ADMIN DASHBOARD SECTION -->
+<section class="admin-section" id="admin">
+  <div class="container">
+    <div class="section-title">
+      <h2>Live Database Entries (Admin Panel)</h2>
+      <p>View all live submissions from the forms above in real-time.</p>
+    </div>
+
+    <button class="admin-refresh" onclick="loadActiveTabData()"><i class="fa-solid fa-rotate-right"></i> Refresh Table</button>
+    <button class="admin-logout" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchTab('companies', this)"><i class="fa-solid fa-building"></i> Companies Data</button>
+      <button class="admin-tab-btn" onclick="switchTab('suppliers', this)"><i class="fa-solid fa-truck-field"></i> Suppliers Data</button>
+      <button class="admin-tab-btn" onclick="switchTab('azad_workers', this)"><i class="fa-solid fa-user-gear"></i> Azad Workers</button>
+      <button class="admin-tab-btn" onclick="switchTab('contact_messages', this)"><i class="fa-solid fa-envelope"></i> Contact Messages</button>
+    </div>
+
+    <div class="admin-table-wrap" id="admin-table-container">
+      <p style="padding:20px;text-align:center;">Loading database records...</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="copyright" style="text-align:center; padding:20px; font-size:14px; color:var(--muted);">
+    &copy; 2026 Elite Workforce Solutions. All rights reserved.
+  </div>
+</footer>
+
+<!-- AZAD VISA POPUP MODAL -->
+<div class="azad-modal" id="azadModal">
+  <div class="azad-modal-content">
+    <span class="azad-close-btn" onclick="closeAzadModal()">&times;</span>
+    <h3 style="color:var(--blue);margin-bottom:10px;">🇦🇪 Quick Registration: Azad Visa Worker</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Fill details to get instant daily/hourly site work leads.</p>
+    
+    <form onsubmit="submitModalAzadWorker(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="m_azad_name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp / Phone</label>
+        <input type="tel" id="m_azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone" placeholder="+971 50 xxx xxxx">
+      </div>
+      <div class="form-group">
+        <label>Emirates ID</label>
+        <input type="text" id="m_azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
+      </div>
+      <div class="form-group">
+        <label>Trade / Skill</label>
+        <select id="m_azad_trade" required>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Mason">Mason</option>
+          <option value="Welder">Welder</option>
+          <option value="Fitter / Mechanical">Fitter / Mechanical</option>
+          <option value="HVAC Technician">HVAC Technician</option>
+          <option value="Helper / General Labour">Helper / General Labour</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Emirate</label>
+        <select id="m_azad_location" required>
+          <option value="Dubai">Dubai</option>
+          <option value="Abu Dhabi">Abu Dhabi</option>
+          <option value="Sharjah">Sharjah</option>
+          <option value="Ajman">Ajman</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn" id="m_azad_btn" style="background:var(--emerald2);">Submit Azad Worker Details</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<!-- SUPABASE LOGIC & EVENT HANDLERS -->
+<script>
+  const SUPABASE_URL = 'https://maakqzczkhkoimlmnvws.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let currentTab = 'companies';
+  let currentPublicTab = 'companies';
+
+  // Navigation Logic
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+  function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
+
+  // Modal Functions
+  function openAzadModal() { document.getElementById('azadModal').style.display = 'flex'; }
+  function closeAzadModal() { document.getElementById('azadModal').style.display = 'none'; }
+
+  // Custom Toast Notification System
+  function showToast(msg, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}" style="color:${type === 'success' ? '#10b981' : '#ef4444'}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+
+  // Secure Admin Access Gate using Supabase Auth
+  async function unlockAdminPanel() {
+    const session = await _supabase.auth.getSession();
+    if (session.data.session) {
+      document.getElementById('admin').style.display = 'block';
+      window.location.hash = "#admin";
+      loadActiveTabData();
+      return;
+    }
+
+    const email = prompt("Enter Admin Email:");
+    if (!email) return;
+
+    const password = prompt("Enter Admin Password:");
+    if (!password) return;
+
+    showToast("Authenticating...");
+
+    const { data, error } = await _supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      showToast("Login Failed: " + error.message, "error");
+    } else {
+      showToast("Admin authenticated successfully!");
+      document.getElementById('admin').style.display = 'block';
+      window.location.hash = "#admin";
+      loadActiveTabData();
+    }
+  }
+
+  // Admin Logout Function
+  async function logoutAdmin() {
+    await _supabase.auth.signOut();
+    document.getElementById('admin').style.display = 'none';
+    showToast("Logged out successfully.");
+  }
+
+  // PUBLIC LEADERBOARD FUNCTIONS (With Masked Emirates ID)
+  function switchPublicTab(tab, btn) {
+    currentPublicTab = tab;
+    document.querySelectorAll('#leaderboard .admin-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadPublicLeaderboard();
+  }
+
+  async function loadPublicLeaderboard() {
+    const container = document.getElementById('public-table-container');
+    
+    if (currentPublicTab === 'companies') {
+      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading requirements...</p>';
+      const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
+
+      if (error || !data || data.length === 0) {
+        container.innerHTML = '<p style="padding:20px;text-align:center;">No active requirements posted yet.</p>';
+        return;
+      }
+
+      let html = `<table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Requirement Details</th>
+            <th>Contact</th>
+          </tr>
+        </thead><tbody>`;
+      data.forEach(i => {
+        const cleanPhone = i.phone ? i.phone.replace(/[^0-9]/g, '') : '';
+        html += `<tr>
+          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
+          <td><b>${i.company_name}</b></td>
+          <td>${i.location || 'UAE'}</td>
+          <td>${i.requirement_details}</td>
+          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></td>
+        </tr>`;
+      });
+      container.innerHTML = html + '</tbody></table>';
+
+    } else if (currentPublicTab === 'azad_workers') {
+      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading available workers...</p>';
+      const { data, error } = await _supabase
+        .from('azad_workers')
+        .select('created_at, full_name, trade, location, expected_daily_rate, phone_number, emirates_id')
+        .order('created_at', { ascending: false });
+
+      if (error || !data || data.length === 0) {
+        container.innerHTML = '<p style="padding:20px;text-align:center;">No workers registered yet.</p>';
+        return;
+      }
+
+      let html = `<table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Skill / Trade</th>
+            <th>Emirates ID</th>
+            <th>Location</th>
+            <th>Rate</th>
+            <th>Connect</th>
+          </tr>
+        </thead><tbody>`;
+      data.forEach(i => {
+        const cleanPhone = i.phone_number ? i.phone_number.replace(/[^0-9]/g, '') : '';
+        
+        // MASKING LOGIC: Shows last 3 digits only (e.g., ***-****-****123)
+        let maskedEID = 'N/A';
+        if (i.emirates_id) {
+          const cleanEID = i.emirates_id.trim();
+          const lastThree = cleanEID.slice(-3);
+          maskedEID = `***-****-****${lastThree}`;
         }
-        function handleCareerFormSubmit(e) {
-            e.preventDefault();
-            document.getElementById('career-success-msg').classList.remove('hidden');
-            e.target.reset();
-        }
-        function handleContactFormSubmit(e) {
-            e.preventDefault();
-            document.getElementById('contact-success-msg').classList.remove('hidden');
-            e.target.reset();
-        }
-    </script>
+
+        html += `<tr>
+          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
+          <td><b>${i.full_name}</b></td>
+          <td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td>
+          <td><span style="letter-spacing:1px;font-family:monospace;color:#64748b;font-weight:bold;">${maskedEID}</span></td>
+          <td>${i.location}</td>
+          <td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'Negotiable'}</b></td>
+          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hire Worker</a></td>
+        </tr>`;
+      });
+      container.innerHTML = html + '</tbody></table>';
+    }
+  }
+
+  // Company Form Submit
+  async function submitCompanyForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('comp_btn');
+    btn.disabled = true; btn.innerText = 'Submitting...';
+
+    const payload = {
+      company_name: document.getElementById('comp_name').value.trim(),
+      contact_person: document.getElementById('comp_person').value.trim(),
+      email: document.getElementById('comp_email').value.trim(),
+      phone: document.getElementById('comp_phone').value.trim(),
+      location: document.getElementById('comp_location').value.trim(),
+      requirement_details: document.getElementById('comp_details').value.trim()
+    };
+
+    const { error } = await _supabase.from('companies').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Requirement posted successfully!');
+      document.getElementById('companyForm').reset();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
+    }
+    btn.disabled = false; btn.innerText = 'Submit Requirement';
+  }
+
+  // Supplier Form Submit
+  async function submitSupplierForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('supp_btn');
+    btn.disabled = true; btn.innerText = 'Registering...';
+
+    const rawWorkers = document.getElementById('supp_workers').value;
+    const payload = {
+      company_name: document.getElementById('supp_name').value.trim(),
+      contact_person: document.getElementById('supp_person').value.trim(),
+      email: document.getElementById('supp_email').value.trim(),
+      phone: document.getElementById('supp_phone').value.trim(),
+      manpower_types: document.getElementById('supp_types').value.trim(),
+      workers_available: rawWorkers ? parseInt(rawWorkers, 10) : 0
+    };
+
+    const { error } = await _supabase.from('suppliers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Supplier registered successfully!');
+      document.getElementById('supplierForm').reset();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
+    }
+    btn.disabled = false; btn.innerText = 'Register as Supplier';
+  }
+
+  // Azad Worker Form Submit
+  async function submitAzadWorkerForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('azad_btn');
+    btn.disabled = true; btn.innerText = 'Submitting...';
+
+    const rawRate = document.getElementById('azad_rate').value;
+    const payload = {
+      full_name: document.getElementById('azad_name').value.trim(),
+      phone_number: document.getElementById('azad_phone').value.trim(),
+      emirates_id: document.getElementById('azad_eid').value.trim(),
+      trade: document.getElementById('azad_trade').value,
+      location: document.getElementById('azad_location').value,
+      expected_daily_rate: rawRate ? parseFloat(rawRate) : 0
+    };
+
+    const { error } = await _supabase.from('azad_workers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Azad Worker profile registered!');
+      document.getElementById('azadWorkerForm').reset();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
+    }
+    btn.disabled = false; btn.innerText = 'Register as Freelance Worker';
+  }
+
+  // Modal Azad Worker Form Submit
+  async function submitModalAzadWorker(e) {
+    e.preventDefault();
+    const btn = document.getElementById('m_azad_btn');
+    btn.disabled = true; btn.innerText = 'Registering...';
+
+    const payload = {
+      full_name: document.getElementById('m_azad_name').value.trim(),
+      phone_number: document.getElementById('m_azad_phone').value.trim(),
+      emirates_id: document.getElementById('m_azad_eid').value.trim(),
+      trade: document.getElementById('m_azad_trade').value,
+      location: document.getElementById('m_azad_location').value,
+      expected_daily_rate: 0
+    };
+
+    const { error } = await _supabase.from('azad_workers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Registered successfully!');
+      closeAzadModal();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
+    }
+    btn.disabled = false; btn.innerText = 'Submit Azad Worker Details';
+  }
+
+  // Contact Form Submit
+  async function submitContactForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cont_btn');
+    btn.disabled = true; btn.innerText = 'Sending...';
+
+    const payload = {
+      name: document.getElementById('cont_name').value.trim(),
+      email: document.getElementById('cont_email').value.trim(),
+      message: document.getElementById('cont_msg').value.trim()
+    };
+
+    const { error } = await _supabase.from('contact_messages').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Message sent successfully!');
+      document.getElementById('contactForm').reset();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
+    }
+    btn.disabled = false; btn.innerText = 'Send Message';
+  }
+
+  // ADMIN PANEL CONTROLLERS
+  function switchTab(tableName, btn) {
+    currentTab = tableName;
+    document.querySelectorAll('.admin-section .admin-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadActiveTabData();
+  }
+
+  function loadActiveTabData() {
+    if (currentTab === 'companies') fetchCompanies();
+    else if (currentTab === 'suppliers') fetchSuppliers();
+    else if (currentTab === 'azad_workers') fetchAzadWorkers();
+    else if (currentTab === 'contact_messages') fetchMessages();
+  }
+
+  async function fetchCompanies() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading companies...</p>';
+    const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No company requirements posted yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Company</th><th>Person</th><th>Email / Phone</th><th>Location</th><th>Details</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.location||'N/A'}</td><td>${i.requirement_details}</td><td><button class="admin-del-btn" onclick="deleteRecord('companies', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchSuppliers() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading suppliers...</p>';
+    const { data, error } = await _supabase.from('suppliers').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No suppliers registered yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Supplier</th><th>Person</th><th>Email / Phone</th><th>Categories</th><th>Workers</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.manpower_types||'N/A'}</td><td><b>${i.workers_available}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('suppliers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchAzadWorkers() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading Azad Visa Workers...</p>';
+    const { data, error } = await _supabase.from('azad_workers').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No Azad workers registered yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Emirates ID</th><th>Trade</th><th>Location</th><th>Expected Rate</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.full_name}</b></td><td>${i.phone_number}</td><td>${i.emirates_id}</td><td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td><td>${i.location}</td><td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'N/A'}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('azad_workers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function fetchMessages() {
+    const container = document.getElementById('admin-table-container');
+    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading messages...</p>';
+    const { data, error } = await _supabase.from('contact_messages').select('*').order('created_at', { ascending: false });
+
+    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No messages received yet.</p>'; return; }
+
+    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Action</th></tr></thead><tbody>`;
+    data.forEach(i => {
+      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.name}</b></td><td>${i.email}</td><td>${i.message}</td><td><button class="admin-del-btn" onclick="deleteRecord('contact_messages', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+    container.innerHTML = html + '</tbody></table>';
+  }
+
+  async function deleteRecord(table, id) {
+    if (confirm('Delete this entry permanently?')) {
+      const { error } = await _supabase.from(table).delete().eq('id', id);
+      if (error) showToast('Error: ' + error.message, 'error');
+      else { 
+        showToast('Record deleted.'); 
+        loadActiveTabData(); 
+        loadPublicLeaderboard(); 
+      }
+    }
+  }
+
+  // Load Leaderboard & Check Active Session on Startup
+  window.addEventListener('DOMContentLoaded', async () => {
+    loadPublicLeaderboard();
+    const session = await _supabase.auth.getSession();
+    if (session.data.session) {
+      document.getElementById('admin').style.display = 'block';
+    }
+  });
+</script>
+
 </body>
 </html>
