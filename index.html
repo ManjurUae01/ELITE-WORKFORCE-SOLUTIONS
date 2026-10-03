@@ -59,6 +59,7 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
 .admin-table td{padding:12px;border-bottom:1px solid #f1f5f9;color:#1e293b}
 .admin-badge{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:bold}
 .admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
+.admin-logout{background:#ef4444;color:#fff;border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px;margin-left:10px}
 .admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
 
 /* Modal Styling */
@@ -316,6 +317,7 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
     </div>
 
     <button class="admin-refresh" onclick="loadActiveTabData()"><i class="fa-solid fa-rotate-right"></i> Refresh Table</button>
+    <button class="admin-logout" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
 
     <div class="admin-tabs">
       <button class="admin-tab-btn active" onclick="switchTab('companies', this)"><i class="fa-solid fa-building"></i> Companies Data</button>
@@ -331,7 +333,7 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
 </section>
 
 <footer>
-  <div class="copyright">
+  <div class="copyright" style="text-align:center; padding:20px; font-size:14px; color:var(--muted);">
     &copy; 2026 Elite Workforce Solutions. All rights reserved.
   </div>
 </footer>
@@ -411,20 +413,47 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
     setTimeout(() => toast.remove(), 4000);
   }
 
-  // Admin Access Gate
-  function unlockAdminPanel() {
-    const pwd = prompt("Enter Admin Access Password:");
-    if (pwd === "admin123") {
+  // Secure Admin Access Gate using Supabase Auth
+  async function unlockAdminPanel() {
+    const session = await _supabase.auth.getSession();
+    if (session.data.session) {
       document.getElementById('admin').style.display = 'block';
-      showToast("Admin access granted.");
       window.location.hash = "#admin";
       loadActiveTabData();
-    } else if (pwd !== null) {
-      showToast("Incorrect Admin Password!", "error");
+      return;
+    }
+
+    const email = prompt("Enter Admin Email:");
+    if (!email) return;
+
+    const password = prompt("Enter Admin Password:");
+    if (!password) return;
+
+    showToast("Authenticating...");
+
+    const { data, error } = await _supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      showToast("Login Failed: " + error.message, "error");
+    } else {
+      showToast("Admin authenticated successfully!");
+      document.getElementById('admin').style.display = 'block';
+      window.location.hash = "#admin";
+      loadActiveTabData();
     }
   }
 
-  // PUBLIC LEADERBOARD FUNCTIONS
+  // Admin Logout Function
+  async function logoutAdmin() {
+    await _supabase.auth.signOut();
+    document.getElementById('admin').style.display = 'none';
+    showToast("Logged out successfully.");
+  }
+
+  // PUBLIC LEADERBOARD FUNCTIONS (With Masked Emirates ID)
   function switchPublicTab(tab, btn) {
     currentPublicTab = tab;
     document.querySelectorAll('#leaderboard .admin-tab-btn').forEach(b => b.classList.remove('active'));
@@ -468,7 +497,10 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
 
     } else if (currentPublicTab === 'azad_workers') {
       container.innerHTML = '<p style="padding:20px;text-align:center;">Loading available workers...</p>';
-      const { data, error } = await _supabase.from('azad_workers').select('created_at, full_name, trade, location, expected_daily_rate, phone_number').order('created_at', { ascending: false });
+      const { data, error } = await _supabase
+        .from('azad_workers')
+        .select('created_at, full_name, trade, location, expected_daily_rate, phone_number, emirates_id')
+        .order('created_at', { ascending: false });
 
       if (error || !data || data.length === 0) {
         container.innerHTML = '<p style="padding:20px;text-align:center;">No workers registered yet.</p>';
@@ -481,6 +513,7 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
             <th>Date</th>
             <th>Name</th>
             <th>Skill / Trade</th>
+            <th>Emirates ID</th>
             <th>Location</th>
             <th>Rate</th>
             <th>Connect</th>
@@ -488,10 +521,20 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
         </thead><tbody>`;
       data.forEach(i => {
         const cleanPhone = i.phone_number ? i.phone_number.replace(/[^0-9]/g, '') : '';
+        
+        // MASKING LOGIC: Shows last 3 digits only (e.g., ***-****-****123)
+        let maskedEID = 'N/A';
+        if (i.emirates_id) {
+          const cleanEID = i.emirates_id.trim();
+          const lastThree = cleanEID.slice(-3);
+          maskedEID = `***-****-****${lastThree}`;
+        }
+
         html += `<tr>
           <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
           <td><b>${i.full_name}</b></td>
           <td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td>
+          <td><span style="letter-spacing:1px;font-family:monospace;color:#64748b;font-weight:bold;">${maskedEID}</span></td>
           <td>${i.location}</td>
           <td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'Negotiable'}</b></td>
           <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hire Worker</a></td>
@@ -715,9 +758,13 @@ input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;bord
     }
   }
 
-  // Load Leaderboard on Startup
-  window.addEventListener('DOMContentLoaded', () => {
+  // Load Leaderboard & Check Active Session on Startup
+  window.addEventListener('DOMContentLoaded', async () => {
     loadPublicLeaderboard();
+    const session = await _supabase.auth.getSession();
+    if (session.data.session) {
+      document.getElementById('admin').style.display = 'block';
+    }
   });
 </script>
 
