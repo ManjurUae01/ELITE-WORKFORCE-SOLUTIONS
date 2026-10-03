@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,7 +130,7 @@ textarea{min-height:115px;resize:vertical}
 <header>
   <nav class="navbar">
     <a href="#home" class="brand-logo">
-      <div style="width:40px;height:40px;background:#0b3d91;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;">EWS</div>
+      <img src="logo.png" alt="Elite Workforce">
       <span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span>
     </a>
     <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
@@ -173,8 +173,27 @@ textarea{min-height:115px;resize:vertical}
   </div>
 </section>
 
+<!-- PUBLIC LEADERBOARD SECTION (PLACED RIGHT BELOW HERO) -->
+<section class="requirement-section" id="leaderboard" style="background:#fff; padding:80px 25px;">
+  <div class="container">
+    <div class="section-title">
+      <h2>🔥 Live Job Requirements & Available Workforce</h2>
+      <p>Browse active company requirements and verified manpower listings across UAE with direct WhatsApp contact.</p>
+    </div>
+
+    <div class="admin-tabs" style="justify-content: center; margin-bottom: 25px;">
+      <button class="admin-tab-btn active" onclick="switchPublicTab('companies', this)"><i class="fa-solid fa-briefcase"></i> Active Requirements</button>
+      <button class="admin-tab-btn" onclick="switchPublicTab('azad_workers', this)"><i class="fa-solid fa-users"></i> Available Workers</button>
+    </div>
+
+    <div class="admin-table-wrap" id="public-table-container">
+      <p style="padding:20px;text-align:center;">Loading live opportunities...</p>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT US SECTION -->
-<section id="about" class="py-20 bg-white" style="background:#fff; padding:80px 25px;">
+<section id="about" class="py-20 bg-white" style="background:#f8fafc; padding:80px 25px;">
     <div class="container">
         <div class="section-title">
             <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2" style="font-size:14px; color:var(--blue2);">About Our Agency</h2>
@@ -193,12 +212,12 @@ textarea{min-height:115px;resize:vertical}
 
                 <!-- Mission & Vision Cards -->
                 <div class="grid sm:grid-cols-2 gap-4 pt-4" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200" style="background:#f8fafc; padding:20px; border-radius:10px; border:1px solid #e2e8f0;">
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200" style="background:#fff; padding:20px; border-radius:10px; border:1px solid #e2e8f0;">
                         <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-3 text-lg font-bold" style="font-size:18px; color:var(--blue); margin-bottom:8px;"><i class="fa-solid fa-bullseye"></i></div>
                         <h3 style="font-weight:bold; color:var(--navy); margin-bottom:5px;">Our Mission</h3>
                         <p style="font-size:12px; color:var(--muted); line-height:1.5;">To deliver vetted, reliable talent quickly while safeguarding business compliance and fostering career advancement.</p>
                     </div>
-                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200" style="background:#f8fafc; padding:20px; border-radius:10px; border:1px solid #e2e8f0;">
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200" style="background:#fff; padding:20px; border-radius:10px; border:1px solid #e2e8f0;">
                         <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 text-lg font-bold" style="font-size:18px; color:#4f46e5; margin-bottom:8px;"><i class="fa-solid fa-eye"></i></div>
                         <h3 style="font-weight:bold; color:var(--navy); margin-bottom:5px;">Our Vision</h3>
                         <p style="font-size:12px; color:var(--muted); line-height:1.5;">To be the global standard for workforce reliability, HR transparency, and ethical recruitment practices.</p>
@@ -246,25 +265,6 @@ textarea{min-height:115px;resize:vertical}
             </div>
         </div>
     </div>
-</section>
-
-<!-- PUBLIC LEADERBOARD SECTION -->
-<section class="requirement-section" id="leaderboard" style="background:#fff; padding:80px 25px;">
-  <div class="container">
-    <div class="section-title">
-      <h2>🔥 Live Job Requirements & Available Workforce</h2>
-      <p>Browse active company requirements and verified manpower listings across UAE with direct WhatsApp contact.</p>
-    </div>
-
-    <div class="admin-tabs" style="justify-content: center; margin-bottom: 25px;">
-      <button class="admin-tab-btn active" onclick="switchPublicTab('companies', this)"><i class="fa-solid fa-briefcase"></i> Active Requirements</button>
-      <button class="admin-tab-btn" onclick="switchPublicTab('azad_workers', this)"><i class="fa-solid fa-users"></i> Available Workers</button>
-    </div>
-
-    <div class="admin-table-wrap" id="public-table-container">
-      <p style="padding:20px;text-align:center;">Loading live opportunities...</p>
-    </div>
-  </div>
 </section>
 
 <!-- REQUIREMENTS SECTION -->
@@ -411,7 +411,7 @@ textarea{min-height:115px;resize:vertical}
                 <span class="text-xs font-bold uppercase tracking-widest text-brand-400" style="color:var(--gold); font-size:12px; letter-spacing:1px;">Join Our Talent Pool</span>
                 <h2 style="font-size:36px; margin:10px 0 15px;">Looking For Your Next Career Opportunity?</h2>
                 <p style="color:#cbd5e1; font-size:15px; line-height:1.6;">Submit your details and upload your PDF Resume. Our recruitment specialists match your qualification with active vacancies across top multinational companies.</p>
-                <div style="margin-top:20px; space-y:15px;">
+                <div style="margin-top:20px;">
                     <div style="display:flex; gap:10px; margin-bottom:10px;"><i class="fa-solid fa-circle-check" style="color:var(--emerald); margin-top:4px;"></i> <span>Direct Client Interviews with decision makers.</span></div>
                     <div style="display:flex; gap:10px;"><i class="fa-solid fa-circle-check" style="color:var(--emerald); margin-top:4px;"></i> <span>Zero Hidden Charges & ethical recruitment standards.</span></div>
                 </div>
