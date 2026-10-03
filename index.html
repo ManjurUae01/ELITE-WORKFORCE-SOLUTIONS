@@ -18,33 +18,40 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--emerald:#10b981;--emerald2:#059669;--text:#17233a;--muted:#64748b;--light:#f6f8fb;--white:#fff}
+:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--emerald:#10b981;--emerald2:#059669;--text:#17233a;--muted:#64748b;--light:#f8fafc;--white:#fff}
 body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--light);line-height:1.6;padding-bottom:50px}
 a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
 .container{max-width:1200px;margin:auto}section{padding:80px 25px}
 .section-title{text-align:center;margin-bottom:45px}.section-title h2{font-size:38px;color:var(--blue);margin-bottom:10px}.section-title p{color:var(--muted);max-width:720px;margin:auto}
-header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
+
+/* Header & Mobile Navbar */
+header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.98);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
 .navbar{max-width:1200px;margin:auto;padding:14px 25px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:21px;font-weight:900;color:var(--blue);letter-spacing:.4px}.logo span{color:var(--gold2)}
-.nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700}.nav-links a:hover{color:var(--blue)}
-.nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px}.menu-btn{display:none;font-size:28px;cursor:pointer;color:var(--blue)}
+.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
+.nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700;transition:color 0.2s}.nav-links a:hover{color:var(--blue2)}
+.nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px;transition:0.3s}.nav-btn:hover{background:var(--blue2)}
+.menu-btn{display:none;font-size:24px;cursor:pointer;color:var(--blue)}
+
+/* Ticker */
 .ticker-wrap{width:100%;background:var(--gold2);color:#000;overflow:hidden;padding:10px 0;font-weight:bold;font-size:14px;margin-top:68px}.ticker{display:flex;gap:50px;white-space:nowrap;animation:ticker 25s linear infinite}@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}.ticker-wrap:hover .ticker{animation-play-state:paused}
+
+/* Hero Section */
 .hero{min-height:88vh;padding:100px 25px 80px;background:linear-gradient(135deg,var(--navy),var(--blue) 55%,var(--blue2));color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
 .hero-container{max-width:1200px;width:100%;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
 .eyebrow{display:inline-block;color:var(--gold);font-weight:800;letter-spacing:1.4px;font-size:13px;margin-bottom:18px}.hero h1{font-size:56px;line-height:1.08;margin-bottom:22px}.hero h1 span{color:var(--gold)}.hero-lead{font-size:18px;color:#e2eaf5;max-width:650px;margin-bottom:30px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}
 .btn-azad-hero{background:var(--emerald);color:#fff}.btn-azad-hero:hover{background:var(--emerald2);transform:translateY(-2px)}
 
-.requirement-section{background:#f1f5f9}.requirement-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0}.requirement-card h3{color:var(--blue);font-size:24px;margin-bottom:8px}.requirement-card>p{color:var(--muted);font-size:14px;margin-bottom:22px}
-form{background:var(--light);padding:30px;border-radius:15px}.requirement-card form{padding:0;background:#fff}.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
-input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff}input:focus,textarea:focus,select:focus{border-color:var(--blue)}textarea{min-height:125px;resize:vertical}.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800}.form-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
-footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width:1200px;margin:32px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);text-align:center;color:#8492a8;font-size:12px}
-.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
+/* Forms & Tables Section */
+.requirement-section{background:#f1f5f9}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0;max-width:700px;margin:auto}
+.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
+input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff;transition:border-color 0.2s}input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,61,145,0.1)}textarea{min-height:125px;resize:vertical}
+.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800;transition:background 0.2s}.submit-btn:hover{background:var(--blue2)}
 
-/* Admin Panel Additional Styling */
-.admin-section{background:#fff;border-top:4px solid var(--navy);padding:60px 25px}
+/* Public & Admin Tabs/Tables */
+.admin-section{background:#fff;border-top:4px solid var(--navy);padding:60px 25px;display:none}
 .admin-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.admin-tab-btn{background:#e2e8f0;border:0;padding:10px 20px;border-radius:6px;font-weight:bold;cursor:pointer;color:#334155}
+.admin-tab-btn{background:#e2e8f0;border:0;padding:10px 20px;border-radius:6px;font-weight:bold;cursor:pointer;color:#334155;transition:0.2s}
 .admin-tab-btn.active{background:var(--blue);color:#fff}
 .admin-table-wrap{overflow-x:auto;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
 .admin-table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}
@@ -54,46 +61,90 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
 .admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
 .admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
 
-/* Modal Styling for Azad Visa Popup */
+/* Modal Styling */
 .azad-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;justify-content:center;align-items:center;padding:20px}
 .azad-modal-content{background:#fff;border-radius:12px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:30px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .azad-close-btn{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#64748b}
-.azad-close-btn:hover{color:#000}
+
+/* Toast Notifications */
+#toast-container{position:fixed;bottom:20px;right:20px;z-index:9999}
+.toast{background:#1e293b;color:#fff;padding:14px 20px;border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.2);margin-top:10px;font-size:14px;display:flex;align-items:center;gap:10px;animation:slideIn 0.3s ease-out}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+
+/* Responsive Navigation Styles */
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr;text-align:center}
+  .hero-lead{margin:0 auto 30px}
+  .hero-buttons{justify-content:center}
+  .menu-btn{display:block}
+  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1)}
+  .nav-links.active{display:flex}
+}
 </style>
 <link rel="icon" type="image/png" sizes="48x48" href="logo.png">
 </head>
 <body>
 
-<header><nav class="navbar">
-<a href="#home" class="brand-logo"><img src="logo.png" alt="Elite Workforce"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
-<ul class="nav-links">
-<li><a href="#home">Home</a></li>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#suppliers">Suppliers</a></li>
-<li><a href="#azad-visa">Azad Workers</a></li>
-<li><a href="#contact" class="nav-btn">Contact</a></li>
-<li><a href="#admin" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin</a></li>
-</ul></nav></header>
+<header>
+  <nav class="navbar">
+    <a href="#home" class="brand-logo"><img src="logo.png" alt="Elite Workforce"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
+    <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#leaderboard" onclick="closeMenu()">Public Board</a></li>
+      <li><a href="#requirements" onclick="closeMenu()">Post Requirement</a></li>
+      <li><a href="#suppliers" onclick="closeMenu()">Suppliers</a></li>
+      <li><a href="#azad-visa" onclick="closeMenu()">Azad Workers</a></li>
+      <li><a href="#contact" class="nav-btn" onclick="closeMenu()">Contact</a></li>
+      <li><a href="javascript:void(0)" onclick="unlockAdminPanel()" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin Login</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div class="ticker-wrap"><div class="ticker">
-<div>⚡ URGENT: 15 Electrical Technicians needed in Abu Dhabi</div>
-<div>🔧 REQUIRED: 20 Mechanical Fitters for Dubai Project</div>
-<div>🔥 AVAILABLE: 30 Certified Welders ready for immediate deployment</div>
-</div></div>
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div>⚡ URGENT: 15 Electrical Technicians needed in Abu Dhabi</div>
+    <div>🔧 REQUIRED: 20 Mechanical Fitters for Dubai Project</div>
+    <div>🔥 AVAILABLE: 30 Certified Welders ready for immediate deployment</div>
+  </div>
+</div>
 
 <!-- HERO SECTION -->
-<section class="hero" id="home"><div class="hero-container"><div>
-<div class="eyebrow">UAE WORKFORCE NETWORK</div>
-<h1>Connecting Companies With <span>Skilled Workforce</span></h1>
-<p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
-<div class="hero-buttons">
-  <a href="#requirements" class="btn btn-primary">Post Requirement</a>
-  <a href="#suppliers" class="btn btn-outline">Join as Supplier</a>
-  <button onclick="openAzadModal()" class="btn btn-azad-hero"><i class="fa-solid fa-id-card"></i> 🇦🇪 Azad Visa Worker</button>
-</div>
-</div></div></section>
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div>
+      <div class="eyebrow">UAE WORKFORCE NETWORK</div>
+      <h1>Connecting Companies With <span>Skilled Workforce</span></h1>
+      <p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
+      <div class="hero-buttons">
+        <a href="#requirements" class="btn btn-primary">Post Requirement</a>
+        <a href="#suppliers" class="btn btn-outline">Join as Supplier</a>
+        <button onclick="openAzadModal()" class="btn btn-azad-hero"><i class="fa-solid fa-id-card"></i> 🇦🇪 Azad Visa Worker</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- REQUIREMENTS SECTION (Company Form) -->
+<!-- PUBLIC LEADERBOARD SECTION -->
+<section class="requirement-section" id="leaderboard" style="background:#fff; padding:60px 25px;">
+  <div class="container">
+    <div class="section-title">
+      <h2>🔥 Live Job Requirements & Available Workforce</h2>
+      <p>Browse active company requirements and verified manpower listings across UAE with direct WhatsApp contact.</p>
+    </div>
+
+    <div class="admin-tabs" style="justify-content: center; margin-bottom: 25px;">
+      <button class="admin-tab-btn active" onclick="switchPublicTab('companies', this)"><i class="fa-solid fa-briefcase"></i> Active Requirements</button>
+      <button class="admin-tab-btn" onclick="switchPublicTab('azad_workers', this)"><i class="fa-solid fa-users"></i> Available Workers</button>
+    </div>
+
+    <div class="admin-table-wrap" id="public-table-container">
+      <p style="padding:20px;text-align:center;">Loading live opportunities...</p>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS SECTION -->
 <section class="requirement-section" id="requirements">
   <div class="container">
     <div class="section-title">
@@ -116,7 +167,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
         </div>
         <div class="form-group">
           <label>Phone Number (WhatsApp)</label>
-          <input type="tel" id="comp_phone" required placeholder="+971 50 123 4567">
+          <input type="tel" id="comp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 123 4567">
         </div>
         <div class="form-group">
           <label>Location / Emirate</label>
@@ -132,7 +183,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </section>
 
-<!-- SUPPLIERS SECTION (Supplier Form) -->
+<!-- SUPPLIERS SECTION -->
 <section class="requirement-section" id="suppliers" style="background:#fff;">
   <div class="container">
     <div class="section-title">
@@ -155,7 +206,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
         </div>
         <div class="form-group">
           <label>Phone / WhatsApp</label>
-          <input type="tel" id="supp_phone" required placeholder="+971 50 987 6543">
+          <input type="tel" id="supp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone Number" placeholder="+971 50 987 6543">
         </div>
         <div class="form-group">
           <label>Available Manpower Categories</label>
@@ -163,7 +214,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
         </div>
         <div class="form-group">
           <label>Total Workers Available</label>
-          <input type="number" id="supp_workers" placeholder="e.g. 25">
+          <input type="number" id="supp_workers" min="1" placeholder="e.g. 25">
         </div>
         <button type="submit" class="submit-btn" id="supp_btn">Register as Supplier</button>
       </form>
@@ -171,7 +222,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </section>
 
-<!-- AZAD VISA WORKER SECTION (On-Page Form) -->
+<!-- AZAD VISA WORKER SECTION -->
 <section class="requirement-section" id="azad-visa">
   <div class="container">
     <div class="section-title">
@@ -186,11 +237,11 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
         </div>
         <div class="form-group">
           <label>UAE Phone / WhatsApp Number</label>
-          <input type="tel" id="azad_phone" required placeholder="+971 50 xxx xxxx">
+          <input type="tel" id="azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 xxx xxxx">
         </div>
         <div class="form-group">
           <label>Emirates ID Number</label>
-          <input type="text" id="azad_eid" required placeholder="784-XXXX-XXXXXXX-X">
+          <input type="text" id="azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
         </div>
         <div class="form-group">
           <label>Trade / Skill Specialization</label>
@@ -256,7 +307,7 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </section>
 
-<!-- ADMIN DASHBOARD DATA SECTION -->
+<!-- SECURED ADMIN DASHBOARD SECTION -->
 <section class="admin-section" id="admin">
   <div class="container">
     <div class="section-title">
@@ -299,11 +350,11 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       </div>
       <div class="form-group">
         <label>WhatsApp / Phone</label>
-        <input type="tel" id="m_azad_phone" required placeholder="+971 50 xxx xxxx">
+        <input type="tel" id="m_azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone" placeholder="+971 50 xxx xxxx">
       </div>
       <div class="form-group">
         <label>Emirates ID</label>
-        <input type="text" id="m_azad_eid" required placeholder="784-XXXX-XXXXXXX-X">
+        <input type="text" id="m_azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
       </div>
       <div class="form-group">
         <label>Trade / Skill</label>
@@ -331,25 +382,130 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   </div>
 </div>
 
-<!-- SUPABASE LIVE CONNECTION & ALL HANDLERS -->
+<div id="toast-container"></div>
+
+<!-- SUPABASE LOGIC & EVENT HANDLERS -->
 <script>
-  // 1. Supabase Connection Setup
   const SUPABASE_URL = 'https://maakqzczkhkoimlmnvws.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let currentTab = 'companies';
+  let currentPublicTab = 'companies';
+
+  // Navigation Logic
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+  function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
 
   // Modal Functions
   function openAzadModal() { document.getElementById('azadModal').style.display = 'flex'; }
   function closeAzadModal() { document.getElementById('azadModal').style.display = 'none'; }
 
-  // 2. Company Requirement Form Submit
+  // Custom Toast Notification System
+  function showToast(msg, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}" style="color:${type === 'success' ? '#10b981' : '#ef4444'}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+
+  // Admin Access Gate
+  function unlockAdminPanel() {
+    const pwd = prompt("Enter Admin Access Password:");
+    if (pwd === "admin123") {
+      document.getElementById('admin').style.display = 'block';
+      showToast("Admin access granted.");
+      window.location.hash = "#admin";
+      loadActiveTabData();
+    } else if (pwd !== null) {
+      showToast("Incorrect Admin Password!", "error");
+    }
+  }
+
+  // PUBLIC LEADERBOARD FUNCTIONS
+  function switchPublicTab(tab, btn) {
+    currentPublicTab = tab;
+    document.querySelectorAll('#leaderboard .admin-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadPublicLeaderboard();
+  }
+
+  async function loadPublicLeaderboard() {
+    const container = document.getElementById('public-table-container');
+    
+    if (currentPublicTab === 'companies') {
+      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading requirements...</p>';
+      const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
+
+      if (error || !data || data.length === 0) {
+        container.innerHTML = '<p style="padding:20px;text-align:center;">No active requirements posted yet.</p>';
+        return;
+      }
+
+      let html = `<table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Requirement Details</th>
+            <th>Contact</th>
+          </tr>
+        </thead><tbody>`;
+      data.forEach(i => {
+        const cleanPhone = i.phone ? i.phone.replace(/[^0-9]/g, '') : '';
+        html += `<tr>
+          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
+          <td><b>${i.company_name}</b></td>
+          <td>${i.location || 'UAE'}</td>
+          <td>${i.requirement_details}</td>
+          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></td>
+        </tr>`;
+      });
+      container.innerHTML = html + '</tbody></table>';
+
+    } else if (currentPublicTab === 'azad_workers') {
+      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading available workers...</p>';
+      const { data, error } = await _supabase.from('azad_workers').select('created_at, full_name, trade, location, expected_daily_rate, phone_number').order('created_at', { ascending: false });
+
+      if (error || !data || data.length === 0) {
+        container.innerHTML = '<p style="padding:20px;text-align:center;">No workers registered yet.</p>';
+        return;
+      }
+
+      let html = `<table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Skill / Trade</th>
+            <th>Location</th>
+            <th>Rate</th>
+            <th>Connect</th>
+          </tr>
+        </thead><tbody>`;
+      data.forEach(i => {
+        const cleanPhone = i.phone_number ? i.phone_number.replace(/[^0-9]/g, '') : '';
+        html += `<tr>
+          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
+          <td><b>${i.full_name}</b></td>
+          <td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td>
+          <td>${i.location}</td>
+          <td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'Negotiable'}</b></td>
+          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hire Worker</a></td>
+        </tr>`;
+      });
+      container.innerHTML = html + '</tbody></table>';
+    }
+  }
+
+  // Company Form Submit
   async function submitCompanyForm(e) {
     e.preventDefault();
     const btn = document.getElementById('comp_btn');
-    btn.disabled = true;
-    btn.innerText = 'Submitting...';
+    btn.disabled = true; btn.innerText = 'Submitting...';
 
     const payload = {
       company_name: document.getElementById('comp_name').value.trim(),
@@ -360,28 +516,24 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       requirement_details: document.getElementById('comp_details').value.trim()
     };
 
-    const { data, error } = await _supabase.from('companies').insert([payload]);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('Success! Your requirement has been posted.');
+    const { error } = await _supabase.from('companies').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Requirement posted successfully!');
       document.getElementById('companyForm').reset();
-      loadActiveTabData();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
     }
-    btn.disabled = false;
-    btn.innerText = 'Submit Requirement';
+    btn.disabled = false; btn.innerText = 'Submit Requirement';
   }
 
-  // 3. Supplier Registration Form Submit
+  // Supplier Form Submit
   async function submitSupplierForm(e) {
     e.preventDefault();
     const btn = document.getElementById('supp_btn');
-    btn.disabled = true;
-    btn.innerText = 'Registering...';
+    btn.disabled = true; btn.innerText = 'Registering...';
 
     const rawWorkers = document.getElementById('supp_workers').value;
-
     const payload = {
       company_name: document.getElementById('supp_name').value.trim(),
       contact_person: document.getElementById('supp_person').value.trim(),
@@ -391,28 +543,23 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       workers_available: rawWorkers ? parseInt(rawWorkers, 10) : 0
     };
 
-    const { data, error } = await _supabase.from('suppliers').insert([payload]);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('Success! Supplier registration completed.');
+    const { error } = await _supabase.from('suppliers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Supplier registered successfully!');
       document.getElementById('supplierForm').reset();
-      loadActiveTabData();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
     }
-    btn.disabled = false;
-    btn.innerText = 'Register as Supplier';
+    btn.disabled = false; btn.innerText = 'Register as Supplier';
   }
 
-  // 4. Azad Visa Worker Form Submit (On-Page Form)
+  // Azad Worker Form Submit
   async function submitAzadWorkerForm(e) {
     e.preventDefault();
     const btn = document.getElementById('azad_btn');
-    btn.disabled = true;
-    btn.innerText = 'Submitting Details...';
+    btn.disabled = true; btn.innerText = 'Submitting...';
 
     const rawRate = document.getElementById('azad_rate').value;
-
     const payload = {
       full_name: document.getElementById('azad_name').value.trim(),
       phone_number: document.getElementById('azad_phone').value.trim(),
@@ -422,25 +569,22 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       expected_daily_rate: rawRate ? parseFloat(rawRate) : 0
     };
 
-    const { data, error } = await _supabase.from('azad_workers').insert([payload]);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('Success! Azad Visa Worker profile registered.');
+    const { error } = await _supabase.from('azad_workers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Azad Worker profile registered!');
       document.getElementById('azadWorkerForm').reset();
-      loadActiveTabData();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
     }
-    btn.disabled = false;
-    btn.innerText = 'Register as Freelance Worker';
+    btn.disabled = false; btn.innerText = 'Register as Freelance Worker';
   }
 
-  // 5. Azad Visa Worker Form Submit (Modal Popup Form)
+  // Modal Azad Worker Form Submit
   async function submitModalAzadWorker(e) {
     e.preventDefault();
     const btn = document.getElementById('m_azad_btn');
-    btn.disabled = true;
-    btn.innerText = 'Registering...';
+    btn.disabled = true; btn.innerText = 'Registering...';
 
     const payload = {
       full_name: document.getElementById('m_azad_name').value.trim(),
@@ -451,25 +595,22 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       expected_daily_rate: 0
     };
 
-    const { data, error } = await _supabase.from('azad_workers').insert([payload]);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('Success! Azad Worker registered successfully.');
+    const { error } = await _supabase.from('azad_workers').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Registered successfully!');
       closeAzadModal();
-      loadActiveTabData();
+      loadPublicLeaderboard();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
     }
-    btn.disabled = false;
-    btn.innerText = 'Submit Azad Worker Details';
+    btn.disabled = false; btn.innerText = 'Submit Azad Worker Details';
   }
 
-  // 6. Contact Form Submit
+  // Contact Form Submit
   async function submitContactForm(e) {
     e.preventDefault();
     const btn = document.getElementById('cont_btn');
-    btn.disabled = true;
-    btn.innerText = 'Sending...';
+    btn.disabled = true; btn.innerText = 'Sending...';
 
     const payload = {
       name: document.getElementById('cont_name').value.trim(),
@@ -477,23 +618,20 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
       message: document.getElementById('cont_msg').value.trim()
     };
 
-    const { data, error } = await _supabase.from('contact_messages').insert([payload]);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('Thank you! Message sent successfully.');
+    const { error } = await _supabase.from('contact_messages').insert([payload]);
+    if (error) { showToast('Error: ' + error.message, 'error'); } 
+    else {
+      showToast('Message sent successfully!');
       document.getElementById('contactForm').reset();
-      loadActiveTabData();
+      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
     }
-    btn.disabled = false;
-    btn.innerText = 'Send Message';
+    btn.disabled = false; btn.innerText = 'Send Message';
   }
 
-  // 7. ADMIN TABLE DATA FETCH FUNCTIONS
+  // ADMIN PANEL CONTROLLERS
   function switchTab(tableName, btn) {
     currentTab = tableName;
-    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.admin-section .admin-tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     loadActiveTabData();
   }
@@ -568,13 +706,19 @@ footer{background:#050f20;color:#fff;padding:45px 25px 20px}.copyright{max-width
   async function deleteRecord(table, id) {
     if (confirm('Delete this entry permanently?')) {
       const { error } = await _supabase.from(table).delete().eq('id', id);
-      if (error) alert('Error: ' + error.message);
-      else loadActiveTabData();
+      if (error) showToast('Error: ' + error.message, 'error');
+      else { 
+        showToast('Record deleted.'); 
+        loadActiveTabData(); 
+        loadPublicLeaderboard(); 
+      }
     }
   }
 
-  // Load Admin Data on Startup
-  window.onload = loadActiveTabData;
+  // Load Leaderboard on Startup
+  window.addEventListener('DOMContentLoaded', () => {
+    loadPublicLeaderboard();
+  });
 </script>
 
 </body>
