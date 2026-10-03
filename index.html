@@ -1,772 +1,800 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce including electricians, fitters, welders, HVAC technicians and maintenance staff.">
-<meta name="keywords" content="manpower supplier UAE, electrician supplier UAE, fitter supplier UAE, welder supplier UAE, skilled manpower UAE, workforce solutions UAE">
-<meta name="author" content="Elite Workforce Solutions">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="Elite Workforce Solutions | UAE Workforce Network">
-<meta property="og:description" content="Connecting UAE companies with manpower suppliers and skilled workforce.">
-<meta property="og:type" content="website">
-<title>Elite Workforce Solutions | UAE Workforce & Manpower Network</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Workforce Solutions | Premier HR & Manpower Supply Agency</title>
+    
+    <!-- Search Engine & Meta Description -->
+    <meta name="description" content="Elite Workforce Solutions is a leading provider of comprehensive HR services, international recruitment, skilled manpower supply, and document control management.">
+    <meta name="keywords" content="HR Solutions, Manpower Supply, Recruitment Agency, Executive Search, Staff Leasing, Document Control">
+    <meta name="author" content="Elite Workforce Solutions">
 
-<!-- Supabase JS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Open Graph / Social Media Preview Tags -->
+    <meta property="og:title" content="Elite Workforce Solutions | Premier HR & Manpower Supply Agency">
+    <meta property="og:description" content="Connecting top talent with leading businesses globally. Professional HR consulting, recruitment, and workforce management.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eliteworkforcesolutions.com">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Elite Workforce Solutions | HR & Staffing Agency">
+    <meta name="twitter:description" content="Top-tier workforce staffing, HR solutions, and recruitment support tailored for your business growth.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-:root{--navy:#061b3a;--blue:#0b3d91;--blue2:#1255b3;--gold:#fbbf24;--gold2:#f59e0b;--emerald:#10b981;--emerald2:#059669;--text:#17233a;--muted:#64748b;--light:#f8fafc;--white:#fff}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--light);line-height:1.6;padding-bottom:50px}
-a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
-.container{max-width:1200px;margin:auto}section{padding:80px 25px}
-.section-title{text-align:center;margin-bottom:45px}.section-title h2{font-size:38px;color:var(--blue);margin-bottom:10px}.section-title p{color:var(--muted);max-width:720px;margin:auto}
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-/* Header & Mobile Navbar */
-header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.98);box-shadow:0 2px 18px rgba(0,0,0,.08);z-index:1000}
-.navbar{max-width:1200px;margin:auto;padding:14px 25px;display:flex;align-items:center;justify-content:space-between}
-.brand-logo{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:18px;font-weight:900;letter-spacing:.3px}.brand-logo img{width:42px;height:42px;object-fit:contain;border-radius:6px}.brand-logo span{white-space:nowrap}.brand-logo b{color:var(--gold2)}.brand-logo em{font-style:normal;color:var(--blue)}
-.nav-links{display:flex;gap:20px;align-items:center;list-style:none}.nav-links a{font-size:14px;font-weight:700;transition:color 0.2s}.nav-links a:hover{color:var(--blue2)}
-.nav-btn{background:var(--blue);color:#fff!important;padding:10px 16px;border-radius:7px;transition:0.3s}.nav-btn:hover{background:var(--blue2)}
-.menu-btn{display:none;font-size:24px;cursor:pointer;color:var(--blue)}
-
-/* Ticker */
-.ticker-wrap{width:100%;background:var(--gold2);color:#000;overflow:hidden;padding:10px 0;font-weight:bold;font-size:14px;margin-top:68px}.ticker{display:flex;gap:50px;white-space:nowrap;animation:ticker 25s linear infinite}@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}.ticker-wrap:hover .ticker{animation-play-state:paused}
-
-/* Hero Section */
-.hero{min-height:88vh;padding:100px 25px 80px;background:linear-gradient(135deg,var(--navy),var(--blue) 55%,var(--blue2));color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
-.hero-container{max-width:1200px;width:100%;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
-.eyebrow{display:inline-block;color:var(--gold);font-weight:800;letter-spacing:1.4px;font-size:13px;margin-bottom:18px}.hero h1{font-size:56px;line-height:1.08;margin-bottom:22px}.hero h1 span{color:var(--gold)}.hero-lead{font-size:18px;color:#e2eaf5;max-width:650px;margin-bottom:30px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:800;transition:.25s;border:0;cursor:pointer}.btn-primary{background:var(--gold2);color:#111827}.btn-primary:hover{transform:translateY(-2px);background:var(--gold)}.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff}.btn-outline:hover{background:#fff;color:var(--blue)}
-.btn-azad-hero{background:var(--emerald);color:#fff}.btn-azad-hero:hover{background:var(--emerald2);transform:translateY(-2px)}
-
-/* Forms & Tables Section */
-.requirement-section{background:#f1f5f9}.requirement-card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 8px 28px rgba(0,0,0,.06);border:1px solid #e7ebf0;max-width:700px;margin:auto}
-.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
-input,textarea,select{width:100%;padding:13px 14px;border:1px solid #d5dce6;border-radius:7px;outline:none;background:#fff;transition:border-color 0.2s}input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,61,145,0.1)}textarea{min-height:125px;resize:vertical}
-.submit-btn{width:100%;border:0;cursor:pointer;background:var(--blue);color:#fff;padding:14px;border-radius:7px;font-weight:800;transition:background 0.2s}.submit-btn:hover{background:var(--blue2)}
-
-/* Public & Admin Tabs/Tables */
-.admin-section{background:#fff;border-top:4px solid var(--navy);padding:60px 25px;display:none}
-.admin-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.admin-tab-btn{background:#e2e8f0;border:0;padding:10px 20px;border-radius:6px;font-weight:bold;cursor:pointer;color:#334155;transition:0.2s}
-.admin-tab-btn.active{background:var(--blue);color:#fff}
-.admin-table-wrap{overflow-x:auto;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
-.admin-table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}
-.admin-table th{background:#f8fafc;padding:12px;border-bottom:2px solid #e2e8f0;color:#475569}
-.admin-table td{padding:12px;border-bottom:1px solid #f1f5f9;color:#1e293b}
-.admin-badge{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:bold}
-.admin-refresh{background:var(--gold2);border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px}
-.admin-logout{background:#ef4444;color:#fff;border:0;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:15px;margin-left:10px}
-.admin-del-btn{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px}
-
-/* Modal Styling */
-.azad-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;justify-content:center;align-items:center;padding:20px}
-.azad-modal-content{background:#fff;border-radius:12px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:30px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.azad-close-btn{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#64748b}
-
-/* Toast Notifications */
-#toast-container{position:fixed;bottom:20px;right:20px;z-index:9999}
-.toast{background:#1e293b;color:#fff;padding:14px 20px;border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.2);margin-top:10px;font-size:14px;display:flex;align-items:center;gap:10px;animation:slideIn 0.3s ease-out}
-@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-
-/* Responsive Navigation Styles */
-@media(max-width:900px){
-  .hero-container{grid-template-columns:1fr;text-align:center}
-  .hero-lead{margin:0 auto 30px}
-  .hero-buttons{justify-content:center}
-  .menu-btn{display:block}
-  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1)}
-  .nav-links.active{display:flex}
-}
-</style>
-<link rel="icon" type="image/png" sizes="48x48" href="logo.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            navy: '#0b132b',
+                            slate: '#1c2541'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
-<body>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
 
-<header>
-  <nav class="navbar">
-    <a href="#home" class="brand-logo"><img src="logo.png" alt="Elite Workforce"><span>ELITE <b>WORKFORCE</b> <em>SOLUTIONS</em></span></a>
-    <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" onclick="closeMenu()">Home</a></li>
-      <li><a href="#leaderboard" onclick="closeMenu()">Public Board</a></li>
-      <li><a href="#requirements" onclick="closeMenu()">Post Requirement</a></li>
-      <li><a href="#suppliers" onclick="closeMenu()">Suppliers</a></li>
-      <li><a href="#azad-visa" onclick="closeMenu()">Azad Workers</a></li>
-      <li><a href="#contact" class="nav-btn" onclick="closeMenu()">Contact</a></li>
-      <li><a href="javascript:void(0)" onclick="unlockAdminPanel()" style="color:var(--gold2);"><i class="fa-solid fa-lock"></i> Admin Login</a></li>
-    </ul>
-  </nav>
-</header>
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 bg-brand-700 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-md group-hover:bg-brand-600 transition-colors">
+                        EWS
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold text-brand-navy tracking-tight block">ELITE WORKFORCE</span>
+                        <span class="text-xs font-semibold text-brand-600 tracking-widest uppercase block -mt-1">Solutions Agency</span>
+                    </div>
+                </a>
 
-<div class="ticker-wrap">
-  <div class="ticker">
-    <div>⚡ URGENT: 15 Electrical Technicians needed in Abu Dhabi</div>
-    <div>🔧 REQUIRED: 20 Mechanical Fitters for Dubai Project</div>
-    <div>🔥 AVAILABLE: 30 Certified Welders ready for immediate deployment</div>
-  </div>
-</div>
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-brand-600 transition-colors">About Us</a>
+                    <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
+                    <a href="#why-choose-us" class="hover:text-brand-600 transition-colors">Why Choose Us</a>
+                    <a href="#partners" class="hover:text-brand-600 transition-colors">Partners</a>
+                    <a href="#careers" class="hover:text-brand-600 transition-colors">Careers</a>
+                    <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
+                </nav>
 
-<!-- HERO SECTION -->
-<section class="hero" id="home">
-  <div class="hero-container">
-    <div>
-      <div class="eyebrow">UAE WORKFORCE NETWORK</div>
-      <h1>Connecting Companies With <span>Skilled Workforce</span></h1>
-      <p class="hero-lead">Elite Workforce Solutions connects UAE companies with manpower suppliers and skilled workforce for project, industrial, construction and maintenance requirements.</p>
-      <div class="hero-buttons">
-        <a href="#requirements" class="btn btn-primary">Post Requirement</a>
-        <a href="#suppliers" class="btn btn-outline">Join as Supplier</a>
-        <button onclick="openAzadModal()" class="btn btn-azad-hero"><i class="fa-solid fa-id-card"></i> 🇦🇪 Azad Visa Worker</button>
-      </div>
-    </div>
-  </div>
-</section>
+                <!-- Desktop CTA -->
+                <div class="hidden lg:flex items-center">
+                    <a href="#contact" class="bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                        Get Staffing Now
+                    </a>
+                </div>
 
-<!-- PUBLIC LEADERBOARD SECTION -->
-<section class="requirement-section" id="leaderboard" style="background:#fff; padding:60px 25px;">
-  <div class="container">
-    <div class="section-title">
-      <h2>🔥 Live Job Requirements & Available Workforce</h2>
-      <p>Browse active company requirements and verified manpower listings across UAE with direct WhatsApp contact.</p>
-    </div>
-
-    <div class="admin-tabs" style="justify-content: center; margin-bottom: 25px;">
-      <button class="admin-tab-btn active" onclick="switchPublicTab('companies', this)"><i class="fa-solid fa-briefcase"></i> Active Requirements</button>
-      <button class="admin-tab-btn" onclick="switchPublicTab('azad_workers', this)"><i class="fa-solid fa-users"></i> Available Workers</button>
-    </div>
-
-    <div class="admin-table-wrap" id="public-table-container">
-      <p style="padding:20px;text-align:center;">Loading live opportunities...</p>
-    </div>
-  </div>
-</section>
-
-<!-- REQUIREMENTS SECTION -->
-<section class="requirement-section" id="requirements">
-  <div class="container">
-    <div class="section-title">
-      <h2>Post Company Requirement</h2>
-      <p>Submit your manpower requirements directly to our network.</p>
-    </div>
-    <div class="requirement-card">
-      <form id="companyForm" onsubmit="submitCompanyForm(event)">
-        <div class="form-group">
-          <label>Company Name</label>
-          <input type="text" id="comp_name" required placeholder="e.g. Al Habtoor Contracting">
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-slate-700 focus:outline-none p-2 rounded-lg hover:bg-slate-100">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Contact Person</label>
-          <input type="text" id="comp_person" required placeholder="Your Name">
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Home</a>
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">About Us</a>
+            <a href="#services" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Services</a>
+            <a href="#why-choose-us" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Why Choose Us</a>
+            <a href="#partners" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Partners</a>
+            <a href="#careers" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Careers</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">Contact</a>
+            <a href="#contact" class="mobile-link block w-full text-center bg-brand-700 text-white font-semibold py-3 rounded-xl shadow mt-4">Get Staffing Now</a>
         </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="comp_email" required placeholder="name@company.com">
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-br from-slate-900 via-brand-navy to-slate-900 text-white pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-brand-500/10 border border-brand-500/20 text-brand-50 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>ISO Certified HR & Staffing Partner</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Empowering Your Business With <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-200">Elite Talent</span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        We bridge the gap between world-class organizations and top-tier professionals. From qualified manpower supply to comprehensive HR management, we fuel enterprise growth.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#contact" class="w-full sm:w-auto text-center bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-brand-500/25 transition-all">
+                            Hire Talent <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                        <a href="#careers" class="w-full sm:w-auto text-center border border-slate-700 hover:border-slate-500 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-xl transition-all">
+                            Apply for Jobs
+                        </a>
+                    </div>
+
+                    <!-- Highlight Metrics -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 mt-8">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">10K+</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Placed Candidates</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">250+</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Corporate Partners</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">99%</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Client Retention</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Frame -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-500 rounded-3xl blur opacity-30"></div>
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Workforce Executive Team" class="w-full h-[420px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 p-4 glass-card rounded-xl text-slate-900 shadow-xl">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-shield-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm">Verified & Compliant</h4>
+                                        <p class="text-xs text-slate-500">Fast, background-checked staffing within 48 hours.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="form-group">
-          <label>Phone Number (WhatsApp)</label>
-          <input type="tel" id="comp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 123 4567">
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">About Our Agency</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Building Stronger Workforces Across Industries
+                </p>
+                <div class="w-16 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-slate-600 leading-relaxed text-base">
+                        Founded with a mission to streamline human capital management, <strong class="text-slate-900">Elite Workforce Solutions</strong> has evolved into a premier staffing and HR services agency. We specialize in providing end-to-end recruitment, contract staffing, technical manpower, and legal compliance support.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-base">
+                        Whether you are a multinational enterprise expanding operations or an energetic startup assembling a high-performance team, our tailor-made human resource solutions ensure operational efficiency and sustainable growth.
+                    </p>
+
+                    <!-- Mission & Vision Cards -->
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center mb-3 text-lg font-bold">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 mb-1">Our Mission</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                To deliver vetted, reliable talent quickly while safeguarding business compliance and fostering career advancement.
+                            </p>
+                        </div>
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3 text-lg font-bold">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 mb-1">Our Vision</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                To be the global standard for workforce reliability, HR transparency, and ethical recruitment practices.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Collage Gallery -->
+                <div class="grid grid-cols-2 gap-4 relative">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Team meeting" class="rounded-2xl shadow-lg object-cover h-64 w-full">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="HR Professional" class="rounded-2xl shadow-lg object-cover h-64 w-full mt-8">
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Location / Emirate</label>
-          <input type="text" id="comp_location" placeholder="e.g. Dubai, Abu Dhabi">
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-2">Our Advantage</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold tracking-tight">Why Choose Elite Workforce Solutions?</p>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Feature Card 1 -->
+                <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 hover:border-brand-500/50 hover:bg-slate-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Vetted Candidates</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Every profile undergoes rigorous background verification, skills assessment, and document authentication before recommendation.
+                    </p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 hover:border-brand-500/50 hover:bg-slate-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Fast Turnaround</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Our extensive talent pool allows us to fulfill urgent technical, executive, and contractual staffing requirements within 24 to 48 hours.
+                    </p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 hover:border-brand-500/50 hover:bg-slate-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">100% Legal Compliance</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        We manage labor laws, visa processing, payroll, and statutory requirements so your business operates seamlessly without liability.
+                    </p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 hover:border-brand-500/50 hover:bg-slate-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Dedicated Support</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Enjoy single-point account managers available round-the-clock for seamless coordination, candidate onboarding, and query resolution.
+                    </p>
+                </div>
+
+            </div>
         </div>
-        <div class="form-group">
-          <label>Requirement Details</label>
-          <textarea id="comp_details" required placeholder="Specify needed roles, number of workers, duration, etc."></textarea>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">What We Offer</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Our Core HR & Workforce Solutions</p>
+                <div class="w-16 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Manpower Supply</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Skilled, semi-skilled, and technical staffing solutions tailored for construction, oil & gas, healthcare, and industrial sectors.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 font-medium border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> On-Demand Deployment</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> Technical Trade Testing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">HR Solutions</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Comprehensive HR outsourcing, statutory payroll processing, employee benefits management, and performance auditing.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 font-medium border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> End-to-End Payroll</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> HR Policy Framing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Recruitment Services</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Executive search, mid-level hiring, and overseas talent acquisition tailored to match your organizational culture.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 font-medium border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> Executive Headhunting</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> Permanent Placement</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Document Control</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Specialized document management specialists, visa processing assistance, and compliance documentation support.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 font-medium border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> Visa & Work Permits</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand-600 mr-2"></i> Digital Document Control</li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-        <button type="submit" class="submit-btn" id="comp_btn">Submit Requirement</button>
-      </form>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SUPPLIERS SECTION -->
-<section class="requirement-section" id="suppliers" style="background:#fff;">
-  <div class="container">
-    <div class="section-title">
-      <h2>Join as Manpower Supplier</h2>
-      <p>Register your supply company to get direct client leads.</p>
-    </div>
-    <div class="requirement-card">
-      <form id="supplierForm" onsubmit="submitSupplierForm(event)">
-        <div class="form-group">
-          <label>Supplier / Company Name</label>
-          <input type="text" id="supp_name" required placeholder="e.g. Gulf Manpower Services">
+    <!-- Client Logos / Partners Section -->
+    <section id="partners" class="py-16 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
+                Trusted by 250+ Industry Leaders & Global Enterprise Brands
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center opacity-70 grayscale hover:grayscale-0 transition-all">
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    METRO BUILD
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    LOGIX TECH
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    AURA HEALTH
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    GLOBAL INFRA
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    NEXUS ONSHORE
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl text-center font-black text-slate-400 hover:text-brand-700 hover:bg-brand-50 transition-colors">
+                    VALOR HR
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Contact Person</label>
-          <input type="text" id="supp_person" required placeholder="Your Name">
+    </section>
+
+    <!-- Job Application / Careers Section -->
+    <section id="careers" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-400">Join Our Talent Pool</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                        Looking For Your Next Career Opportunity?
+                    </h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Submit your details and upload your PDF Resume. Our recruitment specialists match your qualification with active vacancies across top multinational companies.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-brand-400 text-lg mt-0.5"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Direct Client Interviews</h4>
+                                <p class="text-xs text-slate-400">Get scheduled directly with decision makers.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-brand-400 text-lg mt-0.5"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Zero Hidden Charges</h4>
+                                <p class="text-xs text-slate-400">Ethical recruitment complying strictly with international standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Resume Upload Form -->
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-800 p-8 sm:p-10 rounded-3xl border border-slate-700 shadow-2xl relative">
+                        <h3 class="text-2xl font-bold text-white mb-6">Submit Candidate Application</h3>
+                        
+                        <form id="career-form" onsubmit="handleCareerFormSubmit(event)" class="space-y-5">
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Full Name *</label>
+                                    <input type="text" required placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Email Address *</label>
+                                    <input type="email" required placeholder="john@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Phone Number *</label>
+                                    <input type="tel" required placeholder="+1 (555) 000-0000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-2">Applied Position *</label>
+                                    <select required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-brand-500 transition-colors">
+                                        <option value="">Select Target Job Field</option>
+                                        <option value="engineering">Engineering & Construction</option>
+                                        <option value="hr">HR & Administration</option>
+                                        <option value="it">Information Technology</option>
+                                        <option value="doc">Document Control & Support</option>
+                                        <option value="other">Other Technical Role</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- PDF File Upload Area -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Upload Resume (PDF format) *</label>
+                                <div class="border-2 border-dashed border-slate-700 rounded-xl p-6 text-center hover:border-brand-500 transition-colors bg-slate-900/50 cursor-pointer relative" id="drop-zone">
+                                    <input type="file" id="resume-file" accept=".pdf" required class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" onchange="handleFileSelect(event)">
+                                    <i class="fa-solid fa-file-pdf text-3xl text-brand-400 mb-2"></i>
+                                    <p class="text-sm font-medium text-slate-200" id="file-name-label">Click or Drag & Drop PDF Resume Here</p>
+                                    <p class="text-xs text-slate-400 mt-1">Maximum File Size: 10MB (.PDF only)</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Cover Note / Remarks</label>
+                                <textarea rows="3" placeholder="Briefly describe your experience level..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-200">
+                                Submit Application <i class="fa-solid fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+
+                        <div id="career-success-msg" class="hidden mt-4 p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-emerald-200 text-center text-sm font-semibold">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Your application and PDF resume have been received successfully! Our HR team will contact you shortly.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="supp_email" required placeholder="supplier@domain.com">
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Get In Touch</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Contact Our Executive Team</p>
+                <div class="w-16 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+                
+                <!-- Contact Info Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Headquarters Address</h4>
+                            <p class="text-sm text-slate-600 mt-1">
+                                Level 12, Elite Tower, Business Bay, Dubai, United Arab Emirates
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Email Us</h4>
+                            <p class="text-sm text-slate-600 mt-1">info@eliteworkforcesolutions.com</p>
+                            <p class="text-sm text-slate-600">hr@eliteworkforcesolutions.com</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Phone Support</h4>
+                            <p class="text-sm text-slate-600 mt-1">+971 4 123 4567 / +971 50 987 6543</p>
+                        </div>
+                    </div>
+
+                    <!-- Live Embedded Google Maps Frame -->
+                    <div class="bg-white p-2 rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden h-64">
+                        <iframe 
+                            title="Office Location Map"
+                            class="w-full h-full rounded-xl border-0" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1786541819777!2d55.2721877150094!3d25.18880398390069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682def2893d9%3A0xe349f7831f13b632!2sBusiness%20Bay%2C%20Dubai!5e0!3m2!1sen!2sae!4v1650000000000!5m2!1sen!2sae" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-lg">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6">Send Us A Business Query</h3>
+                        
+                        <form id="contact-form" onsubmit="handleContactFormSubmit(event)" class="space-y-5">
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Your Name *</label>
+                                    <input type="text" required placeholder="Full Name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Company Name</label>
+                                    <input type="text" placeholder="Company Ltd." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Email Address *</label>
+                                    <input type="email" required placeholder="name@company.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-2">Phone Number *</label>
+                                    <input type="tel" required placeholder="+971 50 000 0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-2">Service Required *</label>
+                                <select required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 focus:outline-none focus:border-brand-600 transition-colors">
+                                    <option value="">Select Service Category</option>
+                                    <option value="manpower">Manpower Supply</option>
+                                    <option value="hr">HR Management Solutions</option>
+                                    <option value="recruitment">Executive Recruitment</option>
+                                    <option value="doc">Document Control & Legal Support</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-2">Project Details / Message *</label>
+                                <textarea rows="4" required placeholder="Describe your manpower or staffing requirements..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 transition-colors"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-4 rounded-xl shadow-md transition-all">
+                                Send Message <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </form>
+
+                        <div id="contact-success-msg" class="hidden mt-4 p-4 bg-emerald-100 border border-emerald-300 rounded-xl text-emerald-800 text-center text-sm font-semibold">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Message sent successfully! Our client desk will respond within 2 hours.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="form-group">
-          <label>Phone / WhatsApp</label>
-          <input type="tel" id="supp_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone Number" placeholder="+971 50 987 6543">
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+                
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-brand-600 text-white rounded-xl flex items-center justify-center font-bold text-lg">
+                            EWS
+                        </div>
+                        <span class="text-xl font-extrabold text-white tracking-tight">ELITE WORKFORCE</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+                        Your trusted human workforce partner providing custom recruitment, technical manpower, and legal HR compliance solutions across global markets.
+                    </p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 hover:border-brand-600 transition-all">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 hover:border-brand-600 transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 hover:border-brand-600 transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 hover:border-brand-600 transition-all">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="#why-choose-us" class="hover:text-white transition-colors">Why Choose Us</a></li>
+                        <li><a href="#partners" class="hover:text-white transition-colors">Client Partners</a></li>
+                        <li><a href="#careers" class="hover:text-white transition-colors">Job Openings</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#services" class="hover:text-white transition-colors">Manpower Supply</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">HR Outsourcing</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Executive Search</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Visa & Document Control</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Payroll Audit</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Labor License info</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Compliance Portal</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 Elite Workforce Solutions. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed for Premier Corporate Performance.</p>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Available Manpower Categories</label>
-          <input type="text" id="supp_types" placeholder="e.g. Electricians, Welders, Fitters, HVAC">
-        </div>
-        <div class="form-group">
-          <label>Total Workers Available</label>
-          <input type="number" id="supp_workers" min="1" placeholder="e.g. 25">
-        </div>
-        <button type="submit" class="submit-btn" id="supp_btn">Register as Supplier</button>
-      </form>
-    </div>
-  </div>
-</section>
+    </footer>
 
-<!-- AZAD VISA WORKER SECTION -->
-<section class="requirement-section" id="azad-visa">
-  <div class="container">
-    <div class="section-title">
-      <h2>🇦🇪 Azad / Freelance Visa Worker Registration</h2>
-      <p>Register yourself to get immediate short-term & long-term site work across UAE.</p>
-    </div>
-    <div class="requirement-card">
-      <form id="azadWorkerForm" onsubmit="submitAzadWorkerForm(event)">
-        <div class="form-group">
-          <label>Full Name (Poora Naam)</label>
-          <input type="text" id="azad_name" required placeholder="e.g. Mohd Imran">
-        </div>
-        <div class="form-group">
-          <label>UAE Phone / WhatsApp Number</label>
-          <input type="tel" id="azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone (+971 50 xxx xxxx or 050 xxx xxxx)" placeholder="+971 50 xxx xxxx">
-        </div>
-        <div class="form-group">
-          <label>Emirates ID Number</label>
-          <input type="text" id="azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
-        </div>
-        <div class="form-group">
-          <label>Trade / Skill Specialization</label>
-          <select id="azad_trade" required>
-            <option value="">Select Your Work Skill</option>
-            <option value="Electrician">Electrician</option>
-            <option value="Plumber">Plumber</option>
-            <option value="Mason">Mason</option>
-            <option value="Welder">Welder</option>
-            <option value="Fitter / Mechanical">Fitter / Mechanical</option>
-            <option value="HVAC Technician">HVAC Technician</option>
-            <option value="Scaffolder">Scaffolder</option>
-            <option value="Driver">Driver</option>
-            <option value="Helper / General Labour">Helper / General Labour</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Current Emirate / Location</label>
-          <select id="azad_location" required>
-            <option value="Dubai">Dubai</option>
-            <option value="Abu Dhabi">Abu Dhabi</option>
-            <option value="Sharjah">Sharjah</option>
-            <option value="Ajman">Ajman</option>
-            <option value="Ras Al Khaimah">Ras Al Khaimah</option>
-            <option value="Umm Al Quwain">Umm Al Quwain</option>
-            <option value="Fujairah">Fujairah</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Expected Daily / Hourly Rate (AED)</label>
-          <input type="number" id="azad_rate" placeholder="e.g. 100 AED/Day or 12 AED/Hour">
-        </div>
-        <button type="submit" class="submit-btn" id="azad_btn" style="background:var(--emerald2);">Register as Freelance Worker</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section class="requirement-section" id="contact" style="background:#fff;">
-  <div class="container">
-    <div class="section-title">
-      <h2>Get In Touch</h2>
-      <p>Send us a message for general inquiries or support.</p>
-    </div>
-    <div class="requirement-card">
-      <form id="contactForm" onsubmit="submitContactForm(event)">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="cont_name" required placeholder="Your Full Name">
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="cont_email" required placeholder="yourname@gmail.com">
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea id="cont_msg" required placeholder="Write your message here..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn" id="cont_btn">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- SECURED ADMIN DASHBOARD SECTION -->
-<section class="admin-section" id="admin">
-  <div class="container">
-    <div class="section-title">
-      <h2>Live Database Entries (Admin Panel)</h2>
-      <p>View all live submissions from the forms above in real-time.</p>
-    </div>
-
-    <button class="admin-refresh" onclick="loadActiveTabData()"><i class="fa-solid fa-rotate-right"></i> Refresh Table</button>
-    <button class="admin-logout" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-
-    <div class="admin-tabs">
-      <button class="admin-tab-btn active" onclick="switchTab('companies', this)"><i class="fa-solid fa-building"></i> Companies Data</button>
-      <button class="admin-tab-btn" onclick="switchTab('suppliers', this)"><i class="fa-solid fa-truck-field"></i> Suppliers Data</button>
-      <button class="admin-tab-btn" onclick="switchTab('azad_workers', this)"><i class="fa-solid fa-user-gear"></i> Azad Workers</button>
-      <button class="admin-tab-btn" onclick="switchTab('contact_messages', this)"><i class="fa-solid fa-envelope"></i> Contact Messages</button>
-    </div>
-
-    <div class="admin-table-wrap" id="admin-table-container">
-      <p style="padding:20px;text-align:center;">Loading database records...</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="copyright" style="text-align:center; padding:20px; font-size:14px; color:var(--muted);">
-    &copy; 2026 Elite Workforce Solutions. All rights reserved.
-  </div>
-</footer>
-
-<!-- AZAD VISA POPUP MODAL -->
-<div class="azad-modal" id="azadModal">
-  <div class="azad-modal-content">
-    <span class="azad-close-btn" onclick="closeAzadModal()">&times;</span>
-    <h3 style="color:var(--blue);margin-bottom:10px;">🇦🇪 Quick Registration: Azad Visa Worker</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Fill details to get instant daily/hourly site work leads.</p>
-    
-    <form onsubmit="submitModalAzadWorker(event)">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="m_azad_name" required placeholder="Your Name">
-      </div>
-      <div class="form-group">
-        <label>WhatsApp / Phone</label>
-        <input type="tel" id="m_azad_phone" required pattern="(\+971|0)[0-9]{8,9}" title="Valid UAE Phone" placeholder="+971 50 xxx xxxx">
-      </div>
-      <div class="form-group">
-        <label>Emirates ID</label>
-        <input type="text" id="m_azad_eid" required pattern="784-[0-9]{4}-[0-9]{7}-[0-9]{1}" title="Format: 784-XXXX-XXXXXXX-X" placeholder="784-XXXX-XXXXXXX-X">
-      </div>
-      <div class="form-group">
-        <label>Trade / Skill</label>
-        <select id="m_azad_trade" required>
-          <option value="Electrician">Electrician</option>
-          <option value="Plumber">Plumber</option>
-          <option value="Mason">Mason</option>
-          <option value="Welder">Welder</option>
-          <option value="Fitter / Mechanical">Fitter / Mechanical</option>
-          <option value="HVAC Technician">HVAC Technician</option>
-          <option value="Helper / General Labour">Helper / General Labour</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Emirate</label>
-        <select id="m_azad_location" required>
-          <option value="Dubai">Dubai</option>
-          <option value="Abu Dhabi">Abu Dhabi</option>
-          <option value="Sharjah">Sharjah</option>
-          <option value="Ajman">Ajman</option>
-        </select>
-      </div>
-      <button type="submit" class="submit-btn" id="m_azad_btn" style="background:var(--emerald2);">Submit Azad Worker Details</button>
-    </form>
-  </div>
-</div>
-
-<div id="toast-container"></div>
-
-<!-- SUPABASE LOGIC & EVENT HANDLERS -->
-<script>
-  const SUPABASE_URL = 'https://maakqzczkhkoimlmnvws.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_kiZxMM-2_11uQA_GQctlxw_DoEo_pu1';
-  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  let currentTab = 'companies';
-  let currentPublicTab = 'companies';
-
-  // Navigation Logic
-  function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-  function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
-
-  // Modal Functions
-  function openAzadModal() { document.getElementById('azadModal').style.display = 'flex'; }
-  function closeAzadModal() { document.getElementById('azadModal').style.display = 'none'; }
-
-  // Custom Toast Notification System
-  function showToast(msg, type = 'success') {
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}" style="color:${type === 'success' ? '#10b981' : '#ef4444'}"></i> ${msg}`;
-    container.appendChild(toast);
-    setTimeout(() => toast.remove(), 4000);
-  }
-
-  // Secure Admin Access Gate using Supabase Auth
-  async function unlockAdminPanel() {
-    const session = await _supabase.auth.getSession();
-    if (session.data.session) {
-      document.getElementById('admin').style.display = 'block';
-      window.location.hash = "#admin";
-      loadActiveTabData();
-      return;
-    }
-
-    const email = prompt("Enter Admin Email:");
-    if (!email) return;
-
-    const password = prompt("Enter Admin Password:");
-    if (!password) return;
-
-    showToast("Authenticating...");
-
-    const { data, error } = await _supabase.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
-
-    if (error) {
-      showToast("Login Failed: " + error.message, "error");
-    } else {
-      showToast("Admin authenticated successfully!");
-      document.getElementById('admin').style.display = 'block';
-      window.location.hash = "#admin";
-      loadActiveTabData();
-    }
-  }
-
-  // Admin Logout Function
-  async function logoutAdmin() {
-    await _supabase.auth.signOut();
-    document.getElementById('admin').style.display = 'none';
-    showToast("Logged out successfully.");
-  }
-
-  // PUBLIC LEADERBOARD FUNCTIONS (With Masked Emirates ID)
-  function switchPublicTab(tab, btn) {
-    currentPublicTab = tab;
-    document.querySelectorAll('#leaderboard .admin-tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    loadPublicLeaderboard();
-  }
-
-  async function loadPublicLeaderboard() {
-    const container = document.getElementById('public-table-container');
-    
-    if (currentPublicTab === 'companies') {
-      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading requirements...</p>';
-      const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
-
-      if (error || !data || data.length === 0) {
-        container.innerHTML = '<p style="padding:20px;text-align:center;">No active requirements posted yet.</p>';
-        return;
-      }
-
-      let html = `<table class="admin-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Company</th>
-            <th>Location</th>
-            <th>Requirement Details</th>
-            <th>Contact</th>
-          </tr>
-        </thead><tbody>`;
-      data.forEach(i => {
-        const cleanPhone = i.phone ? i.phone.replace(/[^0-9]/g, '') : '';
-        html += `<tr>
-          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
-          <td><b>${i.company_name}</b></td>
-          <td>${i.location || 'UAE'}</td>
-          <td>${i.requirement_details}</td>
-          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></td>
-        </tr>`;
-      });
-      container.innerHTML = html + '</tbody></table>';
-
-    } else if (currentPublicTab === 'azad_workers') {
-      container.innerHTML = '<p style="padding:20px;text-align:center;">Loading available workers...</p>';
-      const { data, error } = await _supabase
-        .from('azad_workers')
-        .select('created_at, full_name, trade, location, expected_daily_rate, phone_number, emirates_id')
-        .order('created_at', { ascending: false });
-
-      if (error || !data || data.length === 0) {
-        container.innerHTML = '<p style="padding:20px;text-align:center;">No workers registered yet.</p>';
-        return;
-      }
-
-      let html = `<table class="admin-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Skill / Trade</th>
-            <th>Emirates ID</th>
-            <th>Location</th>
-            <th>Rate</th>
-            <th>Connect</th>
-          </tr>
-        </thead><tbody>`;
-      data.forEach(i => {
-        const cleanPhone = i.phone_number ? i.phone_number.replace(/[^0-9]/g, '') : '';
+    <!-- Floating Action Buttons (WhatsApp & Direct Call) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+        <!-- Direct Phone Call Button -->
+        <a href="tel:+971509876543" class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-2xl hover:bg-brand-700 transition-all transform hover:scale-110" title="Call Us Directly">
+            <i class="fa-solid fa-phone text-lg"></i>
+        </a>
         
-        // MASKING LOGIC: Shows last 3 digits only (e.g., ***-****-****123)
-        let maskedEID = 'N/A';
-        if (i.emirates_id) {
-          const cleanEID = i.emirates_id.trim();
-          const lastThree = cleanEID.slice(-3);
-          maskedEID = `***-****-****${lastThree}`;
+        <!-- WhatsApp Direct Chat Button -->
+        <a href="https://wa.me/971509876543?text=Hello%20Elite%20Workforce%20Solutions,%20I%20have%20an%20inquiry%20regarding%20staffing%20services." target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl hover:bg-emerald-600 transition-all transform hover:scale-110 animate-bounce" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </a>
+    </div>
+
+    <!-- Application Scripts -->
+    <script>
+        // Mobile Navigation Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close Mobile Menu on Nav Item Click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Dynamic PDF File Display Handler
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const label = document.getElementById('file-name-label');
+            if (file) {
+                if (file.type !== "application/pdf") {
+                    label.innerText = "Error: Please upload a valid .PDF file!";
+                    label.classList.add('text-rose-400');
+                    event.target.value = "";
+                    return;
+                }
+                label.innerText = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                label.classList.remove('text-rose-400');
+                label.classList.add('text-emerald-400');
+            }
         }
 
-        html += `<tr>
-          <td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td>
-          <td><b>${i.full_name}</b></td>
-          <td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td>
-          <td><span style="letter-spacing:1px;font-family:monospace;color:#64748b;font-weight:bold;">${maskedEID}</span></td>
-          <td>${i.location}</td>
-          <td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'Negotiable'}</b></td>
-          <td><a href="https://wa.me/${cleanPhone}" target="_blank" style="color:var(--emerald2);font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hire Worker</a></td>
-        </tr>`;
-      });
-      container.innerHTML = html + '</tbody></table>';
-    }
-  }
+        // Handle Career Form Submit
+        function handleCareerFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const successMsg = document.getElementById('career-success-msg');
+            
+            // Show Feedback Message
+            successMsg.classList.remove('hidden');
+            form.reset();
+            document.getElementById('file-name-label').innerText = "Click or Drag & Drop PDF Resume Here";
+            document.getElementById('file-name-label').classList.remove('text-emerald-400');
 
-  // Company Form Submit
-  async function submitCompanyForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('comp_btn');
-    btn.disabled = true; btn.innerText = 'Submitting...';
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 6000);
+        }
 
-    const payload = {
-      company_name: document.getElementById('comp_name').value.trim(),
-      contact_person: document.getElementById('comp_person').value.trim(),
-      email: document.getElementById('comp_email').value.trim(),
-      phone: document.getElementById('comp_phone').value.trim(),
-      location: document.getElementById('comp_location').value.trim(),
-      requirement_details: document.getElementById('comp_details').value.trim()
-    };
+        // Handle Contact Form Submit
+        function handleContactFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const successMsg = document.getElementById('contact-success-msg');
+            
+            // Show Feedback Message
+            successMsg.classList.remove('hidden');
+            form.reset();
 
-    const { error } = await _supabase.from('companies').insert([payload]);
-    if (error) { showToast('Error: ' + error.message, 'error'); } 
-    else {
-      showToast('Requirement posted successfully!');
-      document.getElementById('companyForm').reset();
-      loadPublicLeaderboard();
-      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
-    }
-    btn.disabled = false; btn.innerText = 'Submit Requirement';
-  }
-
-  // Supplier Form Submit
-  async function submitSupplierForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('supp_btn');
-    btn.disabled = true; btn.innerText = 'Registering...';
-
-    const rawWorkers = document.getElementById('supp_workers').value;
-    const payload = {
-      company_name: document.getElementById('supp_name').value.trim(),
-      contact_person: document.getElementById('supp_person').value.trim(),
-      email: document.getElementById('supp_email').value.trim(),
-      phone: document.getElementById('supp_phone').value.trim(),
-      manpower_types: document.getElementById('supp_types').value.trim(),
-      workers_available: rawWorkers ? parseInt(rawWorkers, 10) : 0
-    };
-
-    const { error } = await _supabase.from('suppliers').insert([payload]);
-    if (error) { showToast('Error: ' + error.message, 'error'); } 
-    else {
-      showToast('Supplier registered successfully!');
-      document.getElementById('supplierForm').reset();
-      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
-    }
-    btn.disabled = false; btn.innerText = 'Register as Supplier';
-  }
-
-  // Azad Worker Form Submit
-  async function submitAzadWorkerForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('azad_btn');
-    btn.disabled = true; btn.innerText = 'Submitting...';
-
-    const rawRate = document.getElementById('azad_rate').value;
-    const payload = {
-      full_name: document.getElementById('azad_name').value.trim(),
-      phone_number: document.getElementById('azad_phone').value.trim(),
-      emirates_id: document.getElementById('azad_eid').value.trim(),
-      trade: document.getElementById('azad_trade').value,
-      location: document.getElementById('azad_location').value,
-      expected_daily_rate: rawRate ? parseFloat(rawRate) : 0
-    };
-
-    const { error } = await _supabase.from('azad_workers').insert([payload]);
-    if (error) { showToast('Error: ' + error.message, 'error'); } 
-    else {
-      showToast('Azad Worker profile registered!');
-      document.getElementById('azadWorkerForm').reset();
-      loadPublicLeaderboard();
-      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
-    }
-    btn.disabled = false; btn.innerText = 'Register as Freelance Worker';
-  }
-
-  // Modal Azad Worker Form Submit
-  async function submitModalAzadWorker(e) {
-    e.preventDefault();
-    const btn = document.getElementById('m_azad_btn');
-    btn.disabled = true; btn.innerText = 'Registering...';
-
-    const payload = {
-      full_name: document.getElementById('m_azad_name').value.trim(),
-      phone_number: document.getElementById('m_azad_phone').value.trim(),
-      emirates_id: document.getElementById('m_azad_eid').value.trim(),
-      trade: document.getElementById('m_azad_trade').value,
-      location: document.getElementById('m_azad_location').value,
-      expected_daily_rate: 0
-    };
-
-    const { error } = await _supabase.from('azad_workers').insert([payload]);
-    if (error) { showToast('Error: ' + error.message, 'error'); } 
-    else {
-      showToast('Registered successfully!');
-      closeAzadModal();
-      loadPublicLeaderboard();
-      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
-    }
-    btn.disabled = false; btn.innerText = 'Submit Azad Worker Details';
-  }
-
-  // Contact Form Submit
-  async function submitContactForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('cont_btn');
-    btn.disabled = true; btn.innerText = 'Sending...';
-
-    const payload = {
-      name: document.getElementById('cont_name').value.trim(),
-      email: document.getElementById('cont_email').value.trim(),
-      message: document.getElementById('cont_msg').value.trim()
-    };
-
-    const { error } = await _supabase.from('contact_messages').insert([payload]);
-    if (error) { showToast('Error: ' + error.message, 'error'); } 
-    else {
-      showToast('Message sent successfully!');
-      document.getElementById('contactForm').reset();
-      if (document.getElementById('admin').style.display === 'block') loadActiveTabData();
-    }
-    btn.disabled = false; btn.innerText = 'Send Message';
-  }
-
-  // ADMIN PANEL CONTROLLERS
-  function switchTab(tableName, btn) {
-    currentTab = tableName;
-    document.querySelectorAll('.admin-section .admin-tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    loadActiveTabData();
-  }
-
-  function loadActiveTabData() {
-    if (currentTab === 'companies') fetchCompanies();
-    else if (currentTab === 'suppliers') fetchSuppliers();
-    else if (currentTab === 'azad_workers') fetchAzadWorkers();
-    else if (currentTab === 'contact_messages') fetchMessages();
-  }
-
-  async function fetchCompanies() {
-    const container = document.getElementById('admin-table-container');
-    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading companies...</p>';
-    const { data, error } = await _supabase.from('companies').select('*').order('created_at', { ascending: false });
-
-    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
-    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No company requirements posted yet.</p>'; return; }
-
-    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Company</th><th>Person</th><th>Email / Phone</th><th>Location</th><th>Details</th><th>Action</th></tr></thead><tbody>`;
-    data.forEach(i => {
-      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.location||'N/A'}</td><td>${i.requirement_details}</td><td><button class="admin-del-btn" onclick="deleteRecord('companies', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-    });
-    container.innerHTML = html + '</tbody></table>';
-  }
-
-  async function fetchSuppliers() {
-    const container = document.getElementById('admin-table-container');
-    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading suppliers...</p>';
-    const { data, error } = await _supabase.from('suppliers').select('*').order('created_at', { ascending: false });
-
-    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
-    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No suppliers registered yet.</p>'; return; }
-
-    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Supplier</th><th>Person</th><th>Email / Phone</th><th>Categories</th><th>Workers</th><th>Action</th></tr></thead><tbody>`;
-    data.forEach(i => {
-      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.company_name}</b></td><td>${i.contact_person}</td><td>${i.email}<br><small>${i.phone}</small></td><td>${i.manpower_types||'N/A'}</td><td><b>${i.workers_available}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('suppliers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-    });
-    container.innerHTML = html + '</tbody></table>';
-  }
-
-  async function fetchAzadWorkers() {
-    const container = document.getElementById('admin-table-container');
-    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading Azad Visa Workers...</p>';
-    const { data, error } = await _supabase.from('azad_workers').select('*').order('created_at', { ascending: false });
-
-    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
-    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No Azad workers registered yet.</p>'; return; }
-
-    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Emirates ID</th><th>Trade</th><th>Location</th><th>Expected Rate</th><th>Action</th></tr></thead><tbody>`;
-    data.forEach(i => {
-      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.full_name}</b></td><td>${i.phone_number}</td><td>${i.emirates_id}</td><td><span style="color:var(--blue);font-weight:bold;">${i.trade}</span></td><td>${i.location}</td><td><b>${i.expected_daily_rate ? i.expected_daily_rate + ' AED' : 'N/A'}</b></td><td><button class="admin-del-btn" onclick="deleteRecord('azad_workers', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-    });
-    container.innerHTML = html + '</tbody></table>';
-  }
-
-  async function fetchMessages() {
-    const container = document.getElementById('admin-table-container');
-    container.innerHTML = '<p style="padding:20px;text-align:center;">Loading messages...</p>';
-    const { data, error } = await _supabase.from('contact_messages').select('*').order('created_at', { ascending: false });
-
-    if (error) { container.innerHTML = `<p style="padding:20px;color:red;">Error: ${error.message}</p>`; return; }
-    if (!data || data.length === 0) { container.innerHTML = '<p style="padding:20px;text-align:center;">No messages received yet.</p>'; return; }
-
-    let html = `<table class="admin-table"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Action</th></tr></thead><tbody>`;
-    data.forEach(i => {
-      html += `<tr><td><span class="admin-badge">${new Date(i.created_at).toLocaleDateString()}</span></td><td><b>${i.name}</b></td><td>${i.email}</td><td>${i.message}</td><td><button class="admin-del-btn" onclick="deleteRecord('contact_messages', ${i.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-    });
-    container.innerHTML = html + '</tbody></table>';
-  }
-
-  async function deleteRecord(table, id) {
-    if (confirm('Delete this entry permanently?')) {
-      const { error } = await _supabase.from(table).delete().eq('id', id);
-      if (error) showToast('Error: ' + error.message, 'error');
-      else { 
-        showToast('Record deleted.'); 
-        loadActiveTabData(); 
-        loadPublicLeaderboard(); 
-      }
-    }
-  }
-
-  // Load Leaderboard & Check Active Session on Startup
-  window.addEventListener('DOMContentLoaded', async () => {
-    loadPublicLeaderboard();
-    const session = await _supabase.auth.getSession();
-    if (session.data.session) {
-      document.getElementById('admin').style.display = 'block';
-    }
-  });
-</script>
-
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
 </body>
 </html>
